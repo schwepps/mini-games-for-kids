@@ -1,14 +1,20 @@
+import ProfileDemo from '@/components/ProfileDemo';
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <main className="text-center">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 animate-pulse">
-          Guess Who
-        </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-          Under Construction 🚧
-        </p>
-      </main>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Guess Who Game
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Character Management System Demo
+          </p>
+        </div>
+        
+        <ProfileDemo />
+      </div>
     </div>
   );
 }

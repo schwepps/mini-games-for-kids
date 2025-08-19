@@ -1,0 +1,296 @@
+{
+  "id": "cartoon-characters",
+  "name": "Cartoon Characters",
+  "description": "Classic cartoon characters perfect for family fun",
+  "version": "1.0.0",
+  "characteristicSchema": {
+    "hairColor": {
+      "type": "enum",
+      "displayName": "Hair Color",
+      "values": ["brown", "blonde", "black", "red", "white", "blue", "green", "none"],
+      "category": "appearance",
+      "description": "The color of the character's hair"
+    },
+    "hasGlasses": {
+      "type": "boolean",
+      "displayName": "Wears Glasses",
+      "category": "appearance",
+      "description": "Does the character wear glasses?"
+    },
+    "age": {
+      "type": "enum",
+      "displayName": "Age Group",
+      "values": ["child", "teen", "adult", "elderly"],
+      "category": "demographics",
+      "description": "The apparent age group of the character"
+    },
+    "species": {
+      "type": "enum",
+      "displayName": "Species",
+      "values": ["human", "animal", "robot", "alien", "monster"],
+      "category": "type",
+      "description": "What type of being is the character"
+    },
+    "hasHat": {
+      "type": "boolean",
+      "displayName": "Wears Hat",
+      "category": "appearance",
+      "description": "Does the character wear a hat or head covering?"
+    },
+    "eyeColor": {
+      "type": "enum",
+      "displayName": "Eye Color",
+      "values": ["brown", "blue", "green", "black", "red", "yellow"],
+      "category": "appearance",
+      "description": "The color of the character's eyes"
+    },
+    "hasBeard": {
+      "type": "boolean",
+      "displayName": "Has Beard",
+      "category": "appearance",
+      "description": "Does the character have facial hair (beard or mustache)?"
+    },
+    "isVillain": {
+      "type": "boolean",
+      "displayName": "Is Villain",
+      "category": "personality",
+      "description": "Is this character typically portrayed as a villain?"
+    }
+  },
+  "characters": [
+    {
+      "id": "char_001",
+      "name": "Mickey Mouse",
+      "image": "mickey.png",
+      "characteristics": {
+        "hairColor": "black",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The famous Disney mouse",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_002",
+      "name": "Donald Duck",
+      "image": "donald.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": true,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "Disney's famous duck",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_003",
+      "name": "Bugs Bunny",
+      "image": "bugs.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "What's up, Doc?",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_004",
+      "name": "Superman",
+      "image": "superman.png",
+      "characteristics": {
+        "hairColor": "black",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "alien",
+        "hasHat": false,
+        "eyeColor": "blue",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The Man of Steel",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "char_005",
+      "name": "Clark Kent",
+      "image": "clark.png",
+      "characteristics": {
+        "hairColor": "black",
+        "hasGlasses": true,
+        "age": "adult",
+        "species": "human",
+        "hasHat": false,
+        "eyeColor": "blue",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "Superman's alter ego",
+        "difficulty": "hard"
+      }
+    },
+    {
+      "id": "char_006",
+      "name": "SpongeBob SquarePants",
+      "image": "spongebob.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "blue",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The optimistic sea sponge",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_007",
+      "name": "Homer Simpson",
+      "image": "homer.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "human",
+        "hasHat": false,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "D'oh! The famous Simpson dad",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_008",
+      "name": "Scooby-Doo",
+      "image": "scooby.png",
+      "characteristics": {
+        "hairColor": "brown",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The mystery-solving Great Dane",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_009",
+      "name": "The Joker",
+      "image": "joker.png",
+      "characteristics": {
+        "hairColor": "green",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "human",
+        "hasHat": false,
+        "eyeColor": "green",
+        "hasBeard": false,
+        "isVillain": true
+      },
+      "metadata": {
+        "description": "Batman's arch-nemesis",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "char_010",
+      "name": "Princess Leia",
+      "image": "leia.png",
+      "characteristics": {
+        "hairColor": "brown",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "human",
+        "hasHat": false,
+        "eyeColor": "brown",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The rebel princess from Star Wars",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "char_011",
+      "name": "Garfield",
+      "image": "garfield.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "adult",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "green",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The lasagna-loving cat",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "char_012",
+      "name": "Pikachu",
+      "image": "pikachu.png",
+      "characteristics": {
+        "hairColor": "none",
+        "hasGlasses": false,
+        "age": "child",
+        "species": "animal",
+        "hasHat": false,
+        "eyeColor": "black",
+        "hasBeard": false,
+        "isVillain": false
+      },
+      "metadata": {
+        "description": "The electric Pokémon",
+        "difficulty": "easy"
+      }
+    }
+  ],
+  "metadata": {
+    "author": "Guess Who Game",
+    "createdAt": "2024-01-01",
+    "tags": ["cartoon", "animation", "family", "kids"],
+    "difficulty": "mixed"
+  }
+}

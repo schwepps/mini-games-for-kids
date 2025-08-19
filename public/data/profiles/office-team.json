@@ -1,0 +1,275 @@
+{
+  "id": "office-team",
+  "name": "Office Team",
+  "description": "Team building game with office colleagues",
+  "version": "1.0.0",
+  "characteristicSchema": {
+    "department": {
+      "type": "enum",
+      "displayName": "Department",
+      "values": ["engineering", "marketing", "sales", "hr", "finance", "design"],
+      "category": "work",
+      "description": "Which department does this person work in?"
+    },
+    "hasGlasses": {
+      "type": "boolean",
+      "displayName": "Wears Glasses",
+      "category": "appearance",
+      "description": "Does this person wear glasses?"
+    },
+    "hairColor": {
+      "type": "enum",
+      "displayName": "Hair Color",
+      "values": ["brown", "blonde", "black", "red", "gray", "none"],
+      "category": "appearance",
+      "description": "What color is their hair?"
+    },
+    "experience": {
+      "type": "enum",
+      "displayName": "Experience Level",
+      "values": ["junior", "mid", "senior", "lead"],
+      "category": "work",
+      "description": "What is their experience level?"
+    },
+    "hasBeard": {
+      "type": "boolean",
+      "displayName": "Has Facial Hair",
+      "category": "appearance",
+      "description": "Do they have a beard or mustache?"
+    },
+    "workLocation": {
+      "type": "enum",
+      "displayName": "Work Location",
+      "values": ["office", "remote", "hybrid"],
+      "category": "work",
+      "description": "Where do they primarily work?"
+    },
+    "hobbies": {
+      "type": "enum",
+      "displayName": "Main Hobby",
+      "values": ["sports", "reading", "gaming", "cooking", "travel", "music", "art"],
+      "category": "personal",
+      "description": "What is their main hobby or interest?"
+    },
+    "hasPets": {
+      "type": "boolean",
+      "displayName": "Has Pets",
+      "category": "personal",
+      "description": "Do they have pets?"
+    },
+    "drinksCoffee": {
+      "type": "boolean",
+      "displayName": "Coffee Drinker",
+      "category": "personal",
+      "description": "Are they a regular coffee drinker?"
+    }
+  },
+  "characters": [
+    {
+      "id": "team_001",
+      "name": "Sarah Johnson",
+      "image": "sarah.png",
+      "characteristics": {
+        "department": "engineering",
+        "hasGlasses": true,
+        "hairColor": "brown",
+        "experience": "senior",
+        "hasBeard": false,
+        "workLocation": "hybrid",
+        "hobbies": "gaming",
+        "hasPets": true,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "Senior Software Engineer, loves gaming",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "team_002",
+      "name": "Mike Chen",
+      "image": "mike.png",
+      "characteristics": {
+        "department": "design",
+        "hasGlasses": false,
+        "hairColor": "black",
+        "experience": "mid",
+        "hasBeard": true,
+        "workLocation": "office",
+        "hobbies": "art",
+        "hasPets": false,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "UX Designer, passionate about art",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "team_003",
+      "name": "Emily Rodriguez",
+      "image": "emily.png",
+      "characteristics": {
+        "department": "marketing",
+        "hasGlasses": false,
+        "hairColor": "blonde",
+        "experience": "lead",
+        "hasBeard": false,
+        "workLocation": "hybrid",
+        "hobbies": "travel",
+        "hasPets": true,
+        "drinksCoffe": false
+      },
+      "metadata": {
+        "description": "Marketing Lead, world traveler",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "team_004",
+      "name": "David Kim",
+      "image": "david.png",
+      "characteristics": {
+        "department": "engineering",
+        "hasGlasses": true,
+        "hairColor": "black",
+        "experience": "junior",
+        "hasBeard": false,
+        "workLocation": "remote",
+        "hobbies": "reading",
+        "hasPets": false,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "Junior Developer, bookworm",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "team_005",
+      "name": "Lisa Thompson",
+      "image": "lisa.png",
+      "characteristics": {
+        "department": "hr",
+        "hasGlasses": false,
+        "hairColor": "red",
+        "experience": "senior",
+        "hasBeard": false,
+        "workLocation": "office",
+        "hobbies": "cooking",
+        "hasPets": true,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "HR Director, master chef",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "team_006",
+      "name": "James Wilson",
+      "image": "james.png",
+      "characteristics": {
+        "department": "sales",
+        "hasGlasses": false,
+        "hairColor": "brown",
+        "experience": "mid",
+        "hasBeard": true,
+        "workLocation": "hybrid",
+        "hobbies": "sports",
+        "hasPets": false,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "Sales Manager, fitness enthusiast",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "team_007",
+      "name": "Amanda Foster",
+      "image": "amanda.png",
+      "characteristics": {
+        "department": "finance",
+        "hasGlasses": true,
+        "hairColor": "blonde",
+        "experience": "senior",
+        "hasBeard": false,
+        "workLocation": "office",
+        "hobbies": "music",
+        "hasPets": false,
+        "drinksCoffe": false
+      },
+      "metadata": {
+        "description": "CFO, classical music lover",
+        "difficulty": "hard"
+      }
+    },
+    {
+      "id": "team_008",
+      "name": "Robert Davis",
+      "image": "robert.png",
+      "characteristics": {
+        "department": "engineering",
+        "hasGlasses": false,
+        "hairColor": "gray",
+        "experience": "lead",
+        "hasBeard": true,
+        "workLocation": "office",
+        "hobbies": "reading",
+        "hasPets": true,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "Engineering Director, tech veteran",
+        "difficulty": "medium"
+      }
+    },
+    {
+      "id": "team_009",
+      "name": "Jessica Martinez",
+      "image": "jessica.png",
+      "characteristics": {
+        "department": "design",
+        "hasGlasses": false,
+        "hairColor": "black",
+        "experience": "junior",
+        "hasBeard": false,
+        "workLocation": "remote",
+        "hobbies": "art",
+        "hasPets": true,
+        "drinksCoffe": false
+      },
+      "metadata": {
+        "description": "Junior Designer, digital artist",
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "team_010",
+      "name": "Alex Cooper",
+      "image": "alex.png",
+      "characteristics": {
+        "department": "marketing",
+        "hasGlasses": true,
+        "hairColor": "brown",
+        "experience": "mid",
+        "hasBeard": false,
+        "workLocation": "hybrid",
+        "hobbies": "gaming",
+        "hasPets": false,
+        "drinksCoffe": true
+      },
+      "metadata": {
+        "description": "Marketing Specialist, strategy gamer",
+        "difficulty": "medium"
+      }
+    }
+  ],
+  "metadata": {
+    "author": "Guess Who Game",
+    "createdAt": "2024-01-01",
+    "tags": ["office", "team-building", "workplace", "professional"],
+    "difficulty": "mixed"
+  }
+}
