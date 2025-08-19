@@ -15,17 +15,22 @@ A modern, browser-based solo version of the classic Guess Who game built with Ne
 ```
 guess-who/
 ├── app/                    # Next.js App Router pages and components
-├── profiles/              # Character profile configurations
-│   └── [profile-name]/    # Individual profile sets (JSON files)
+├── components/             # Reusable React components
+├── lib/                    # Utility functions and services
+├── types/                  # TypeScript type definitions
 ├── public/
-│   └── profiles/          # Character images
-│       └── [profile-name]/ # Images for each profile set
+│   ├── data/
+│   │   └── profiles/       # Character profile JSON configurations
+│   └── images/
+│       └── profiles/       # Character images organized by profile
+│           └── [profile-name]/ # Images for each profile set
 └── ...
 ```
 
 ### Profile Organization
-- **Configuration**: `profiles/[profile-name]/characters.json` - Character data and attributes
-- **Images**: `public/profiles/[profile-name]/` - Character portraits and assets
+- **Configuration**: `public/data/profiles/[profile-name].json` - Character data and schema definitions
+- **Images**: `public/images/profiles/[profile-name]/` - Character portraits and assets
+- **Environment**: `.env.local` - Profile selection via `NEXT_PUBLIC_GAME_PROFILE`
 
 ## 🚀 Getting Started
 
@@ -115,34 +120,92 @@ bun lint
 
 ## 🎨 Adding Custom Profiles
 
-Create your own character sets by adding new profile directories:
+Create your own character sets by adding new profile configurations:
 
-1. Create a new directory in `profiles/[your-profile-name]/`
-2. Add a `characters.json` file with the following structure:
+1. Create a new JSON file: `public/data/profiles/[your-profile-name].json`
+2. Define the profile structure with characteristics schema and characters:
 
 ```json
 {
+  "id": "your-profile-name",
   "name": "Profile Name",
   "description": "Profile description",
+  "version": "1.0.0",
+  "characteristicSchema": {
+    "hairColor": {
+      "type": "enum",
+      "displayName": "Hair Color",
+      "values": ["brown", "blonde", "black", "red"],
+      "category": "appearance"
+    },
+    "hasGlasses": {
+      "type": "boolean",
+      "displayName": "Wears Glasses",
+      "category": "appearance"
+    }
+  },
   "characters": [
     {
-      "id": "char1",
+      "id": "char_001",
       "name": "Character Name",
       "image": "character1.jpg",
-      "attributes": {
+      "characteristics": {
         "hairColor": "brown",
-        "glasses": true,
-        "gender": "male",
-        // ... more attributes
+        "hasGlasses": true
       }
     }
-    // ... more characters
   ]
 }
 ```
 
-3. Add character images to `public/profiles/[your-profile-name]/`
-4. The profile will automatically appear in the game's profile selection
+3. Add character images to `public/images/profiles/[your-profile-name]/`
+4. Update `.env.local` with `NEXT_PUBLIC_GAME_PROFILE=[your-profile-name]` to load your profile
+
+## 🏗️ Architecture & Features
+
+### ✅ Character Management System
+
+The game includes a comprehensive character management system with the following features:
+
+1. **Smart Profile Loading System** 
+   - Automatic path resolution based on `.env` configuration
+   - JSON file loading: `public/data/profiles/{PROFILE}.json`
+   - Image path resolution: `public/images/profiles/{PROFILE}/`
+   - Profile caching for performance
+
+2. **Flexible JSON Structure**
+   - Extensible characteristic schema per profile
+   - Type-safe character definitions
+   - Support for different characteristic types (boolean, enum, range, etc.)
+   - Profile metadata and versioning
+
+3. **Advanced Game Logic**
+   - Smart character filtering based on questions
+   - Question suggestion engine with effectiveness scoring
+   - Game state management
+   - Automatic question optimization
+
+4. **Type Safety & Validation**
+   - Complete TypeScript interfaces
+   - Zod schema validation for runtime safety
+   - Comprehensive error handling
+   - Development-friendly validation warnings
+
+### 📦 Key Classes
+
+- **ProfileLoader**: Environment integration, path resolution, caching, validation
+- **CharacterFilter**: Smart filtering, question engine, game logic utilities
+- **GameValidation**: Runtime validation with Zod schemas
+
+### 🎮 Demo Features
+
+The included ProfileDemo component demonstrates:
+- ✅ Profile loading and switching
+- ✅ Character filtering in real-time  
+- ✅ Question suggestion engine
+- ✅ Game state management
+- ✅ Effectiveness scoring
+- ✅ Win/lose conditions
 
 ## 🛠️ Tech Stack
 

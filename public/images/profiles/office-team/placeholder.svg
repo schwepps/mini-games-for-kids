@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="8" fill="#DBEAFE"/>
+  <circle cx="32" cy="26" r="8" fill="#3B82F6"/>
+  <path d="M32 36c-8 0-14 4-14 8v8h28v-8c0-4-6-8-14-8z" fill="#3B82F6"/>
+  <text x="32" y="58" text-anchor="middle" fill="#1E40AF" font-size="8" font-family="system-ui">Team</text>
+</svg>
