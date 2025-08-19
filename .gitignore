@@ -42,3 +42,4 @@ next-env.d.ts
 
 #IA
 CLAUDE.md
+.claude*
