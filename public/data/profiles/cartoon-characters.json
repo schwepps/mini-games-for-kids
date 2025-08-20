@@ -1,54 +1,54 @@
 {
   "id": "cartoon-characters",
-  "name": "Cartoon Characters",
-  "description": "Popular cartoon characters perfect for family fun",
+  "name": "Personnages de Dessins Animés",
+  "description": "Des personnages de dessins animés populaires parfaits pour s'amuser en famille",
   "version": "3.0.0",
   "characteristicSchema": {
     "hairColor": {
       "type": "enum",
-      "displayName": "Hair Color",
-      "values": ["brown", "blonde", "black", "red", "white", "blue", "green", "yellow", "none"],
+      "displayName": "Couleur des Cheveux",
+      "values": ["marron", "blond", "noir", "rouge", "blanc", "bleu", "vert", "jaune", "aucune"],
       "category": "appearance",
-      "description": "The color of the character's hair"
+      "description": "La couleur des cheveux du personnage"
     },
     "age": {
       "type": "enum",
-      "displayName": "Age Group",
-      "values": ["child", "teen", "adult", "elderly"],
+      "displayName": "Groupe d'Âge",
+      "values": ["enfant", "adolescent", "adulte", "âgé"],
       "category": "demographics",
-      "description": "The apparent age group of the character"
+      "description": "Le groupe d'âge apparent du personnage"
     },
     "species": {
       "type": "enum",
-      "displayName": "Species",
-      "values": ["human", "animal", "robot", "alien", "monster"],
+      "displayName": "Espèce",
+      "values": ["humain", "animal", "robot", "alien", "monstre"],
       "category": "type",
-      "description": "What type of being is the character"
+      "description": "Quel type d'être est le personnage"
     },
     "hasHat": {
       "type": "boolean",
-      "displayName": "Wears Hat",
+      "displayName": "Porte un Chapeau",
       "category": "appearance",
-      "description": "Does the character wear a hat or head covering?"
+      "description": "Le personnage porte-t-il un chapeau ou couvre-chef ?"
     },
     "eyeColor": {
       "type": "enum",
-      "displayName": "Eye Color",
-      "values": ["brown", "blue", "green", "black", "red", "yellow"],
+      "displayName": "Couleur des Yeux",
+      "values": ["marron", "bleu", "vert", "noir", "rouge", "jaune"],
       "category": "appearance",
-      "description": "The color of the character's eyes"
+      "description": "La couleur des yeux du personnage"
     },
     "isSuperhero": {
       "type": "boolean",
-      "displayName": "Is Superhero",
+      "displayName": "Est un Super-héros",
       "category": "personality",
-      "description": "Is this character a superhero?"
+      "description": "Ce personnage est-il un super-héros ?"
     },
     "isSmiling": {
       "type": "boolean",
-      "displayName": "Is Smiling",
+      "displayName": "Sourit",
       "category": "appearance",
-      "description": "Is the character typically portrayed as smiling?"
+      "description": "Le personnage est-il généralement représenté en train de sourire ?"
     }
   },
   "characters": [
@@ -57,11 +57,11 @@
       "name": "Tchoupi",
       "image": "tchoupi.png",
       "characteristics": {
-        "hairColor": "none",
-        "age": "child",
+        "hairColor": "aucune",
+        "age": "enfant",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -75,11 +75,11 @@
       "name": "Lightning McQueen",
       "image": "lightning-mcqueen.png",
       "characteristics": {
-        "hairColor": "none",
-        "age": "adult",
+        "hairColor": "aucune",
+        "age": "adulte",
         "species": "robot",
         "hasHat": false,
-        "eyeColor": "blue",
+        "eyeColor": "bleu",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -93,11 +93,11 @@
       "name": "Bluey",
       "image": "bluey.png",
       "characteristics": {
-        "hairColor": "blue",
-        "age": "child",
+        "hairColor": "bleu",
+        "age": "enfant",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -111,11 +111,11 @@
       "name": "Petit Ours Brun",
       "image": "petit-ours-brun.png",
       "characteristics": {
-        "hairColor": "brown",
-        "age": "child",
+        "hairColor": "marron",
+        "age": "enfant",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -129,11 +129,11 @@
       "name": "Chase",
       "image": "chase.png",
       "characteristics": {
-        "hairColor": "brown",
-        "age": "child",
+        "hairColor": "marron",
+        "age": "enfant",
         "species": "animal",
         "hasHat": true,
-        "eyeColor": "brown",
+        "eyeColor": "marron",
         "isSuperhero": false,
         "isSmiling": false
       },
@@ -147,11 +147,11 @@
       "name": "Catboy",
       "image": "catboy.png",
       "characteristics": {
-        "hairColor": "brown",
-        "age": "child",
-        "species": "human",
+        "hairColor": "marron",
+        "age": "enfant",
+        "species": "humain",
         "hasHat": false,
-        "eyeColor": "blue",
+        "eyeColor": "bleu",
         "isSuperhero": true,
         "isSmiling": true
       },
@@ -165,11 +165,11 @@
       "name": "Homer Simpson",
       "image": "homer.png",
       "characteristics": {
-        "hairColor": "none",
-        "age": "adult",
-        "species": "human",
+        "hairColor": "aucune",
+        "age": "adulte",
+        "species": "humain",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": false
       },
@@ -183,11 +183,11 @@
       "name": "Bugs Bunny",
       "image": "bugs.png",
       "characteristics": {
-        "hairColor": "none",
-        "age": "adult",
+        "hairColor": "aucune",
+        "age": "adulte",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -201,11 +201,11 @@
       "name": "Spider-Man",
       "image": "spider-man.png",
       "characteristics": {
-        "hairColor": "brown",
-        "age": "adult",
-        "species": "human",
+        "hairColor": "marron",
+        "age": "adulte",
+        "species": "humain",
         "hasHat": false,
-        "eyeColor": "brown",
+        "eyeColor": "marron",
         "isSuperhero": true,
         "isSmiling": true
       },
@@ -219,11 +219,11 @@
       "name": "SpongeBob SquarePants",
       "image": "spongebob.png",
       "characteristics": {
-        "hairColor": "yellow",
-        "age": "adult",
+        "hairColor": "jaune",
+        "age": "adulte",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "blue",
+        "eyeColor": "bleu",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -237,11 +237,11 @@
       "name": "Pikachu",
       "image": "pikachu.png",
       "characteristics": {
-        "hairColor": "yellow",
-        "age": "child",
+        "hairColor": "jaune",
+        "age": "enfant",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "black",
+        "eyeColor": "noir",
         "isSuperhero": false,
         "isSmiling": true
       },
@@ -255,11 +255,11 @@
       "name": "Superman",
       "image": "superman.png",
       "characteristics": {
-        "hairColor": "black",
-        "age": "adult",
+        "hairColor": "noir",
+        "age": "adulte",
         "species": "alien",
         "hasHat": false,
-        "eyeColor": "blue",
+        "eyeColor": "bleu",
         "isSuperhero": true,
         "isSmiling": true
       },

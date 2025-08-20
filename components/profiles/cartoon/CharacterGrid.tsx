@@ -32,7 +32,7 @@ export default function CharacterGrid({
             <>
               {characters.length > 1 && (
                 <p className="text-white text-lg font-medium">
-                  🤔 Ask questions to eliminate characters, or tap a character to guess!
+                  🤔 Pose des questions pour éliminer des personnages, ou clique sur un personnage pour deviner !
                 </p>
               )}
               {characters.length === 1 && (
@@ -41,12 +41,12 @@ export default function CharacterGrid({
                   animate={{ scale: 1 }}
                   className="text-white text-xl font-bold"
                 >
-                  🎯 Only one left! Tap to make your guess!
+                  🎯 Il n&apos;en reste qu&apos;un ! Clique pour deviner !
                 </motion.p>
               )}
               {characters.length === 0 && (
                 <p className="text-white text-lg font-medium">
-                  😅 Oops! No characters left. Try a new game!
+                  😅 Oups ! Il ne reste plus de personnages. Essaie une nouvelle partie !
                 </p>
               )}
             </>
@@ -57,7 +57,7 @@ export default function CharacterGrid({
               animate={{ scale: 1 }}
               className="text-white text-xl font-bold"
             >
-              🎉 You found the hidden character! Amazing!
+              🎉 Tu as trouvé le personnage caché ! Incroyable !
             </motion.p>
           )}
           {gameState === 'lost' && (
@@ -66,7 +66,7 @@ export default function CharacterGrid({
               animate={{ scale: 1 }}
               className="text-white text-xl font-bold"
             >
-              😔 Better luck next time! Try again!
+              😔 Plus de chance la prochaine fois ! Réessaie !
             </motion.p>
           )}
         </div>
@@ -128,10 +128,10 @@ export default function CharacterGrid({
         >
           <div className="text-8xl mb-4">🤷‍♀️</div>
           <p className="text-white text-xl font-bold mb-2">
-            Oops! No characters left!
+            Oups ! Plus de personnages !
           </p>
           <p className="text-white/80">
-            Looks like the questions eliminated everyone. Try a new game!
+            On dirait que les questions ont éliminé tout le monde. Essaie une nouvelle partie !
           </p>
         </motion.div>
       )}

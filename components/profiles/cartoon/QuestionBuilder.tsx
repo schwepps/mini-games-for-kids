@@ -75,30 +75,30 @@ const characteristicIcons: CharacteristicIcon = {
 };
 
 const colorSwatches: { [key: string]: string } = {
-  brown: 'bg-amber-800',
-  blonde: 'bg-yellow-400',
-  black: 'bg-gray-900',
-  red: 'bg-red-600',
-  white: 'bg-gray-200',
-  blue: 'bg-blue-600',
-  green: 'bg-green-600',
-  yellow: 'bg-yellow-500',
-  none: 'bg-gray-400'
+  marron: 'bg-amber-800',
+  blond: 'bg-yellow-400',
+  noir: 'bg-gray-900',
+  rouge: 'bg-red-600',
+  blanc: 'bg-gray-200',
+  bleu: 'bg-blue-600',
+  vert: 'bg-green-600',
+  jaune: 'bg-yellow-500',
+  aucune: 'bg-gray-400'
 };
 
 const ageEmojis: { [key: string]: string } = {
-  child: '👶',
-  teen: '🧑',
-  adult: '👩',
-  elderly: '👴'
+  enfant: '👶',
+  adolescent: '🧑',
+  adulte: '👩',
+  âgé: '👴'
 };
 
 const speciesEmojis: { [key: string]: string } = {
-  human: '👤',
+  humain: '👤',
   animal: '🐾',
   robot: '🤖',
   alien: '👽',
-  monster: '👹'
+  monstre: '👹'
 };
 
 export default function QuestionBuilder({ 
@@ -183,7 +183,7 @@ export default function QuestionBuilder({
               >
                 <div className="flex flex-col items-center gap-1">
                   <CheckCircle className="w-6 h-6" />
-                  <span>Yes</span>
+                  <span>Oui</span>
                 </div>
               </Button>
             </motion.div>
@@ -195,7 +195,7 @@ export default function QuestionBuilder({
               >
                 <div className="flex flex-col items-center gap-1">
                   <XCircle className="w-6 h-6" />
-                  <span>No</span>
+                  <span>Non</span>
                 </div>
               </Button>
             </motion.div>
@@ -208,7 +208,7 @@ export default function QuestionBuilder({
       return (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-white text-center">
-            Choose {schema.displayName}
+            Choisis {schema.displayName}
           </h3>
           <div className="grid grid-cols-3 gap-3">
             {schema.values.map((value) => {
@@ -272,7 +272,7 @@ export default function QuestionBuilder({
         <CardTitle className="text-white text-center text-xl">
           <div className="flex items-center justify-center gap-2">
             <HelpCircle className="w-6 h-6" />
-            Ask a Question!
+            Pose une Question !
           </div>
         </CardTitle>
       </CardHeader>
@@ -280,7 +280,7 @@ export default function QuestionBuilder({
         {/* Step 1: Choose what to ask about */}
         <div>
           <h3 className="text-white font-medium mb-3 text-center">
-            What do you want to know?
+            Que veux-tu savoir ?
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {renderCharacteristicButtons()}
@@ -328,7 +328,7 @@ export default function QuestionBuilder({
                       ? 'text-green-800' 
                       : 'text-red-800'
                   }`}>
-                    {questionsAsked[questionsAsked.length - 1].answer ? 'YES!' : 'NO!'}
+                    {questionsAsked[questionsAsked.length - 1].answer ? 'OUI !' : 'NON !'}
                   </h4>
                 </div>
                 
@@ -342,8 +342,8 @@ export default function QuestionBuilder({
                 
                 <div className="text-sm text-gray-600">
                   {questionsAsked[questionsAsked.length - 1].answer 
-                    ? '✨ Characters without this trait were eliminated!'
-                    : '✨ Characters with this trait were eliminated!'
+                    ? '✨ Les personnages sans ce trait ont été éliminés !'
+                    : '✨ Les personnages avec ce trait ont été éliminés !'
                   }
                 </div>
               </div>

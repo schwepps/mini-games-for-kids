@@ -43,8 +43,8 @@ export default function CartoonGame() {
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="w-20 h-20 border-8 border-white border-t-yellow-400 rounded-full mx-auto mb-6"
           />
-          <h2 className="text-3xl font-bold text-white mb-2">Getting ready...</h2>
-          <p className="text-white/80 text-lg">Loading your cartoon friends!</p>
+          <h2 className="text-3xl font-bold text-white mb-2">Préparation...</h2>
+          <p className="text-white/80 text-lg">Chargement de tes amis dessinés !</p>
         </div>
       </div>
     );
@@ -56,15 +56,15 @@ export default function CartoonGame() {
         <Card className="p-8 max-w-md text-center bg-white/90 backdrop-blur-sm">
           <CardContent className="space-y-4">
             <div className="text-6xl mb-4">😔</div>
-            <h2 className="text-2xl font-bold text-red-600">Oops!</h2>
-            <p className="text-gray-600">Something went wrong loading the game.</p>
+            <h2 className="text-2xl font-bold text-red-600">Oups !</h2>
+            <p className="text-gray-600">Quelque chose s&apos;est mal passé lors du chargement du jeu.</p>
             <Button 
               onClick={resetGame} 
               className="bg-blue-500 hover:bg-blue-600 text-white"
               size="lg"
             >
               <RotateCcw className="w-5 h-5 mr-2" />
-              Try Again
+              Réessayer
             </Button>
           </CardContent>
         </Card>
@@ -83,10 +83,10 @@ export default function CartoonGame() {
           className="text-center mb-6"
         >
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-2 drop-shadow-lg">
-            Cartoon Guess Who! 🎭
+            Qui Est-Ce ? 🎭
           </h1>
           <p className="text-white/90 text-lg lg:text-xl">
-            Find the hidden character by asking questions!
+            Trouve le personnage caché en posant des questions !
           </p>
         </motion.div>
 
@@ -133,7 +133,7 @@ export default function CartoonGame() {
             className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/30 backdrop-blur-sm text-lg px-8 py-4"
           >
             <Play className="w-6 h-6 mr-2" />
-            New Game
+            Nouvelle Partie
           </Button>
         </motion.div>
 

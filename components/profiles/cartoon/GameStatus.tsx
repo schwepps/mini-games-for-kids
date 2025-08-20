@@ -17,7 +17,7 @@ import {
 interface GameStatusProps {
   remainingCharacters: ICharacter[];
   questionsAsked: IQuestion[];
-  gameState: 'welcome' | 'playing' | 'won' | 'lost';
+  gameState: 'playing' | 'won' | 'lost';
   hiddenCharacter: ICharacter | null;
 }
 
@@ -51,15 +51,15 @@ export default function GameStatus({
     switch (gameState) {
       case 'playing':
         if (remainingCharacters.length === 1) {
-          return 'Almost there! Make your guess!';
+          return 'Presque ! Fais ta supposition !';
         }
-        return 'Keep asking questions!';
+        return 'Continue à poser des questions !';
       case 'won':
-        return 'Congratulations! You won! 🎉';
+        return 'Félicitations ! Tu as gagné ! 🎉';
       case 'lost':
-        return 'Better luck next time! 😊';
+        return 'Plus de chance la prochaine fois ! 😊';
       default:
-        return 'Ready to play!';
+        return 'Prêt à jouer !';
     }
   };
 
@@ -76,7 +76,7 @@ export default function GameStatus({
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Users className="w-5 h-5 text-white" />
-                <span className="text-white font-medium">Characters</span>
+                <span className="text-white font-medium">Personnages</span>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <motion.div
@@ -87,7 +87,7 @@ export default function GameStatus({
                 >
                   {remainingCharacters.length}
                 </motion.div>
-                <span className="text-white/80">remaining</span>
+                <span className="text-white/80">restants</span>
               </div>
               
               {/* Progress bar */}
@@ -97,7 +97,7 @@ export default function GameStatus({
                   className="h-2 bg-white/20"
                 />
                 <div className="text-xs text-white/60 mt-1">
-                  {totalCharacters - remainingCharacters.length} eliminated
+                  {totalCharacters - remainingCharacters.length} éliminés
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function GameStatus({
                 >
                   {questionsCount}
                 </motion.div>
-                <span className="text-white/80">asked</span>
+                <span className="text-white/80">posées</span>
               </div>
               
               {/* Quality indicator */}
@@ -130,9 +130,9 @@ export default function GameStatus({
                     'bg-red-100 text-red-700'
                   }`}
                 >
-                  {questionsCount <= 5 ? '🌟 Great!' : 
-                   questionsCount <= 8 ? '👍 Good' : 
-                   '🤔 Many questions'}
+                  {questionsCount <= 5 ? '🌟 Super !' : 
+                   questionsCount <= 8 ? '👍 Bien' : 
+                   '🤔 Beaucoup de questions'}
                 </Badge>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function GameStatus({
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 mb-2">
                 {getGameStateIcon()}
-                <span className="text-white font-medium">Status</span>
+                <span className="text-white font-medium">Statut</span>
               </div>
               <div className="text-white text-sm font-medium">
                 {getGameStateText()}
@@ -161,7 +161,7 @@ export default function GameStatus({
                   className="mt-2"
                 >
                   <Badge className="bg-yellow-400 text-yellow-900 font-bold">
-                    🎯 FINAL GUESS!
+                    🎯 SUPPOSITION FINALE !
                   </Badge>
                 </motion.div>
               )}
@@ -178,7 +178,7 @@ export default function GameStatus({
                   className="mt-2"
                 >
                   <Badge className="bg-yellow-400 text-yellow-900 font-bold">
-                    🏆 WINNER!
+                    🏆 GAGNANT !
                   </Badge>
                 </motion.div>
               )}
@@ -193,7 +193,7 @@ export default function GameStatus({
               className="mt-4 text-center bg-red-100 border border-red-200 rounded-lg p-3"
             >
               <div className="text-red-600 font-medium">
-                😅 Oops! All characters were eliminated. The hidden character was <strong>{hiddenCharacter?.name}</strong>!
+                😅 Oups ! Tous les personnages ont été éliminés. Le personnage caché était <strong>{hiddenCharacter?.name}</strong> !
               </div>
             </motion.div>
           )}
@@ -205,7 +205,7 @@ export default function GameStatus({
               className="mt-4 text-center bg-blue-100 border border-blue-200 rounded-lg p-3"
             >
               <div className="text-blue-600 font-medium">
-                The hidden character was <strong>{hiddenCharacter.name}</strong>! Try again! 🎮
+                Le personnage caché était <strong>{hiddenCharacter.name}</strong> ! Réessaie ! 🎮
               </div>
             </motion.div>
           )}

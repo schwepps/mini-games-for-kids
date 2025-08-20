@@ -63,9 +63,9 @@ export default function CelebrationModal({
   }, []);
 
   const getPerformanceRating = () => {
-    if (questionsAsked <= 3) return { stars: 3, text: 'Amazing!', emoji: '🌟', color: 'text-yellow-500' };
-    if (questionsAsked <= 6) return { stars: 2, text: 'Great job!', emoji: '⭐', color: 'text-yellow-400' };
-    return { stars: 1, text: 'Well done!', emoji: '👍', color: 'text-blue-500' };
+    if (questionsAsked <= 3) return { stars: 3, text: 'Incroyable !', emoji: '🌟', color: 'text-yellow-500' };
+    if (questionsAsked <= 6) return { stars: 2, text: 'Très bien !', emoji: '⭐', color: 'text-yellow-400' };
+    return { stars: 1, text: 'Bien joué !', emoji: '👍', color: 'text-blue-500' };
   };
 
   const rating = getPerformanceRating();
@@ -112,7 +112,7 @@ export default function CelebrationModal({
             </motion.div>
 
             <DialogTitle className="text-3xl font-bold text-gray-800 mb-2">
-              🎉 You Won! 🎉
+              🎉 Tu as Gagné ! 🎉
             </DialogTitle>
           </DialogHeader>
 
@@ -127,7 +127,7 @@ export default function CelebrationModal({
               >
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
                   <h3 className="text-lg font-bold text-gray-800 mb-4">
-                    You found the hidden character!
+                    Tu as trouvé le personnage caché !
                   </h3>
                   
                   <div className="relative inline-block">
@@ -172,7 +172,7 @@ export default function CelebrationModal({
               <div className="text-center space-y-3">
                 <div className="flex items-center justify-center gap-2">
                   <Target className="w-5 h-5 text-blue-600" />
-                  <span className="font-medium text-gray-700">Your Performance</span>
+                  <span className="font-medium text-gray-700">Ta Performance</span>
                 </div>
                 
                 {/* Star rating */}
@@ -207,7 +207,7 @@ export default function CelebrationModal({
                   </Badge>
                   
                   <p className="text-gray-600 text-sm">
-                    You solved it in <strong>{questionsAsked}</strong> question{questionsAsked !== 1 ? 's' : ''}!
+                    Tu l&apos;as trouvé en <strong>{questionsAsked}</strong> question{questionsAsked !== 1 ? 's' : ''} !
                   </p>
                 </div>
               </div>
@@ -223,12 +223,12 @@ export default function CelebrationModal({
               <div className="bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl p-4 border-2 border-blue-200">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Sparkles className="w-5 h-5 text-purple-600" />
-                  <span className="font-medium text-gray-700">Fun Fact!</span>
+                  <span className="font-medium text-gray-700">Le Savais-tu ?</span>
                 </div>
                 <p className="text-sm text-gray-600">
-                  {questionsAsked <= 3 && "You're a true detective! 🕵️‍♀️"}
-                  {questionsAsked > 3 && questionsAsked <= 6 && "Great strategic thinking! 🧠"}
-                  {questionsAsked > 6 && "Practice makes perfect! Keep playing! 🎮"}
+                  {questionsAsked <= 3 && "Tu es un vrai détective ! 🕵️‍♀️"}
+                  {questionsAsked > 3 && questionsAsked <= 6 && "Belle stratégie ! 🧠"}
+                  {questionsAsked > 6 && "La pratique rend parfait ! Continue à jouer ! 🎮"}
                 </p>
               </div>
             </motion.div>
@@ -246,7 +246,7 @@ export default function CelebrationModal({
                 className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transform transition hover:scale-105"
               >
                 <Play className="w-6 h-6 mr-2" />
-                Play Again!
+                Rejouer !
               </Button>
             </motion.div>
           </div>

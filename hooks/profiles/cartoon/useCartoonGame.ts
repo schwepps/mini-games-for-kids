@@ -56,10 +56,39 @@ export function useCartoonGame() {
     const hiddenCharacterValue = hiddenCharacter.characteristics[characteristicKey];
     const answer = hiddenCharacterValue === value;
 
-    // Create the question
+    // Create the question with proper French grammar
+    const characteristic = profile.characteristicSchema[characteristicKey];
+    let questionText = '';
+    
+    if (typeof value === 'boolean') {
+      // Boolean characteristics like "Porte un Chapeau", "Est un Super-héros", "Sourit"
+      questionText = value 
+        ? `Est-ce que le personnage ${characteristic.displayName.toLowerCase()} ?`
+        : `Est-ce que le personnage ne ${characteristic.displayName.toLowerCase()} pas ?`;
+    } else {
+      // Enum characteristics like colors, age, species
+      switch (characteristicKey) {
+        case 'hairColor':
+          questionText = `Est-ce que le personnage a les cheveux ${value} ?`;
+          break;
+        case 'eyeColor':
+          questionText = `Est-ce que le personnage a les yeux ${value} ?`;
+          break;
+        case 'age':
+          questionText = `Est-ce que le personnage est ${value === 'enfant' ? 'un enfant' : value === 'adolescent' ? 'un adolescent' : value === 'adulte' ? 'un adulte' : 'âgé'} ?`;
+          break;
+        case 'species':
+          const article = value === 'humain' ? 'un humain' : value === 'animal' ? 'un animal' : value === 'robot' ? 'un robot' : value === 'alien' ? 'un alien' : 'un monstre';
+          questionText = `Est-ce que le personnage est ${article} ?`;
+          break;
+        default:
+          questionText = `Est-ce que ${characteristic.displayName.toLowerCase()} est ${value} ?`;
+      }
+    }
+
     const question: IQuestion = {
       id: `q_${Date.now()}`,
-      text: `Is the ${profile.characteristicSchema[characteristicKey].displayName} ${value}?`,
+      text: questionText,
       characteristicKey,
       value,
       answer,
