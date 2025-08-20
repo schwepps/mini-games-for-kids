@@ -90,7 +90,7 @@ export class ProfileLoader {
     // In a real implementation, you might have a profiles.json index file
     // or use a server endpoint to list available profiles
     // For now, return known profiles
-    return ['cartoon-characters', 'office-team'];
+    return ['cartoon-characters'];
   }
 
   /**
