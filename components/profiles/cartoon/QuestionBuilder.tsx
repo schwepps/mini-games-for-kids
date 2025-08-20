@@ -87,32 +87,54 @@ const characteristicIcons: CharacteristicIcon = {
   }
 };
 
-const colorSwatches: { [key: string]: string } = {
-  marron: 'bg-amber-800',
-  blond: 'bg-yellow-400',
-  noir: 'bg-gray-900',
-  rouge: 'bg-red-600',
-  blanc: 'bg-gray-200',
-  bleu: 'bg-blue-600',
-  vert: 'bg-green-600',
-  jaune: 'bg-yellow-500',
-  aucune: 'bg-gray-400'
+// Image mapping for all characteristics and values
+const characteristicImages: { [key: string]: { [value: string]: string } } = {
+  age: {
+    enfant: '/images/answers/age/enfant.png',
+    adulte: '/images/answers/age/adulte.png'
+  },
+  eyeColor: {
+    marron: '/images/answers/eyeColor/marron.png',
+    bleu: '/images/answers/eyeColor/bleu.png',
+    noir: '/images/answers/eyeColor/noir.png'
+  },
+  hairColor: {
+    marron: '/images/answers/hairColor/marron.png',
+    noir: '/images/answers/hairColor/noir.png',
+    bleu: '/images/answers/hairColor/bleu.png',
+    jaune: '/images/answers/hairColor/jaune.png',
+    aucune: '/images/answers/hairColor/aucune.png'
+  },
+  hasHat: {
+    true: '/images/answers/hasHat/hasHat.png',
+    false: '/images/answers/hasHat/noHat.png'
+  },
+  isSmiling: {
+    true: '/images/answers/isSmiling/isSmiling.png',
+    false: '/images/answers/isSmiling/isNotSmiling.png'
+  },
+  isSuperhero: {
+    true: '/images/answers/isSuperhero/isSuperhero.png',
+    false: '/images/answers/isSuperhero/isNotSuperhero.png'
+  },
+  species: {
+    humain: '/images/answers/species/humain.png',
+    animal: '/images/answers/species/animal.png',
+    robot: '/images/answers/species/robot.png',
+    alien: '/images/answers/species/alien.png'
+  }
 };
 
-const ageEmojis: { [key: string]: string } = {
-  enfant: '👶',
-  adolescent: '🧑',
-  adulte: '👩',
-  âgé: '👴'
-};
-
-const speciesEmojis: { [key: string]: string } = {
-  humain: '👤',
-  animal: '🐾',
-  robot: '🤖',
-  alien: '👽',
-  monstre: '👹'
-};
+// Kid-friendly counter colors
+const kidFriendlyColors = [
+  'bg-red-500 border-red-400',
+  'bg-orange-500 border-orange-400', 
+  'bg-yellow-500 border-yellow-400',
+  'bg-green-500 border-green-400',
+  'bg-blue-500 border-blue-400',
+  'bg-purple-500 border-purple-400',
+  'bg-pink-500 border-pink-400'
+];
 
 export default function QuestionBuilder({ 
   onAskQuestion, 
@@ -189,6 +211,8 @@ export default function QuestionBuilder({
     if (schema.type === 'boolean') {
       const trueCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, true).length;
       const falseCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, false).length;
+      const trueImage = characteristicImages[selectedCharacteristic]?.true;
+      const falseImage = characteristicImages[selectedCharacteristic]?.false;
       
       return (
         <div className="space-y-4">
@@ -204,9 +228,19 @@ export default function QuestionBuilder({
                 aria-label={`Oui - ${trueCount} personnages`}
               >
                 <div className="flex flex-col items-center justify-center h-full">
-                  <div className="text-6xl text-white">✓</div>
+                  {trueImage ? (
+                    <Image
+                      src={trueImage}
+                      alt="Oui"
+                      width={80}
+                      height={80}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <div className="text-6xl text-white">✓</div>
+                  )}
                   {trueCount > 0 && (
-                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
+                    <div className={`absolute -top-2 -right-2 ${kidFriendlyColors[0]} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
                       {trueCount}
                     </div>
                   )}
@@ -221,9 +255,19 @@ export default function QuestionBuilder({
                 aria-label={`Non - ${falseCount} personnages`}
               >
                 <div className="flex flex-col items-center justify-center h-full">
-                  <div className="text-6xl text-white">✗</div>
+                  {falseImage ? (
+                    <Image
+                      src={falseImage}
+                      alt="Non"
+                      width={80}
+                      height={80}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <div className="text-6xl text-white">✗</div>
+                  )}
                   {falseCount > 0 && (
-                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
+                    <div className={`absolute -top-2 -right-2 ${kidFriendlyColors[1]} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
                       {falseCount}
                     </div>
                   )}
@@ -242,10 +286,13 @@ export default function QuestionBuilder({
             Choisis {schema.displayName}
           </h3>
           <div className="grid grid-cols-2 gap-4">
-            {schema.values.map((value) => {
+            {schema.values.map((value, index) => {
               const matchCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, value).length;
               
               if (matchCount === 0) return null; // Don't show options that would eliminate everyone
+              
+              const imagePath = characteristicImages[selectedCharacteristic]?.[String(value)];
+              const colorClass = kidFriendlyColors[index % kidFriendlyColors.length];
               
               return (
                 <motion.div 
@@ -260,28 +307,21 @@ export default function QuestionBuilder({
                     aria-label={`${String(value)} - ${matchCount} personnages`}
                   >
                     <div className="flex flex-col items-center justify-center h-full">
-                      {/* Large visual representation */}
-                      {selectedCharacteristic === 'hairColor' && (
-                        <div className="relative">
-                          <div className="text-6xl">👤</div>
-                          <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-6 rounded-t-full ${colorSwatches[String(value)]} opacity-80`} />
-                        </div>
-                      )}
-                      {selectedCharacteristic === 'eyeColor' && (
-                        <div className="relative">
-                          <div className="text-6xl">👁️</div>
-                          <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full ${colorSwatches[String(value)]}`} />
-                        </div>
-                      )}
-                      {selectedCharacteristic === 'age' && (
-                        <div className="text-6xl">{ageEmojis[String(value)]}</div>
-                      )}
-                      {selectedCharacteristic === 'species' && (
-                        <div className="text-6xl">{speciesEmojis[String(value)]}</div>
+                      {/* Clear image representation */}
+                      {imagePath ? (
+                        <Image
+                          src={imagePath}
+                          alt={String(value)}
+                          width={80}
+                          height={80}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <div className="text-6xl text-gray-600">❓</div>
                       )}
                       
-                      {/* Large, prominent number badge */}
-                      <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
+                      {/* Colorful, kid-friendly number badge */}
+                      <div className={`absolute -top-2 -right-2 ${colorClass} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
                         {matchCount}
                       </div>
                     </div>
