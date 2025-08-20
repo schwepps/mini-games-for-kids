@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { ICharacter } from '@/types/game';
 import CharacterAvatar from '@/components/CharacterAvatar';
+import CharacteristicIcon from '@/components/CharacteristicIcon';
 import { Sparkles, Target } from 'lucide-react';
 
 interface CharacterCardProps {
@@ -93,11 +94,56 @@ const CharacterCard = memo(function CharacterCard({
             </div>
           </div>
 
-          {/* Character Name - pushes to bottom */}
+          {/* Character Name and Characteristics - pushes to bottom */}
           <div className="text-center mt-auto">
-            <h3 className="font-bold text-gray-800 text-lg mb-1 leading-tight line-clamp-2 min-h-[4rem] flex items-top justify-center">
+            <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight line-clamp-2 min-h-[3rem] flex items-top justify-center">
               {character.name}
             </h3>
+            
+            {/* Characteristic Icons Row - Selective Display */}
+            <div className="flex items-center justify-center gap-2 flex-wrap mb-1">
+              {/* Always show species and age */}
+              {Boolean(character.characteristics.species) && (
+                <CharacteristicIcon
+                  key="species"
+                  characteristic="species"
+                  value={character.characteristics.species}
+                  size="lg"
+                  className="opacity-90 hover:opacity-100 transition-opacity"
+                />
+              )}
+              {Boolean(character.characteristics.age) && (
+                <CharacteristicIcon
+                  key="age"
+                  characteristic="age"
+                  value={character.characteristics.age}
+                  size="lg"
+                  className="opacity-90 hover:opacity-100 transition-opacity"
+                />
+              )}
+              
+              {/* Show isSuperhero only if true */}
+              {character.characteristics.isSuperhero === true && (
+                <CharacteristicIcon
+                  key="isSuperhero"
+                  characteristic="isSuperhero"
+                  value={true}
+                  size="lg"
+                  className="opacity-90 hover:opacity-100 transition-opacity"
+                />
+              )}
+              
+              {/* Show hasHat only if true */}
+              {character.characteristics.hasHat === true && (
+                <CharacteristicIcon
+                  key="hasHat"
+                  characteristic="hasHat"
+                  value={true}
+                  size="lg"
+                  className="opacity-90 hover:opacity-100 transition-opacity"
+                />
+              )}
+            </div>
           </div>
 
           {/* Last character indicator */}

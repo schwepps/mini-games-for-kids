@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { CharacterFilter } from '@/lib/characterFilter';
+import { characteristicImages } from '@/lib/characteristicImages';
 import { IProfile, ICharacter, IQuestion } from '@/types/game';
 import { 
   CheckCircle,
@@ -35,44 +36,6 @@ const pictogramMapping: { [key: string]: string } = {
   species: '/images/questions/species.png'
 };
 
-
-// Image mapping for all characteristics and values
-const characteristicImages: { [key: string]: { [value: string]: string } } = {
-  age: {
-    enfant: '/images/answers/age/enfant.png',
-    adulte: '/images/answers/age/adulte.png'
-  },
-  eyeColor: {
-    marron: '/images/answers/eyeColor/marron.png',
-    bleu: '/images/answers/eyeColor/bleu.png',
-    noir: '/images/answers/eyeColor/noir.png'
-  },
-  hairColor: {
-    marron: '/images/answers/hairColor/marron.png',
-    noir: '/images/answers/hairColor/noir.png',
-    bleu: '/images/answers/hairColor/bleu.png',
-    jaune: '/images/answers/hairColor/jaune.png',
-    aucune: '/images/answers/hairColor/aucune.png'
-  },
-  hasHat: {
-    true: '/images/answers/hasHat/hasHat.png',
-    false: '/images/answers/hasHat/noHat.png'
-  },
-  isSmiling: {
-    true: '/images/answers/isSmiling/isSmiling.png',
-    false: '/images/answers/isSmiling/isNotSmiling.png'
-  },
-  isSuperhero: {
-    true: '/images/answers/isSuperhero/isSuperhero.png',
-    false: '/images/answers/isSuperhero/isNotSuperhero.png'
-  },
-  species: {
-    humain: '/images/answers/species/humain.png',
-    animal: '/images/answers/species/animal.png',
-    robot: '/images/answers/species/robot.png',
-    alien: '/images/answers/species/alien.png'
-  }
-};
 
 // Kid-friendly counter colors
 const kidFriendlyColors = [

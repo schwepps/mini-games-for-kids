@@ -1,0 +1,67 @@
+/**
+ * Shared mapping of character characteristics to their corresponding image paths
+ * Used by both QuestionBuilder and CharacterCard components
+ */
+
+export const characteristicImages: { [key: string]: { [value: string]: string } } = {
+  age: {
+    enfant: '/images/answers/age/enfant.png',
+    adulte: '/images/answers/age/adulte.png'
+  },
+  eyeColor: {
+    marron: '/images/answers/eyeColor/marron.png',
+    bleu: '/images/answers/eyeColor/bleu.png',
+    noir: '/images/answers/eyeColor/noir.png'
+  },
+  hairColor: {
+    marron: '/images/answers/hairColor/marron.png',
+    noir: '/images/answers/hairColor/noir.png',
+    bleu: '/images/answers/hairColor/bleu.png',
+    jaune: '/images/answers/hairColor/jaune.png',
+    aucune: '/images/answers/hairColor/aucune.png'
+  },
+  hasHat: {
+    true: '/images/answers/hasHat/hasHat.png',
+    false: '/images/answers/hasHat/noHat.png'
+  },
+  isSmiling: {
+    true: '/images/answers/isSmiling/isSmiling.png',
+    false: '/images/answers/isSmiling/isNotSmiling.png'
+  },
+  isSuperhero: {
+    true: '/images/answers/isSuperhero/isSuperhero.png',
+    false: '/images/answers/isSuperhero/isNotSuperhero.png'
+  },
+  species: {
+    humain: '/images/answers/species/humain.png',
+    animal: '/images/answers/species/animal.png',
+    robot: '/images/answers/species/robot.png',
+    alien: '/images/answers/species/alien.png'
+  }
+};
+
+/**
+ * Get the image path for a specific characteristic and value
+ * @param characteristic The characteristic key (e.g., 'species', 'hairColor')
+ * @param value The characteristic value (e.g., 'animal', 'marron')
+ * @returns The image path or null if not found
+ */
+export function getCharacteristicImage(characteristic: string, value: unknown): string | null {
+  const characteristicMap = characteristicImages[characteristic];
+  if (!characteristicMap) return null;
+  
+  const stringValue = String(value);
+  return characteristicMap[stringValue] || null;
+}
+
+/**
+ * Priority order for displaying characteristics in CharacterCard
+ * Ordered by visual importance for small children
+ */
+export const characteristicDisplayOrder = [
+  'species',     // What type of being (most fundamental)
+  'hairColor',   // Visual appearance
+  'hasHat',      // Accessories
+  'isSuperhero', // Special traits
+  'isSmiling'    // Emotional state
+];
