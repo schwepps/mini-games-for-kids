@@ -141,6 +141,7 @@ export default function QuestionBuilder({
   const renderCharacteristicButtons = () => {
     return Object.entries(profile.characteristicSchema).map(([key, schema]) => {
       const iconConfig = characteristicIcons[key];
+      if (!iconConfig) return null; // Handle missing icon config
       const isSelected = selectedCharacteristic === key;
       
       return (
@@ -163,13 +164,15 @@ export default function QuestionBuilder({
             `}
           >
             <div className="flex flex-col items-center gap-2">
-              <Image
-                src={pictogramMapping[key]}
-                alt={schema.displayName}
+              {pictogramMapping[key] && (
+                <Image
+                  src={pictogramMapping[key]}
+                  alt={schema.displayName}
                 width={80}
-                height={80}
-                className="object-contain"
-              />
+                  height={80}
+                  className="object-contain"
+                />
+              )}
             </div>
           </Button>
         </motion.div>
@@ -181,6 +184,7 @@ export default function QuestionBuilder({
     if (!selectedCharacteristic || !profile) return null;
     
     const schema = profile.characteristicSchema[selectedCharacteristic];
+    if (!schema) return null; // Handle missing schema
     
     if (schema.type === 'boolean') {
       const trueCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, true).length;
@@ -338,37 +342,37 @@ export default function QuestionBuilder({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className={`rounded-2xl p-4 border-2 ${
-                questionsAsked[questionsAsked.length - 1].answer 
+                questionsAsked[questionsAsked.length - 1]?.answer 
                   ? 'bg-green-100 border-green-400' 
                   : 'bg-red-100 border-red-400'
               }`}
             >
               <div className="text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  {questionsAsked[questionsAsked.length - 1].answer ? (
+                  {questionsAsked[questionsAsked.length - 1]?.answer ? (
                     <CheckCircle className="w-6 h-6 text-green-600" />
                   ) : (
                     <XCircle className="w-6 h-6 text-red-600" />
                   )}
                   <h4 className={`font-bold text-lg ${
-                    questionsAsked[questionsAsked.length - 1].answer 
+                    questionsAsked[questionsAsked.length - 1]?.answer 
                       ? 'text-green-800' 
                       : 'text-red-800'
                   }`}>
-                    {questionsAsked[questionsAsked.length - 1].answer ? 'OUI !' : 'NON !'}
+                    {questionsAsked[questionsAsked.length - 1]?.answer ? 'OUI !' : 'NON !'}
                   </h4>
                 </div>
                 
                 <p className={`font-medium mb-2 ${
-                  questionsAsked[questionsAsked.length - 1].answer 
+                  questionsAsked[questionsAsked.length - 1]?.answer 
                     ? 'text-green-700' 
                     : 'text-red-700'
                 }`}>
-                  {questionsAsked[questionsAsked.length - 1].text}
+                  {questionsAsked[questionsAsked.length - 1]?.text}
                 </p>
                 
                 <div className="text-sm text-gray-600">
-                  {questionsAsked[questionsAsked.length - 1].answer 
+                  {questionsAsked[questionsAsked.length - 1]?.answer 
                     ? '✨ Les personnages sans ce trait ont été éliminés !'
                     : '✨ Les personnages avec ce trait ont été éliminés !'
                   }

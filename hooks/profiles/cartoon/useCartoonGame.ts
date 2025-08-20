@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { IProfile, ICharacter, IQuestion, IGameState } from '@/types/game';
+import { IProfile, ICharacter, IQuestion } from '@/types/game';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { CharacterFilter } from '@/lib/characterFilter';
 
@@ -36,7 +36,7 @@ export function useCartoonGame() {
 
   const selectRandomCharacter = useCallback((characters: ICharacter[]): ICharacter => {
     const randomIndex = Math.floor(Math.random() * characters.length);
-    return characters[randomIndex];
+    return characters[randomIndex]!; // We know the array is not empty when called
   }, []);
 
   const startNewGame = useCallback(() => {
@@ -58,6 +58,7 @@ export function useCartoonGame() {
 
     // Create the question with proper French grammar
     const characteristic = profile.characteristicSchema[characteristicKey];
+    if (!characteristic) return; // Handle missing characteristic
     let questionText = '';
     
     if (typeof value === 'boolean') {
@@ -108,11 +109,8 @@ export function useCartoonGame() {
     setQuestionsAsked(newQuestions);
     setRemainingCharacters(filteredCharacters);
 
-    // Check win condition (player wins when only hidden character remains)
-    if (filteredCharacters.length === 1) {
-      setGameState('won');
-    }
-    // Note: Player can no longer "lose" by elimination since logic is now correct
+    // Note: Player wins only by making a correct guess via makeGuess(), not automatically
+    // This allows the user to click on the final remaining character
   }, [profile, gameState, remainingCharacters, questionsAsked, hiddenCharacter]);
 
   const makeGuess = useCallback((guessedCharacter: ICharacter) => {

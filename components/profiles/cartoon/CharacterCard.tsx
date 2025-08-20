@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { ICharacter } from '@/types/game';
@@ -14,7 +15,7 @@ interface CharacterCardProps {
   gameState: 'welcome' | 'playing' | 'won' | 'lost';
 }
 
-export default function CharacterCard({ 
+const CharacterCard = memo(function CharacterCard({ 
   character, 
   onClick, 
   isClickable, 
@@ -42,6 +43,15 @@ export default function CharacterCard({
           bg-white/90 backdrop-blur-sm
         `}
         onClick={onClick}
+        role="button"
+        tabIndex={isClickable ? 0 : -1}
+        aria-label={`Select ${character.name}`}
+        onKeyDown={(e) => {
+          if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
       >
         {/* Glow effect for last character */}
         {isLastOne && (
@@ -99,6 +109,7 @@ export default function CharacterCard({
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 className="bg-yellow-400 text-yellow-900 rounded-full p-3 font-bold text-sm shadow-lg"
+                aria-label="Click to make your final guess"
               >
                 TAP ME!
               </motion.div>
@@ -122,4 +133,14 @@ export default function CharacterCard({
       </Card>
     </motion.div>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison for better performance
+  return (
+    prevProps.character.id === nextProps.character.id &&
+    prevProps.isClickable === nextProps.isClickable &&
+    prevProps.isLastOne === nextProps.isLastOne &&
+    prevProps.gameState === nextProps.gameState
+  );
+});
+
+export default CharacterCard;

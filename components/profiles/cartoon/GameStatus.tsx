@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +22,7 @@ interface GameStatusProps {
   hiddenCharacter: ICharacter | null;
 }
 
-export default function GameStatus({ 
+const GameStatus = memo(function GameStatus({ 
   remainingCharacters, 
   questionsAsked, 
   gameState,
@@ -213,4 +214,6 @@ export default function GameStatus({
       </Card>
     </motion.div>
   );
-}
+});
+
+export default GameStatus;

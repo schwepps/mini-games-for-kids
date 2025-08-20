@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ICharacter, IQuestion } from '@/types/game';
 import CharacterCard from './CharacterCard';
@@ -11,7 +12,7 @@ interface CharacterGridProps {
   questionsAsked: IQuestion[];
 }
 
-export default function CharacterGrid({ 
+const CharacterGrid = memo(function CharacterGrid({ 
   characters, 
   onCharacterGuess, 
   gameState
@@ -86,4 +87,6 @@ export default function CharacterGrid({
       )}
     </div>
   );
-}
+});
+
+export default CharacterGrid;

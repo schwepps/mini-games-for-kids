@@ -175,7 +175,10 @@ export class CharacterFilter {
       const values = this.getUniqueCharacteristicValues(characters, key);
       
       values.forEach(value => {
-        stats[key][String(value)] = this.getCharactersWithTrait(characters, key, value).length;
+        const statKey = stats[key];
+        if (statKey) {
+          statKey[String(value)] = this.getCharactersWithTrait(characters, key, value).length;
+        }
       });
     });
 
