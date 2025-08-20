@@ -100,7 +100,7 @@ const QuestionHistory = memo(function VisualQuestionHistory({
                 <div className="flex items-end gap-3">
                   {/* Answer image with colored border */}
                   <div className={`
-                    w-16 h-16 rounded-lg border-2 flex-shrink-0 flex items-center justify-center
+                    w-16 h-16 rounded-lg border-4 flex-shrink-0 flex items-center justify-center
                     ${question.answer 
                       ? 'border-green-500 bg-green-50' 
                       : 'border-red-500 bg-red-50'
