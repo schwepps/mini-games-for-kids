@@ -11,13 +11,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CharacterFilter } from '@/lib/characterFilter';
 import { IProfile, ICharacter, IQuestion } from '@/types/game';
 import { 
-  Palette, 
-  Users, 
-  PawPrint as Paw, 
-  Crown, 
-  Eye, 
-  Smile, 
-  HardHat as Hat,
   CheckCircle,
   XCircle,
   HelpCircle
@@ -31,13 +24,6 @@ interface QuestionBuilderProps {
   disabled: boolean;
 }
 
-type CharacteristicIcon = {
-  [key: string]: {
-    icon: React.ReactNode;
-    color: string;
-    bgColor: string;
-  };
-};
 
 const pictogramMapping: { [key: string]: string } = {
   age: '/images/questions/age.png',
@@ -49,43 +35,6 @@ const pictogramMapping: { [key: string]: string } = {
   species: '/images/questions/species.png'
 };
 
-const characteristicIcons: CharacteristicIcon = {
-  hairColor: {
-    icon: <Palette className="w-6 h-6" />,
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-100 hover:bg-purple-200'
-  },
-  age: {
-    icon: <Users className="w-6 h-6" />,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-100 hover:bg-blue-200'
-  },
-  species: {
-    icon: <Paw className="w-6 h-6" />,
-    color: 'text-green-600',
-    bgColor: 'bg-green-100 hover:bg-green-200'
-  },
-  isSuperhero: {
-    icon: <Crown className="w-6 h-6" />,
-    color: 'text-red-600',
-    bgColor: 'bg-red-100 hover:bg-red-200'
-  },
-  eyeColor: {
-    icon: <Eye className="w-6 h-6" />,
-    color: 'text-amber-600',
-    bgColor: 'bg-amber-100 hover:bg-amber-200'
-  },
-  isSmiling: {
-    icon: <Smile className="w-6 h-6" />,
-    color: 'text-yellow-600',
-    bgColor: 'bg-yellow-100 hover:bg-yellow-200'
-  },
-  hasHat: {
-    icon: <Hat className="w-6 h-6" />,
-    color: 'text-indigo-600',
-    bgColor: 'bg-indigo-100 hover:bg-indigo-200'
-  }
-};
 
 // Image mapping for all characteristics and values
 const characteristicImages: { [key: string]: { [value: string]: string } } = {
@@ -162,8 +111,6 @@ export default function QuestionBuilder({
 
   const renderCharacteristicButtons = () => {
     return Object.entries(profile.characteristicSchema).map(([key, schema]) => {
-      const iconConfig = characteristicIcons[key];
-      if (!iconConfig) return null; // Handle missing icon config
       const isSelected = selectedCharacteristic === key;
       
       return (
@@ -179,8 +126,8 @@ export default function QuestionBuilder({
             className={`
               h-32 w-full p-4 rounded-2xl border-2 transition-all duration-200
               ${isSelected 
-                ? `${iconConfig.bgColor} border-current ${iconConfig.color}` 
-                : `${iconConfig.bgColor} border-gray-200 hover:border-gray-300`
+                ? 'bg-blue-100 hover:bg-blue-200 border-blue-500 text-blue-700' 
+                : 'bg-white/90 hover:bg-white border-gray-200 hover:border-gray-300'
               }
               ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
             `}
