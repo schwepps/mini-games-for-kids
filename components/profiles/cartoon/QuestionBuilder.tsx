@@ -2,20 +2,14 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-import { CharacterFilter } from '@/lib/characterFilter';
-import { characteristicImages } from '@/lib/characteristicImages';
 import { IProfile, ICharacter, IQuestion } from '@/types/game';
-import { 
-  CheckCircle,
-  XCircle,
-  HelpCircle
-} from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
+
+import CharacteristicSelector from './question-builder/CharacteristicSelector';
+import AnswerOptionsDisplay from './question-builder/AnswerOptionsDisplay';
+import QuestionFeedback from './question-builder/QuestionFeedback';
+import QuestionHistory from './question-builder/QuestionHistory';
 
 interface QuestionBuilderProps {
   onAskQuestion: (characteristicKey: string, value: unknown) => void;
@@ -24,29 +18,6 @@ interface QuestionBuilderProps {
   questionsAsked: IQuestion[];
   disabled: boolean;
 }
-
-
-const pictogramMapping: { [key: string]: string } = {
-  age: '/images/questions/age.png',
-  eyeColor: '/images/questions/eyes-color.png',
-  hairColor: '/images/questions/hair-color.png',
-  hasHat: '/images/questions/has-hat.png',
-  isSmiling: '/images/questions/is-smilling.png',
-  isSuperhero: '/images/questions/is-superhero.png',
-  species: '/images/questions/species.png'
-};
-
-
-// Kid-friendly counter colors
-const kidFriendlyColors = [
-  'bg-red-500 border-red-400',
-  'bg-orange-500 border-orange-400', 
-  'bg-yellow-500 border-yellow-400',
-  'bg-green-500 border-green-400',
-  'bg-blue-500 border-blue-400',
-  'bg-purple-500 border-purple-400',
-  'bg-pink-500 border-pink-400'
-];
 
 export default function QuestionBuilder({ 
   onAskQuestion, 
@@ -71,182 +42,6 @@ export default function QuestionBuilder({
     setSelectedCharacteristic(null);
   };
 
-
-  const renderCharacteristicButtons = () => {
-    return Object.entries(profile.characteristicSchema).map(([key, schema]) => {
-      const isSelected = selectedCharacteristic === key;
-      
-      return (
-        <motion.div
-          key={key}
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button
-            onClick={() => handleCharacteristicSelect(key)}
-            disabled={disabled}
-            variant={isSelected ? "default" : "outline"}
-            className={`
-              h-32 w-full p-4 rounded-2xl border-2 transition-all duration-200
-              ${isSelected 
-                ? 'bg-blue-100 hover:bg-blue-200 border-blue-500 text-blue-700' 
-                : 'bg-white/90 hover:bg-white border-gray-200 hover:border-gray-300'
-              }
-              ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-            `}
-          >
-            <div className="flex flex-col items-center gap-2">
-              {pictogramMapping[key] && (
-                <Image
-                  src={pictogramMapping[key]}
-                  alt={schema.displayName}
-                width={80}
-                  height={80}
-                  className="object-contain"
-                />
-              )}
-            </div>
-          </Button>
-        </motion.div>
-      );
-    });
-  };
-
-  const renderValueOptions = () => {
-    if (!selectedCharacteristic || !profile) return null;
-    
-    const schema = profile.characteristicSchema[selectedCharacteristic];
-    if (!schema) return null; // Handle missing schema
-    
-    if (schema.type === 'boolean') {
-      const trueCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, true).length;
-      const falseCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, false).length;
-      const trueImage = characteristicImages[selectedCharacteristic]?.true;
-      const falseImage = characteristicImages[selectedCharacteristic]?.false;
-      
-      return (
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-white text-center">
-            {schema.displayName}
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => handleValueSelect(selectedCharacteristic, true)}
-                className="h-28 w-full bg-green-500 hover:bg-green-600 text-white rounded-2xl relative border-4 border-green-400 hover:border-green-300"
-                disabled={disabled}
-                aria-label={`Oui - ${trueCount} personnages`}
-              >
-                <div className="flex flex-col items-center justify-center h-full">
-                  {trueImage ? (
-                    <Image
-                      src={trueImage}
-                      alt="Oui"
-                      width={80}
-                      height={80}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <div className="text-6xl text-white">✓</div>
-                  )}
-                  {trueCount > 0 && (
-                    <div className={`absolute -top-2 -right-2 ${kidFriendlyColors[0]} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
-                      {trueCount}
-                    </div>
-                  )}
-                </div>
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => handleValueSelect(selectedCharacteristic, false)}
-                className="h-28 w-full bg-red-500 hover:bg-red-600 text-white rounded-2xl relative border-4 border-red-400 hover:border-red-300"
-                disabled={disabled}
-                aria-label={`Non - ${falseCount} personnages`}
-              >
-                <div className="flex flex-col items-center justify-center h-full">
-                  {falseImage ? (
-                    <Image
-                      src={falseImage}
-                      alt="Non"
-                      width={80}
-                      height={80}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <div className="text-6xl text-white">✗</div>
-                  )}
-                  {falseCount > 0 && (
-                    <div className={`absolute -top-2 -right-2 ${kidFriendlyColors[1]} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
-                      {falseCount}
-                    </div>
-                  )}
-                </div>
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      );
-    }
-
-    if (schema.type === 'enum' && schema.values) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-white text-center">
-            Choisis {schema.displayName}
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            {schema.values.map((value, index) => {
-              const matchCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, value).length;
-              
-              if (matchCount === 0) return null; // Don't show options that would eliminate everyone
-              
-              const imagePath = characteristicImages[selectedCharacteristic]?.[String(value)];
-              const colorClass = kidFriendlyColors[index % kidFriendlyColors.length];
-              
-              return (
-                <motion.div 
-                  key={String(value)}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    onClick={() => handleValueSelect(selectedCharacteristic, value)}
-                    className="h-28 w-full p-4 rounded-2xl bg-white/90 hover:bg-white text-gray-800 border-4 border-gray-300 hover:border-blue-400 relative shadow-lg hover:shadow-xl transition-all"
-                    disabled={disabled}
-                    aria-label={`${String(value)} - ${matchCount} personnages`}
-                  >
-                    <div className="flex flex-col items-center justify-center h-full">
-                      {/* Clear image representation */}
-                      {imagePath ? (
-                        <Image
-                          src={imagePath}
-                          alt={String(value)}
-                          width={80}
-                          height={80}
-                          className="object-contain"
-                        />
-                      ) : (
-                        <div className="text-6xl text-gray-600">❓</div>
-                      )}
-                      
-                      {/* Colorful, kid-friendly number badge */}
-                      <div className={`absolute -top-2 -right-2 ${colorClass} text-white rounded-full w-14 h-14 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg`}>
-                        {matchCount}
-                      </div>
-                    </div>
-                  </Button>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
   return (
     <Card className="bg-white/10 backdrop-blur-sm border-2 border-white/20">
       <CardHeader>
@@ -259,14 +54,12 @@ export default function QuestionBuilder({
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Step 1: Choose what to ask about */}
-        <div>
-          <h3 className="text-white font-medium mb-3 text-center">
-            Que veux-tu savoir ?
-          </h3>
-          <div className="grid grid-cols-2 gap-3">
-            {renderCharacteristicButtons()}
-          </div>
-        </div>
+        <CharacteristicSelector
+          profile={profile}
+          selectedCharacteristic={selectedCharacteristic}
+          onCharacteristicSelect={handleCharacteristicSelect}
+          disabled={disabled}
+        />
 
         {/* Step 2: Choose specific value */}
         <AnimatePresence>
@@ -278,7 +71,13 @@ export default function QuestionBuilder({
               transition={{ duration: 0.3 }}
             >
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                {renderValueOptions()}
+                <AnswerOptionsDisplay
+                  selectedCharacteristic={selectedCharacteristic}
+                  profile={profile}
+                  remainingCharacters={remainingCharacters}
+                  onValueSelect={handleValueSelect}
+                  disabled={disabled}
+                />
               </div>
             </motion.div>
           )}
@@ -287,73 +86,14 @@ export default function QuestionBuilder({
         {/* Visual Feedback for Last Question */}
         <AnimatePresence>
           {questionsAsked.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className={`rounded-2xl p-4 border-2 ${
-                questionsAsked[questionsAsked.length - 1]?.answer 
-                  ? 'bg-green-100 border-green-400' 
-                  : 'bg-red-100 border-red-400'
-              }`}
-            >
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  {questionsAsked[questionsAsked.length - 1]?.answer ? (
-                    <CheckCircle className="w-6 h-6 text-green-600" />
-                  ) : (
-                    <XCircle className="w-6 h-6 text-red-600" />
-                  )}
-                  <h4 className={`font-bold text-lg ${
-                    questionsAsked[questionsAsked.length - 1]?.answer 
-                      ? 'text-green-800' 
-                      : 'text-red-800'
-                  }`}>
-                    {questionsAsked[questionsAsked.length - 1]?.answer ? 'OUI !' : 'NON !'}
-                  </h4>
-                </div>
-                
-                <p className={`font-medium mb-2 ${
-                  questionsAsked[questionsAsked.length - 1]?.answer 
-                    ? 'text-green-700' 
-                    : 'text-red-700'
-                }`}>
-                  {questionsAsked[questionsAsked.length - 1]?.text}
-                </p>
-                
-                <div className="text-sm text-gray-600">
-                  {questionsAsked[questionsAsked.length - 1]?.answer 
-                    ? '✨ Les personnages sans ce trait ont été éliminés !'
-                    : '✨ Les personnages avec ce trait ont été éliminés !'
-                  }
-                </div>
-              </div>
-            </motion.div>
+            <QuestionFeedback 
+              lastQuestion={questionsAsked[questionsAsked.length - 1]}
+            />
           )}
         </AnimatePresence>
 
-        {/* Questions asked */}
-        {questionsAsked.length > 0 && (
-          <div className="space-y-2">
-            <h4 className="text-white font-medium text-sm">Questions posées:</h4>
-            <div className="space-y-1 max-h-32 overflow-y-auto">
-              {questionsAsked.map((question, index) => (
-                <div 
-                  key={question.id}
-                  className="text-xs bg-white/10 rounded-lg p-2 text-white/80"
-                >
-                  <span className="font-medium">Q{index + 1}:</span> {question.text}{' '}
-                  <Badge 
-                    variant={question.answer ? "default" : "destructive"}
-                    className="ml-1 text-xs"
-                  >
-                    {question.answer ? 'YES' : 'NO'}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Questions History */}
+        <QuestionHistory questionsAsked={questionsAsked} />
       </CardContent>
     </Card>
   );

@@ -41,6 +41,20 @@ export const characteristicImages: { [key: string]: { [value: string]: string } 
 };
 
 /**
+ * Mapping of characteristics to their question pictogram images
+ * Used for displaying characteristic selection buttons
+ */
+export const pictogramMapping: { [key: string]: string } = {
+  age: '/images/questions/age.png',
+  eyeColor: '/images/questions/eyes-color.png',
+  hairColor: '/images/questions/hair-color.png',
+  hasHat: '/images/questions/has-hat.png',
+  isSmiling: '/images/questions/is-smilling.png',
+  isSuperhero: '/images/questions/is-superhero.png',
+  species: '/images/questions/species.png'
+};
+
+/**
  * Get the image path for a specific characteristic and value
  * @param characteristic The characteristic key (e.g., 'species', 'hairColor')
  * @param value The characteristic value (e.g., 'animal', 'marron')
