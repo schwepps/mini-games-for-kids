@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { IProfile, ICharacter, IQuestion } from '@/types/game';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { CharacterFilter } from '@/lib/characterFilter';
+import { IProfile, ICharacter, IQuestion } from '@/types/game';
 import { 
   Palette, 
   Users, 

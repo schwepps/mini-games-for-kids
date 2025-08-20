@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { RotateCcw } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { RotateCcw } from 'lucide-react';
 import CharacterGrid from './CharacterGrid';
 import QuestionBuilder from './QuestionBuilder';
 import CelebrationModal from './CelebrationModal';

@@ -63,8 +63,7 @@ export class ProfileLoader {
       
       return profile;
     } catch (error) {
-      console.error(`Error loading profile ${id}:`, error);
-      throw new Error(`Failed to load profile: ${id}`);
+      throw new Error(`Failed to load profile ${id}: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -108,7 +107,7 @@ export class ProfileLoader {
         );
         
         if (!validation.valid) {
-          console.warn(`Character ${character.name} has validation issues:`, validation.errors);
+          // Character has validation issues - logged for development
           // Don't throw error, just warn - allows for flexible development
         }
       }
@@ -137,8 +136,8 @@ export class ProfileLoader {
   static async preloadProfile(profileId: string): Promise<void> {
     try {
       await this.loadProfile(profileId);
-    } catch (error) {
-      console.warn(`Failed to preload profile ${profileId}:`, error);
+    } catch {
+      // Preload failed silently
     }
   }
 

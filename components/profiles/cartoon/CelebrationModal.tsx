@@ -4,22 +4,24 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle 
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ICharacter } from '@/types/game';
-import CharacterAvatar from '@/components/CharacterAvatar';
-import { 
   Trophy, 
   Star, 
   Crown,
   Sparkles,
   Target
 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle 
+} from '@/components/ui/dialog';
+
+import CharacterAvatar from '@/components/CharacterAvatar';
+import { ICharacter } from '@/types/game';
 
 interface CelebrationModalProps {
   open: boolean;

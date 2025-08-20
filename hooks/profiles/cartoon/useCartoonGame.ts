@@ -100,10 +100,7 @@ export function useCartoonGame() {
     
     // Safety check: Ensure hidden character is never eliminated
     if (!filteredCharacters.find(char => char.id === hiddenCharacter.id)) {
-      console.error('Hidden character would be eliminated! This should never happen.');
-      // This should never occur with correct logic, but as a safety net:
-      // Don't apply the filter if it would eliminate the hidden character
-      return;
+      throw new Error('Critical game logic error: Hidden character would be eliminated');
     }
     
     // Update state
