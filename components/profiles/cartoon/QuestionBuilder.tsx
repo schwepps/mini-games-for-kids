@@ -181,6 +181,9 @@ export default function QuestionBuilder({
     const schema = profile.characteristicSchema[selectedCharacteristic];
     
     if (schema.type === 'boolean') {
+      const trueCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, true).length;
+      const falseCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, false).length;
+      
       return (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-white text-center">
@@ -190,24 +193,34 @@ export default function QuestionBuilder({
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 onClick={() => handleValueSelect(selectedCharacteristic, true)}
-                className="h-16 w-full bg-green-500 hover:bg-green-600 text-white rounded-xl"
+                className="h-28 w-full bg-green-500 hover:bg-green-600 text-white rounded-2xl relative border-4 border-green-400 hover:border-green-300"
                 disabled={disabled}
+                aria-label={`Oui - ${trueCount} personnages`}
               >
-                <div className="flex flex-col items-center gap-1">
-                  <CheckCircle className="w-6 h-6" />
-                  <span>Oui</span>
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="text-6xl text-white">✓</div>
+                  {trueCount > 0 && (
+                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
+                      {trueCount}
+                    </div>
+                  )}
                 </div>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 onClick={() => handleValueSelect(selectedCharacteristic, false)}
-                className="h-16 w-full bg-red-500 hover:bg-red-600 text-white rounded-xl"
+                className="h-28 w-full bg-red-500 hover:bg-red-600 text-white rounded-2xl relative border-4 border-red-400 hover:border-red-300"
                 disabled={disabled}
+                aria-label={`Non - ${falseCount} personnages`}
               >
-                <div className="flex flex-col items-center gap-1">
-                  <XCircle className="w-6 h-6" />
-                  <span>Non</span>
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="text-6xl text-white">✗</div>
+                  {falseCount > 0 && (
+                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
+                      {falseCount}
+                    </div>
+                  )}
                 </div>
               </Button>
             </motion.div>
@@ -222,7 +235,7 @@ export default function QuestionBuilder({
           <h3 className="text-lg font-semibold text-white text-center">
             Choisis {schema.displayName}
           </h3>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {schema.values.map((value) => {
               const matchCount = CharacterFilter.getCharactersWithTrait(remainingCharacters, selectedCharacteristic, value).length;
               
@@ -236,35 +249,35 @@ export default function QuestionBuilder({
                 >
                   <Button
                     onClick={() => handleValueSelect(selectedCharacteristic, value)}
-                    className="h-20 w-full p-2 rounded-xl bg-white/90 hover:bg-white text-gray-800 border-2 border-gray-200 hover:border-gray-300"
+                    className="h-28 w-full p-4 rounded-2xl bg-white/90 hover:bg-white text-gray-800 border-4 border-gray-300 hover:border-blue-400 relative shadow-lg hover:shadow-xl transition-all"
                     disabled={disabled}
+                    aria-label={`${String(value)} - ${matchCount} personnages`}
                   >
-                    <div className="flex flex-col items-center gap-1">
-                      {/* Visual representation */}
+                    <div className="flex flex-col items-center justify-center h-full">
+                      {/* Large visual representation */}
                       {selectedCharacteristic === 'hairColor' && (
-                        <div className={`w-8 h-8 rounded-full border-2 border-gray-300 ${colorSwatches[String(value)]}`} />
+                        <div className="relative">
+                          <div className="text-6xl">👤</div>
+                          <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-6 rounded-t-full ${colorSwatches[String(value)]} opacity-80`} />
+                        </div>
                       )}
                       {selectedCharacteristic === 'eyeColor' && (
                         <div className="relative">
-                          <Eye className="w-8 h-8" />
-                          <div className={`absolute inset-2 rounded-full ${colorSwatches[String(value)]}`} />
+                          <div className="text-6xl">👁️</div>
+                          <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full ${colorSwatches[String(value)]}`} />
                         </div>
                       )}
                       {selectedCharacteristic === 'age' && (
-                        <div className="text-2xl">{ageEmojis[String(value)]}</div>
+                        <div className="text-6xl">{ageEmojis[String(value)]}</div>
                       )}
                       {selectedCharacteristic === 'species' && (
-                        <div className="text-2xl">{speciesEmojis[String(value)]}</div>
+                        <div className="text-6xl">{speciesEmojis[String(value)]}</div>
                       )}
                       
-                      <span className="text-xs font-medium capitalize">
-                        {String(value)}
-                      </span>
-                      
-                      {/* Effectiveness indicator */}
-                      <Badge variant="secondary" className="text-xs">
+                      {/* Large, prominent number badge */}
+                      <div className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold border-4 border-white shadow-lg">
                         {matchCount}
-                      </Badge>
+                      </div>
                     </div>
                   </Button>
                 </motion.div>
@@ -366,7 +379,7 @@ export default function QuestionBuilder({
         {/* Questions asked */}
         {questionsAsked.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-white font-medium text-sm">Questions Asked:</h4>
+            <h4 className="text-white font-medium text-sm">Questions posées:</h4>
             <div className="space-y-1 max-h-32 overflow-y-auto">
               {questionsAsked.map((question, index) => (
                 <div 

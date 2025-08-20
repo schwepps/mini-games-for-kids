@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Play, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 import CharacterGrid from './CharacterGrid';
 import QuestionBuilder from './QuestionBuilder';
 import CelebrationModal from './CelebrationModal';
@@ -86,8 +86,8 @@ export default function CartoonGame() {
           <Image
             src="/images/logo/logo.png"
             alt="Qui Est-Ce ?"
-            width={300}
-            height={120}
+            width={200}
+            height={200}
             className="mx-auto drop-shadow-lg"
             priority
           />
@@ -131,16 +131,38 @@ export default function CartoonGame() {
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center mt-8"
+          className="text-center mt-12"
         >
-          <Button 
-            onClick={startNewGame}
-            size="lg"
-            className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/30 backdrop-blur-sm text-lg px-8 py-4"
+          <motion.div
+            whileHover={{ 
+              scale: 1.05,
+              y: -2,
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block"
           >
-            <Play className="w-6 h-6 mr-2" />
-            Nouvelle Partie
-          </Button>
+            <Button 
+              onClick={startNewGame}
+              size="lg"
+              className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 hover:from-yellow-500 hover:via-orange-500 hover:to-pink-500 text-white font-bold text-2xl px-12 py-6 rounded-full shadow-2xl border-4 border-white/50 backdrop-blur-sm transform transition-all duration-200 hover:shadow-3xl"
+            >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="mr-3"
+              >
+                🎮
+              </motion.div>
+              <span className="drop-shadow-sm">Nouvelle Partie</span>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="ml-3"
+              >
+                ✨
+              </motion.div>
+            </Button>
+          </motion.div>
         </motion.div>
 
         {/* Celebration Modal */}

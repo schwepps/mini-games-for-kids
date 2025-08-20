@@ -16,7 +16,6 @@ import CharacterAvatar from '@/components/CharacterAvatar';
 import { 
   Trophy, 
   Star, 
-  Play, 
   Crown,
   Sparkles,
   Target
@@ -240,14 +239,44 @@ export default function CelebrationModal({
               transition={{ delay: 1.5 }}
               className="text-center"
             >
-              <Button
-                onClick={handleNewGame}
-                size="lg"
-                className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transform transition hover:scale-105"
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -3,
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.25)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block"
               >
-                <Play className="w-6 h-6 mr-2" />
-                Rejouer !
-              </Button>
+                <Button
+                  onClick={handleNewGame}
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-400 hover:from-purple-600 hover:via-pink-600 hover:to-red-500 text-white font-bold text-2xl px-12 py-6 rounded-full shadow-2xl border-4 border-white transform transition-all duration-200 hover:shadow-3xl"
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    className="mr-3 text-2xl"
+                  >
+                    🔄
+                  </motion.div>
+                  <span className="drop-shadow-sm">Rejouer !</span>
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      rotate: [0, 10, -10, 0]
+                    }}
+                    transition={{ 
+                      duration: 1.8, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                    className="ml-3 text-2xl"
+                  >
+                    🎉
+                  </motion.div>
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </DialogContent>
