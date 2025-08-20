@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Play, RotateCcw } from 'lucide-react';
@@ -82,9 +83,14 @@ export default function CartoonGame() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-6"
         >
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-2 drop-shadow-lg">
-            Qui Est-Ce ? 🎭
-          </h1>
+          <Image
+            src="/images/logo/logo.png"
+            alt="Qui Est-Ce ?"
+            width={300}
+            height={120}
+            className="mx-auto drop-shadow-lg"
+            priority
+          />
           <p className="text-white/90 text-lg lg:text-xl">
             Trouve le personnage caché en posant des questions !
           </p>

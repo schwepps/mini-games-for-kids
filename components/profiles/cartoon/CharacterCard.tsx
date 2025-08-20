@@ -2,10 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { ICharacter } from '@/types/game';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { Crown, Sparkles, Target } from 'lucide-react';
+import { Sparkles, Target } from 'lucide-react';
 
 interface CharacterCardProps {
   character: ICharacter;
@@ -60,15 +59,15 @@ export default function CharacterCard({
           />
         )}
 
-        <CardContent className="p-3 relative z-10 h-full flex flex-col">
-          {/* Character Avatar */}
-          <div className="relative mb-3 flex justify-center">
-            <div className="relative">
+        <CardContent className="p-1 relative z-10 h-full flex flex-col">
+          {/* Character Avatar - full width with 4px padding */}
+          <div className="relative mb-3">
+            <div className="relative w-full aspect-square">
               <CharacterAvatar
                 characterName={character.name}
                 imageName={character.image}
-                size="lg"
-                className="rounded-xl shadow-md"
+                size="xl"
+                className="rounded-xl shadow-md w-full h-full"
               />
               
               {/* Special indicators */}
@@ -81,66 +80,28 @@ export default function CharacterCard({
                   <Target className="w-4 h-4 text-yellow-800" />
                 </motion.div>
               )}
-
-              {/* Superhero indicator */}
-              {(character.characteristics.isSuperhero as boolean) && (
-                <div className="absolute -top-1 -left-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                  <Crown className="w-3 h-3 text-white" />
-                </div>
-              )}
             </div>
           </div>
 
           {/* Character Name - pushes to bottom */}
           <div className="text-center mt-auto">
-            <h3 className="font-bold text-gray-800 text-sm mb-1 leading-tight">
+            <h3 className="font-bold text-gray-800 text-lg mb-1 leading-tight line-clamp-2 min-h-[4rem] flex items-top justify-center">
               {character.name}
             </h3>
-            
-            {/* Quick characteristics */}
-            <div className="flex flex-wrap justify-center gap-1 mb-2">
-              {/* Age badge */}
-              <Badge 
-                variant="secondary" 
-                className="text-xs px-1.5 py-0.5 bg-blue-100 text-blue-700"
-              >
-                {character.characteristics.age === 'child' && '👶'}
-                {character.characteristics.age === 'teen' && '🧑'}
-                {character.characteristics.age === 'adult' && '👩'}
-                {character.characteristics.age === 'elderly' && '👴'}
-              </Badge>
-              
-              {/* Species badge */}
-              <Badge 
-                variant="secondary" 
-                className="text-xs px-1.5 py-0.5 bg-green-100 text-green-700"
-              >
-                {character.characteristics.species === 'human' && '👤'}
-                {character.characteristics.species === 'animal' && '🐾'}
-                {character.characteristics.species === 'robot' && '🤖'}
-                {character.characteristics.species === 'alien' && '👽'}
-                {character.characteristics.species === 'monster' && '👹'}
-              </Badge>
-            </div>
           </div>
 
-          {/* Click indicator */}
-          {isClickable && (
+          {/* Last character indicator */}
+          {isLastOne && isClickable && (
             <motion.div
-              className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/10 rounded-lg transition-colors duration-200"
-              whileHover={isLastOne ? {
-                backgroundColor: "rgba(255, 255, 0, 0.2)"
-              } : {}}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {isLastOne && (
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  className="bg-yellow-400 text-yellow-900 rounded-full p-2 font-bold text-xs shadow-lg"
-                >
-                  TAP ME!
-                </motion.div>
-              )}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                className="bg-yellow-400 text-yellow-900 rounded-full p-3 font-bold text-sm shadow-lg"
+              >
+                TAP ME!
+              </motion.div>
             </motion.div>
           )}
 

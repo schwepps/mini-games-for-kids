@@ -72,7 +72,7 @@
     },
     {
       "id": "char_002",
-      "name": "Lightning McQueen",
+      "name": "Flash McQueen",
       "image": "lightning-mcqueen.png",
       "characteristics": {
         "hairColor": "aucune",
@@ -216,7 +216,7 @@
     },
     {
       "id": "char_010",
-      "name": "SpongeBob SquarePants",
+      "name": "Bob l'éponge",
       "image": "spongebob.png",
       "characteristics": {
         "hairColor": "jaune",

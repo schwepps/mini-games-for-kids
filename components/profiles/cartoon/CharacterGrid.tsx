@@ -75,7 +75,7 @@ export default function CharacterGrid({
       {/* Character Grid */}
       <motion.div 
         layout
-        className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4 auto-rows-fr"
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4 auto-rows-fr"
       >
         {characters.map((character, index) => (
           <motion.div

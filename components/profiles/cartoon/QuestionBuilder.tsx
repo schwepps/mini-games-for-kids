@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +35,16 @@ type CharacteristicIcon = {
     color: string;
     bgColor: string;
   };
+};
+
+const pictogramMapping: { [key: string]: string } = {
+  age: '/images/questions/age.png',
+  eyeColor: '/images/questions/eyes-color.png',
+  hairColor: '/images/questions/hair-color.png',
+  hasHat: '/images/questions/has-hat.png',
+  isSmiling: '/images/questions/is-smilling.png',
+  isSuperhero: '/images/questions/is-superhero.png',
+  species: '/images/questions/species.png'
 };
 
 const characteristicIcons: CharacteristicIcon = {
@@ -141,7 +152,7 @@ export default function QuestionBuilder({
             disabled={disabled}
             variant={isSelected ? "default" : "outline"}
             className={`
-              h-20 w-full p-4 rounded-2xl border-2 transition-all duration-200
+              h-32 w-full p-4 rounded-2xl border-2 transition-all duration-200
               ${isSelected 
                 ? `${iconConfig.bgColor} border-current ${iconConfig.color}` 
                 : `${iconConfig.bgColor} border-gray-200 hover:border-gray-300`
@@ -150,12 +161,13 @@ export default function QuestionBuilder({
             `}
           >
             <div className="flex flex-col items-center gap-2">
-              <div className={iconConfig.color}>
-                {iconConfig.icon}
-              </div>
-              <span className={`text-sm font-medium ${iconConfig.color}`}>
-                {schema.displayName}
-              </span>
+              <Image
+                src={pictogramMapping[key]}
+                alt={schema.displayName}
+                width={80}
+                height={80}
+                className="object-contain"
+              />
             </div>
           </Button>
         </motion.div>
