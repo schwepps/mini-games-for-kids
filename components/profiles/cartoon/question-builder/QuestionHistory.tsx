@@ -7,7 +7,7 @@ import { CharacterFilter } from '@/lib/characterFilter';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import CharacteristicIcon from '@/components/CharacteristicIcon';
 
-interface VisualQuestionHistoryProps {
+interface QuestionHistoryProps {
   questionsAsked: IQuestion[];
   allCharacters: ICharacter[];
 }
@@ -22,10 +22,10 @@ interface QuestionEliminationData {
  * Kid-friendly visual component that shows question history using character avatars
  * and fun emojis instead of text. Displays eliminated characters for each question.
  */
-const VisualQuestionHistory = memo(function VisualQuestionHistory({
+const QuestionHistory = memo(function VisualQuestionHistory({
   questionsAsked,
   allCharacters
-}: VisualQuestionHistoryProps): JSX.Element | null {
+}: QuestionHistoryProps): JSX.Element | null {
   
   // Calculate eliminated characters for each question
   const questionEliminationData = useMemo((): QuestionEliminationData[] => {
@@ -177,4 +177,4 @@ const VisualQuestionHistory = memo(function VisualQuestionHistory({
   );
 });
 
-export default VisualQuestionHistory;
+export default QuestionHistory;

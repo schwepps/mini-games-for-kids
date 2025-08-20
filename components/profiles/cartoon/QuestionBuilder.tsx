@@ -8,7 +8,7 @@ import { HelpCircle } from 'lucide-react';
 
 import CharacteristicSelector from './question-builder/CharacteristicSelector';
 import AnswerOptionsDisplay from './question-builder/AnswerOptionsDisplay';
-import VisualQuestionHistory from './question-builder/VisualQuestionHistory';
+import QuestionHistory from './question-builder/QuestionHistory';
 
 interface QuestionBuilderProps {
   onAskQuestion: (characteristicKey: string, value: unknown) => void;
@@ -83,7 +83,7 @@ export default function QuestionBuilder({
         </AnimatePresence>
 
         {/* Visual Question History - Kid-Friendly */}
-        <VisualQuestionHistory 
+        <QuestionHistory 
           questionsAsked={questionsAsked}
           allCharacters={profile?.characters || []}
         />
