@@ -54,14 +54,3 @@ export function getCharacteristicImage(characteristic: string, value: unknown): 
   return characteristicMap[stringValue] || null;
 }
 
-/**
- * Priority order for displaying characteristics in CharacterCard
- * Ordered by visual importance for small children
- */
-export const characteristicDisplayOrder = [
-  'species',     // What type of being (most fundamental)
-  'hairColor',   // Visual appearance
-  'hasHat',      // Accessories
-  'isSuperhero', // Special traits
-  'isSmiling'    // Emotional state
-];
