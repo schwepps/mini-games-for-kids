@@ -1,21 +1,15 @@
 {
   "id": "cartoon-characters",
   "name": "Cartoon Characters",
-  "description": "Classic cartoon characters perfect for family fun",
-  "version": "1.0.0",
+  "description": "Popular cartoon characters perfect for family fun",
+  "version": "3.0.0",
   "characteristicSchema": {
     "hairColor": {
       "type": "enum",
       "displayName": "Hair Color",
-      "values": ["brown", "blonde", "black", "red", "white", "blue", "green", "none"],
+      "values": ["brown", "blonde", "black", "red", "white", "blue", "green", "yellow", "none"],
       "category": "appearance",
       "description": "The color of the character's hair"
-    },
-    "hasGlasses": {
-      "type": "boolean",
-      "displayName": "Wears Glasses",
-      "category": "appearance",
-      "description": "Does the character wear glasses?"
     },
     "age": {
       "type": "enum",
@@ -44,132 +38,126 @@
       "category": "appearance",
       "description": "The color of the character's eyes"
     },
-    "hasBeard": {
+    "isSuperhero": {
       "type": "boolean",
-      "displayName": "Has Beard",
-      "category": "appearance",
-      "description": "Does the character have facial hair (beard or mustache)?"
-    },
-    "isVillain": {
-      "type": "boolean",
-      "displayName": "Is Villain",
+      "displayName": "Is Superhero",
       "category": "personality",
-      "description": "Is this character typically portrayed as a villain?"
+      "description": "Is this character a superhero?"
+    },
+    "isSmiling": {
+      "type": "boolean",
+      "displayName": "Is Smiling",
+      "category": "appearance",
+      "description": "Is the character typically portrayed as smiling?"
     }
   },
   "characters": [
     {
       "id": "char_001",
-      "name": "Mickey Mouse",
-      "image": "mickey.png",
+      "name": "Tchoupi",
+      "image": "tchoupi.png",
       "characteristics": {
-        "hairColor": "black",
-        "hasGlasses": false,
-        "age": "adult",
+        "hairColor": "none",
+        "age": "child",
         "species": "animal",
         "hasHat": false,
         "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The famous Disney mouse",
+        "description": "The friendly little penguin from French children's books",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_002",
-      "name": "Donald Duck",
-      "image": "donald.png",
+      "name": "Lightning McQueen",
+      "image": "lightning-mcqueen.png",
       "characteristics": {
         "hairColor": "none",
-        "hasGlasses": false,
         "age": "adult",
-        "species": "animal",
-        "hasHat": true,
-        "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "species": "robot",
+        "hasHat": false,
+        "eyeColor": "blue",
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "Disney's famous duck",
+        "description": "Ka-chiga! The famous race car from Cars",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_003",
-      "name": "Bugs Bunny",
-      "image": "bugs.png",
+      "name": "Bluey",
+      "image": "bluey.png",
       "characteristics": {
-        "hairColor": "none",
-        "hasGlasses": false,
-        "age": "adult",
+        "hairColor": "blue",
+        "age": "child",
         "species": "animal",
         "hasHat": false,
         "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "What's up, Doc?",
+        "description": "The energetic Blue Heeler pup who loves to play",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_004",
-      "name": "Superman",
-      "image": "superman.png",
+      "name": "Petit Ours Brun",
+      "image": "petit-ours-brun.png",
       "characteristics": {
-        "hairColor": "black",
-        "hasGlasses": false,
-        "age": "adult",
-        "species": "alien",
+        "hairColor": "brown",
+        "age": "child",
+        "species": "animal",
         "hasHat": false,
-        "eyeColor": "blue",
-        "hasBeard": false,
-        "isVillain": false
+        "eyeColor": "black",
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The Man of Steel",
-        "difficulty": "medium"
+        "description": "The little brown bear from French children's stories",
+        "difficulty": "easy"
       }
     },
     {
       "id": "char_005",
-      "name": "Clark Kent",
-      "image": "clark.png",
+      "name": "Chase",
+      "image": "chase.png",
       "characteristics": {
-        "hairColor": "black",
-        "hasGlasses": true,
-        "age": "adult",
-        "species": "human",
-        "hasHat": false,
-        "eyeColor": "blue",
-        "hasBeard": false,
-        "isVillain": false
+        "hairColor": "brown",
+        "age": "child",
+        "species": "animal",
+        "hasHat": true,
+        "eyeColor": "brown",
+        "isSuperhero": false,
+        "isSmiling": false
       },
       "metadata": {
-        "description": "Superman's alter ego",
-        "difficulty": "hard"
+        "description": "The police pup from PAW Patrol - ready for action!",
+        "difficulty": "easy"
       }
     },
     {
       "id": "char_006",
-      "name": "SpongeBob SquarePants",
-      "image": "spongebob.png",
+      "name": "Catboy",
+      "image": "catboy.png",
       "characteristics": {
-        "hairColor": "none",
-        "hasGlasses": false,
-        "age": "adult",
-        "species": "animal",
+        "hairColor": "brown",
+        "age": "child",
+        "species": "human",
         "hasHat": false,
         "eyeColor": "blue",
-        "hasBeard": false,
-        "isVillain": false
+        "isSuperhero": true,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The optimistic sea sponge",
-        "difficulty": "easy"
+        "description": "The super cat hero from PJ Masks with amazing speed",
+        "difficulty": "medium"
       }
     },
     {
@@ -178,119 +166,114 @@
       "image": "homer.png",
       "characteristics": {
         "hairColor": "none",
-        "hasGlasses": false,
         "age": "adult",
         "species": "human",
         "hasHat": false,
         "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "isSuperhero": false,
+        "isSmiling": false
       },
       "metadata": {
-        "description": "D'oh! The famous Simpson dad",
+        "description": "D'oh! The famous Simpson dad who loves donuts",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_008",
-      "name": "Scooby-Doo",
-      "image": "scooby.png",
+      "name": "Bugs Bunny",
+      "image": "bugs.png",
       "characteristics": {
-        "hairColor": "brown",
-        "hasGlasses": false,
+        "hairColor": "none",
         "age": "adult",
         "species": "animal",
         "hasHat": false,
         "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The mystery-solving Great Dane",
+        "description": "What's up, Doc? The clever Looney Tunes rabbit",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_009",
-      "name": "The Joker",
-      "image": "joker.png",
+      "name": "Spider-Man",
+      "image": "spider-man.png",
       "characteristics": {
-        "hairColor": "green",
-        "hasGlasses": false,
+        "hairColor": "brown",
         "age": "adult",
         "species": "human",
         "hasHat": false,
-        "eyeColor": "green",
-        "hasBeard": false,
-        "isVillain": true
+        "eyeColor": "brown",
+        "isSuperhero": true,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "Batman's arch-nemesis",
+        "description": "Your friendly neighborhood wall-crawling superhero",
         "difficulty": "medium"
       }
     },
     {
       "id": "char_010",
-      "name": "Princess Leia",
-      "image": "leia.png",
+      "name": "SpongeBob SquarePants",
+      "image": "spongebob.png",
       "characteristics": {
-        "hairColor": "brown",
-        "hasGlasses": false,
+        "hairColor": "yellow",
         "age": "adult",
-        "species": "human",
+        "species": "animal",
         "hasHat": false,
-        "eyeColor": "brown",
-        "hasBeard": false,
-        "isVillain": false
+        "eyeColor": "blue",
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The rebel princess from Star Wars",
-        "difficulty": "medium"
+        "description": "I'm ready! The optimistic sea sponge from Bikini Bottom",
+        "difficulty": "easy"
       }
     },
     {
       "id": "char_011",
-      "name": "Garfield",
-      "image": "garfield.png",
+      "name": "Pikachu",
+      "image": "pikachu.png",
       "characteristics": {
-        "hairColor": "none",
-        "hasGlasses": false,
-        "age": "adult",
+        "hairColor": "yellow",
+        "age": "child",
         "species": "animal",
         "hasHat": false,
-        "eyeColor": "green",
-        "hasBeard": false,
-        "isVillain": false
+        "eyeColor": "black",
+        "isSuperhero": false,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The lasagna-loving cat",
+        "description": "Pika pika! The electric Pokémon and Ash's best friend",
         "difficulty": "easy"
       }
     },
     {
       "id": "char_012",
-      "name": "Pikachu",
-      "image": "pikachu.png",
+      "name": "Superman",
+      "image": "superman.png",
       "characteristics": {
-        "hairColor": "none",
-        "hasGlasses": false,
-        "age": "child",
-        "species": "animal",
+        "hairColor": "black",
+        "age": "adult",
+        "species": "alien",
         "hasHat": false,
-        "eyeColor": "black",
-        "hasBeard": false,
-        "isVillain": false
+        "eyeColor": "blue",
+        "isSuperhero": true,
+        "isSmiling": true
       },
       "metadata": {
-        "description": "The electric Pokémon",
-        "difficulty": "easy"
+        "description": "The Man of Steel from planet Krypton",
+        "difficulty": "medium"
       }
     }
   ],
   "metadata": {
     "author": "Guess Who Game",
     "createdAt": "2024-01-01",
-    "tags": ["cartoon", "animation", "family", "kids"],
+    "lastUpdated": "2024-12-20",
+    "tags": ["cartoon", "animation", "family", "kids", "international"],
     "difficulty": "mixed"
   }
 }
