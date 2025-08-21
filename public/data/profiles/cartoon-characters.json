@@ -180,16 +180,16 @@
     },
     {
       "id": "char_008",
-      "name": "Bugs Bunny",
-      "image": "bugs.png",
+      "name": "Buzz l'éclair",
+      "image": "buzz.png",
       "characteristics": {
         "hairColor": "aucune",
         "age": "adulte",
-        "species": "animal",
+        "species": "robot",
         "hasHat": false,
         "eyeColor": "noir",
         "isSuperhero": false,
-        "isSmiling": true
+        "isSmiling": false
       },
       "metadata": {
         "description": "What's up, Doc? The clever Looney Tunes rabbit",
