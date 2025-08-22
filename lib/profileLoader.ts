@@ -6,6 +6,7 @@
 import { IProfile } from '@/types/game';
 import { GameValidation } from '@/lib/schemas';
 import { ZodError } from 'zod';
+import { getErrorMessage } from '@/lib/utils/errorHandling';
 
 export class ProfileLoader {
   private static _currentProfile: IProfile | null = null;
@@ -63,7 +64,7 @@ export class ProfileLoader {
       
       return profile;
     } catch (error) {
-      throw new Error(`Failed to load profile ${id}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(`Failed to load profile ${id}: ${getErrorMessage(error)}`);
     }
   }
 

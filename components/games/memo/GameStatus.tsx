@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { GameStatusProps } from '@/types/memo';
+import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
 
 export default function GameStatus({
   moves,
@@ -50,7 +51,7 @@ export default function GameStatus({
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: ANIMATION_DURATIONS.FADE_IN / 1000 }}
       className="w-full max-w-4xl mx-auto mb-6"
     >
       {/* Screen reader announcements */}
@@ -119,7 +120,7 @@ export default function GameStatus({
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: ANIMATION_DURATIONS.FADE_IN / 1000 }}
             >
               <Progress 
                 value={progressPercentage} 
@@ -148,7 +149,7 @@ export default function GameStatus({
             key={progressPercentage} // Re-animate when progress changes
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: ANIMATION_DURATIONS.SLIDE_IN / 1000 }}
           >
             <div className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-xl p-4">
               <p className="text-lg font-bold text-purple-700 mb-1">
@@ -181,11 +182,10 @@ export default function GameStatus({
                     scale: index < matchedPairs ? 1 : 1,
                   }}
                   transition={{ 
-                    delay: index * 0.1,
-                    duration: 0.5,
+                    delay: index * SPRING_CONFIGS.DELAYS.STAGGER_BASE,
+                    duration: ANIMATION_DURATIONS.FADE_IN / 1000,
                     type: "spring",
-                    stiffness: 300,
-                    damping: 15
+                    ...SPRING_CONFIGS.BOUNCY
                   }}
                 >
                   ⭐

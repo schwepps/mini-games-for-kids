@@ -4,6 +4,8 @@ import { useReducer, useEffect, useCallback } from 'react';
 import { IProfile } from '@/types/game';
 import { MemoGameState, MemoGameAction } from '@/types/memo';
 import { ProfileLoader } from '@/lib/profileLoader';
+import { createErrorHandler } from '@/lib/utils/errorHandling';
+import { GAME_TIMING } from '@/lib/constants/gameConstants';
 import { 
   memoGameReducer, 
   initialMemoGameState, 
@@ -15,6 +17,12 @@ import {
 
 export function useMemoGame() {
   const [state, dispatch] = useReducer(memoGameReducer, initialMemoGameState);
+  
+  // Create error handler for this component
+  const handleError = createErrorHandler(
+    (error) => dispatch({ type: 'SET_ERROR', error }),
+    { component: 'game', operation: 'memo-game' }
+  );
   
   // Load character profile
   useEffect(() => {
@@ -34,8 +42,7 @@ export function useMemoGame() {
       dispatch({ type: 'SET_LOADING', loading: false });
       return profile;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load character profile';
-      dispatch({ type: 'SET_ERROR', error: errorMessage });
+      handleError(err, 'Impossible de charger les personnages du jeu');
     }
   };
 
@@ -58,8 +65,7 @@ export function useMemoGame() {
       dispatch({ type: 'START_GAME', cards: gameCards });
       
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Impossible de démarrer le jeu';
-      dispatch({ type: 'SET_ERROR', error: errorMessage });
+      handleError(err, 'Impossible de démarrer le jeu');
     }
   }, [state.selectedPairCount]);
 
@@ -97,12 +103,12 @@ export function useMemoGame() {
           if (isGameWon(newMatchedCards, state.cards.length)) {
             dispatch({ type: 'GAME_WON' });
           }
-        }, 500); // Brief delay to show both cards
+        }, GAME_TIMING.CARD_MATCH_DELAY);
       } else {
         // No match - flip cards back after delay
         setTimeout(() => {
           dispatch({ type: 'NO_MATCH' });
-        }, 1500); // Give time to memorize the cards
+        }, GAME_TIMING.CARD_MISMATCH_DELAY);
       }
     }
   }, [state.gamePhase, state.flippedCards, state.matchedCards, state.cards]);

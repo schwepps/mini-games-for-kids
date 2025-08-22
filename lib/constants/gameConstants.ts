@@ -26,7 +26,18 @@ export const ANIMATION_DURATIONS = {
   CONFETTI_DURATION: 5000,
   CARD_FLIP: 600,
   CELEBRATION_ENTRY: 500,
-  STAR_ANIMATION_DELAY: 100
+  STAR_ANIMATION_DELAY: 100,
+  // Common component animations
+  FADE_IN: 500,
+  SLIDE_IN: 300,
+  QUICK_TRANSITION: 200,
+  MEDIUM_TRANSITION: 400,
+  SLOW_TRANSITION: 600,
+  HOVER_TRANSITION: 200,
+  // Loading and infinite animations
+  SPIN_ROTATION: 2000,
+  PULSE_ANIMATION: 1500,
+  BOUNCE_ANIMATION: 1800
 } as const;
 
 // Kid-friendly color schemes
@@ -70,6 +81,21 @@ export const GAME_TIMING = {
   CARD_MISMATCH_DELAY: 1500,
   MODAL_CLOSE_DELAY: 300,
   ANIMATION_STAGGER: 100
+} as const;
+
+// Spring animation constants for consistent motion
+export const SPRING_CONFIGS = {
+  GENTLE: { stiffness: 100, damping: 15 },
+  MEDIUM: { stiffness: 200, damping: 20 },
+  BOUNCY: { stiffness: 300, damping: 15 },
+  STIFF: { stiffness: 500, damping: 30 },
+  // Common delay values
+  DELAYS: {
+    SHORT: 0.1,
+    MEDIUM: 0.2,
+    LONG: 0.5,
+    STAGGER_BASE: 0.1
+  }
 } as const;
 
 // Performance calculation helpers

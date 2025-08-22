@@ -7,7 +7,6 @@ import {
   Trophy, 
   Star, 
   Crown,
-  Sparkles,
   Target
 } from 'lucide-react';
 
@@ -23,6 +22,7 @@ import {
 import CharacterAvatar from '@/components/CharacterAvatar';
 import { ICharacter } from '@/types/game';
 import { usePerformanceRating } from '@/hooks/shared/usePerformanceRating';
+import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
 
 interface CelebrationModalProps {
   open: boolean;
@@ -46,7 +46,7 @@ export default function CelebrationModal({
     if (open) {
       setShowConfetti(true);
       // Stop confetti after 5 seconds
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
+      const timer = setTimeout(() => setShowConfetti(false), ANIMATION_DURATIONS.CONFETTI_DURATION);
       return () => clearTimeout(timer);
     }
   }, [open]);
@@ -84,7 +84,7 @@ export default function CelebrationModal({
     // Small delay to allow modal to close before starting new game
     setTimeout(() => {
       onNewGame();
-    }, 300);
+    }, ANIMATION_DURATIONS.MODAL_DELAY);
   };
 
   return (
@@ -109,9 +109,8 @@ export default function CelebrationModal({
               animate={{ scale: 1, rotate: 0 }}
               transition={{ 
                 type: "spring", 
-                stiffness: 200, 
-                damping: 20,
-                delay: 0.2
+                ...SPRING_CONFIGS.MEDIUM,
+                delay: SPRING_CONFIGS.DELAYS.MEDIUM
               }}
               className="mx-auto mb-4"
             >
@@ -131,7 +130,7 @@ export default function CelebrationModal({
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: SPRING_CONFIGS.DELAYS.LONG }}
                 className="text-center"
               >
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
@@ -186,7 +185,7 @@ export default function CelebrationModal({
                 
                 {/* Star rating */}
                 <div className="flex justify-center gap-1">
-                  {[...Array(3)].map((_, i) => (
+                  {Array.from({ length: 3 }, (_, i) => (
                     <motion.div
                       key={i}
                       initial={{ scale: 0, rotate: -180 }}
@@ -219,26 +218,6 @@ export default function CelebrationModal({
                     Tu l&apos;as trouvé en <strong>{questionsAsked}</strong> question{questionsAsked !== 1 ? 's' : ''} !
                   </p>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Fun facts */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="text-center"
-            >
-              <div className="bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl p-4 border-2 border-blue-200">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Sparkles className="w-5 h-5 text-purple-600" />
-                  <span className="font-medium text-gray-700">Le Savais-tu ?</span>
-                </div>
-                <p className="text-sm text-gray-600">
-                  {questionsAsked <= 3 && "Tu es un vrai détective ! 🕵️‍♀️"}
-                  {questionsAsked > 3 && questionsAsked <= 6 && "Belle stratégie ! 🧠"}
-                  {questionsAsked > 6 && "La pratique rend parfait ! Continue à jouer ! 🎮"}
-                </p>
               </div>
             </motion.div>
 

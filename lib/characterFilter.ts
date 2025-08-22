@@ -156,9 +156,9 @@ export class CharacterFilter {
   static getUniqueCharacteristicValues(
     characters: ICharacter[],
     characteristicKey: string
-  ): unknown[] {
+  ): (string | number | boolean)[] {
     const values = characters.map(char => char.characteristics[characteristicKey]);
-    return [...new Set(values)].filter(value => value !== undefined && value !== null);
+    return [...new Set(values)].filter(value => value !== undefined && value !== null) as (string | number | boolean)[];
   }
 
   /**

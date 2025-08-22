@@ -4,6 +4,7 @@ import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ICharacter, IQuestion } from '@/types/game';
 import CharacterCard from './CharacterCard';
+import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
 
 interface CharacterGridProps {
   characters: ICharacter[];
@@ -38,15 +39,15 @@ const CharacterGrid = memo(function CharacterGrid({
               rotateY: 0,
             }}
             transition={{ 
-              duration: 0.6, 
-              delay: index * 0.1,
+              duration: ANIMATION_DURATIONS.SLOW_TRANSITION / 1000, 
+              delay: index * SPRING_CONFIGS.DELAYS.STAGGER_BASE,
               type: "spring",
-              stiffness: 100
+              ...SPRING_CONFIGS.GENTLE
             }}
             whileHover={canMakeGuess || mustMakeGuess ? { 
               scale: 1.05,
               y: -8,
-              transition: { duration: 0.2 }
+              transition: { duration: ANIMATION_DURATIONS.HOVER_TRANSITION / 1000 }
             } : {}}
             whileTap={canMakeGuess || mustMakeGuess ? { 
               scale: 0.95 

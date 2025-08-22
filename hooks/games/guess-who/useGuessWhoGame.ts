@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { IProfile, ICharacter, IQuestion } from '@/types/game';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { CharacterFilter } from '@/lib/characterFilter';
+import { createErrorHandler } from '@/lib/utils/errorHandling';
 
 type GameStatus = 'playing' | 'won' | 'lost';
 
@@ -15,6 +16,12 @@ export function useGuessWhoGame() {
   const [gameState, setGameState] = useState<GameStatus>('playing');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Create error handler for this component
+  const handleError = createErrorHandler(
+    setError,
+    { component: 'game', operation: 'guess-who-game' }
+  );
 
   // Load the profile on mount
   useEffect(() => {
@@ -28,7 +35,7 @@ export function useGuessWhoGame() {
       const gameProfile = await ProfileLoader.loadProfile('cartoon-characters');
       setProfile(gameProfile);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load character profile');
+      handleError(err, 'Impossible de charger les personnages du jeu');
     } finally {
       setLoading(false);
     }

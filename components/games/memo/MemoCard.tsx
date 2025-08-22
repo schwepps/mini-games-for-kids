@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { MemoCardProps } from '@/types/memo';
+import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
 
 const MemoCard = memo(function MemoCard({
   card,
@@ -54,7 +55,7 @@ const MemoCard = memo(function MemoCard({
           initial={{ opacity: 0, rotateY: -180 }}
           animate={{ opacity: 1, rotateY: 0 }}
           exit={{ opacity: 0, rotateY: 180 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: ANIMATION_DURATIONS.MEDIUM_TRANSITION / 1000 }}
         >
           <div className="relative w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-yellow-400 rounded-xl flex items-center justify-center">
             <Image
@@ -77,7 +78,7 @@ const MemoCard = memo(function MemoCard({
           initial={{ opacity: 0, rotateY: -180 }}
           animate={{ opacity: 1, rotateY: 0 }}
           exit={{ opacity: 0, rotateY: 180 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: ANIMATION_DURATIONS.MEDIUM_TRANSITION / 1000 }}
         >
           <div className="relative w-full h-full bg-white rounded-xl overflow-hidden">
             <Image
@@ -106,9 +107,9 @@ const MemoCard = memo(function MemoCard({
                     rotate: 0
                   }}
                   transition={{ 
-                    delay: 0.3, 
+                    delay: SPRING_CONFIGS.DELAYS.MEDIUM, 
                     type: "spring", 
-                    stiffness: 300
+                    ...SPRING_CONFIGS.BOUNCY
                   }}
                   style={{
                     boxShadow: "0 0 0 2px rgba(34, 197, 94, 0.5)"
