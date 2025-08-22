@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GameConfig } from '@/types/games';
@@ -6,7 +7,7 @@ interface GameCardProps {
   game: GameConfig;
 }
 
-export default function GameCard({ game }: GameCardProps) {
+const GameCard = memo(function GameCard({ game }: GameCardProps) {
   const CardContent = (
     <div className={`
       relative overflow-hidden rounded-3xl shadow-2xl 
@@ -82,4 +83,6 @@ export default function GameCard({ game }: GameCardProps) {
       {CardContent}
     </div>
   );
-}
+});
+
+export default GameCard;

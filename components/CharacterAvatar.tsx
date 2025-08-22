@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import Image from 'next/image';
 import { ProfileLoader } from '@/lib/profileLoader';
 
@@ -11,7 +11,7 @@ interface CharacterAvatarProps {
   className?: string;
 }
 
-export default function CharacterAvatar({ 
+const CharacterAvatar = memo(function CharacterAvatar({ 
   characterName, 
   imageName, 
   size = 'md', 
@@ -82,4 +82,6 @@ export default function CharacterAvatar({
       />
     </div>
   );
-}
+});
+
+export default CharacterAvatar;

@@ -22,6 +22,7 @@ import {
 
 import CharacterAvatar from '@/components/CharacterAvatar';
 import { ICharacter } from '@/types/game';
+import { usePerformanceRating } from '@/hooks/shared/usePerformanceRating';
 
 interface CelebrationModalProps {
   open: boolean;
@@ -63,13 +64,20 @@ export default function CelebrationModal({
     return () => window.removeEventListener('resize', updateWindowSize);
   }, []);
 
-  const getPerformanceRating = () => {
+  // Use performance rating hook for efficiency calculation (not displayed in GuessWho UI)
+  usePerformanceRating({
+    gameType: 'guessWho',
+    metrics: { attempts: questionsAsked }
+  });
+
+  // Local GuessWho-specific rating system (3 stars instead of 5)
+  const getGuessWhoRating = () => {
     if (questionsAsked <= 3) return { stars: 3, text: 'Incroyable !', emoji: '🌟', color: 'text-yellow-500' };
     if (questionsAsked <= 6) return { stars: 2, text: 'Très bien !', emoji: '⭐', color: 'text-yellow-400' };
     return { stars: 1, text: 'Bien joué !', emoji: '👍', color: 'text-blue-500' };
   };
 
-  const rating = getPerformanceRating();
+  const rating = getGuessWhoRating();
 
   const handleNewGame = () => {
     onOpenChange(false);

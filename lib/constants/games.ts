@@ -18,12 +18,11 @@ export const GAMES: GameConfig[] = [
   {
     id: 'memo',
     title: 'Mémo',
-    description: 'Jeu de mémoire',
+    description: 'Retrouve les paires !',
     logo: '/images/logo/memo-logo-large.png',
     href: '/memo',
     bgColor: 'from-green-400 to-blue-400',
-    available: false,
-    comingSoonText: 'Bientôt disponible',
+    available: true,
     metadata: {
       title: 'Mémo - Jeu de mémoire',
       description: 'Jeu de mémoire avec tes personnages préférés !',
