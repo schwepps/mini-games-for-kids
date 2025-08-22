@@ -28,7 +28,7 @@ const GameStatus = memo(function GameStatus({
   gameState,
   hiddenCharacter 
 }: GameStatusProps) {
-  const totalCharacters = 12; // Cartoon characters profile has 12 characters
+  const totalCharacters = 12; // Character profile has 12 characters
   const progress = ((totalCharacters - remainingCharacters.length) / totalCharacters) * 100;
   const questionsCount = questionsAsked.length;
   

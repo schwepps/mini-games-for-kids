@@ -28,7 +28,7 @@ export function useGuessWhoGame() {
       const gameProfile = await ProfileLoader.loadProfile('cartoon-characters');
       setProfile(gameProfile);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load cartoon characters');
+      setError(err instanceof Error ? err.message : 'Failed to load character profile');
     } finally {
       setLoading(false);
     }

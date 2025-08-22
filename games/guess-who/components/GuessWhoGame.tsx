@@ -13,7 +13,7 @@ import CelebrationModal from './CelebrationModal';
 import GameStatus from './GameStatus';
 import { useGuessWhoGame } from '../hooks/useGuessWhoGame';
 
-export default function CartoonGame() {
+export default function GuessWhoGame() {
   const {
     profile,
     hiddenCharacter,

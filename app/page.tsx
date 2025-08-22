@@ -1,4 +1,4 @@
-import CartoonGame from '@/games/guess-who/components/CartoonGame';
+import GuessWhoGame from '@/games/guess-who/components/GuessWhoGame';
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       
       {/* Main game content */}
       <div className="relative z-10">
-        <CartoonGame />
+        <GuessWhoGame />
       </div>
     </div>
   );
