@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
-import { getCharacteristicImage } from '@/lib/characteristicImages';
+import { getCharacteristicImage } from '../lib/characteristicImages';
 
 interface CharacteristicIconProps {
   characteristic: string;

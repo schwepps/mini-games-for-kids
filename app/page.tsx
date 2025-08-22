@@ -1,4 +1,4 @@
-import CartoonGame from '@/components/profiles/cartoon/CartoonGame';
+import CartoonGame from '@/games/guess-who/components/CartoonGame';
 
 export default function Home() {
   return (

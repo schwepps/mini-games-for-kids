@@ -11,7 +11,7 @@ import CharacterGrid from './CharacterGrid';
 import QuestionBuilder from './QuestionBuilder';
 import CelebrationModal from './CelebrationModal';
 import GameStatus from './GameStatus';
-import { useCartoonGame } from '@/hooks/profiles/cartoon/useCartoonGame';
+import { useGuessWhoGame } from '../hooks/useGuessWhoGame';
 
 export default function CartoonGame() {
   const {
@@ -26,7 +26,7 @@ export default function CartoonGame() {
     askQuestion,
     makeGuess,
     resetGame
-  } = useCartoonGame();
+  } = useGuessWhoGame();
 
   const [showCelebration, setShowCelebration] = useState(false);
 

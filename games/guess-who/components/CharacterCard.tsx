@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { ICharacter } from '@/types/game';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import CharacteristicIcon from '@/components/CharacteristicIcon';
+import CharacteristicIcon from './CharacteristicIcon';
 import { Sparkles, Target } from 'lucide-react';
 
 interface CharacterCardProps {

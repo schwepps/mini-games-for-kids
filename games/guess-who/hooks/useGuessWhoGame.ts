@@ -7,7 +7,7 @@ import { CharacterFilter } from '@/lib/characterFilter';
 
 type GameStatus = 'playing' | 'won' | 'lost';
 
-export function useCartoonGame() {
+export function useGuessWhoGame() {
   const [profile, setProfile] = useState<IProfile | null>(null);
   const [hiddenCharacter, setHiddenCharacter] = useState<ICharacter | null>(null);
   const [remainingCharacters, setRemainingCharacters] = useState<ICharacter[]>([]);
@@ -16,17 +16,17 @@ export function useCartoonGame() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Load the cartoon profile on mount
+  // Load the profile on mount
   useEffect(() => {
-    loadCartoonProfile();
+    loadProfile();
   }, []);
 
-  const loadCartoonProfile = async () => {
+  const loadProfile = async () => {
     try {
       setLoading(true);
       setError(null);
-      const cartoonProfile = await ProfileLoader.loadProfile('cartoon-characters');
-      setProfile(cartoonProfile);
+      const gameProfile = await ProfileLoader.loadProfile('cartoon-characters');
+      setProfile(gameProfile);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load cartoon characters');
     } finally {
@@ -129,7 +129,7 @@ export function useCartoonGame() {
     setRemainingCharacters([]);
     setQuestionsAsked([]);
     setError(null);
-    loadCartoonProfile();
+    loadProfile();
   }, []);
 
   // Auto-start game when profile loads successfully

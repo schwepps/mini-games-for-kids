@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { IQuestion, ICharacter } from '@/types/game';
 import { CharacterFilter } from '@/lib/characterFilter';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import CharacteristicIcon from '@/components/CharacteristicIcon';
+import CharacteristicIcon from '../CharacteristicIcon';
 
 interface QuestionHistoryProps {
   questionsAsked: IQuestion[];
