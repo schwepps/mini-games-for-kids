@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { CharacterFilter } from '@/lib/characterFilter';
-import { characteristicImages } from '../../lib/characteristicImages';
+import { characteristicImages } from '@/lib/games/guess-who/characteristicImages';
 import { kidFriendlyColors } from '@/lib/uiConstants';
 import { IProfile, ICharacter } from '@/types/game';
 import { BUTTON_STYLES, BADGE_STYLES, IMAGE_DIMENSIONS } from './constants';

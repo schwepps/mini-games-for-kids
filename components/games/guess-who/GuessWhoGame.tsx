@@ -11,7 +11,7 @@ import CharacterGrid from './CharacterGrid';
 import QuestionBuilder from './QuestionBuilder';
 import CelebrationModal from './CelebrationModal';
 import GameStatus from './GameStatus';
-import { useGuessWhoGame } from '../hooks/useGuessWhoGame';
+import { useGuessWhoGame } from '@/hooks/games/guess-who/useGuessWhoGame';
 
 export default function GuessWhoGame() {
   const {
