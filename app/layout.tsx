@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Qui est-ce ?",
     description: "Devine les personnages de dessins animés !",
-    url: "https://your-domain.com",
+    url: "https://qui-est-ce-schwepps.vercel.app/",
     siteName: "Qui est-ce ?",
     images: [
       {
