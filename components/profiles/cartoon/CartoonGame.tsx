@@ -85,7 +85,7 @@ export default function CartoonGame() {
           className="text-center mb-6"
         >
           <Image
-            src="/images/logo/logo.png"
+            src="/images/logo/qui-est-ce-logo-large.png"
             alt="Qui Est-Ce ?"
             width={200}
             height={200}

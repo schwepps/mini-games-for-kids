@@ -66,7 +66,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "The friendly little penguin from French children's books",
+        "description": "Le petit pingouin curieux qui vit plein d'aventures avec Doudou",
         "difficulty": "easy"
       }
     },
@@ -84,7 +84,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "Ka-chiga! The famous race car from Cars",
+        "description": "Je suis la vitesse ! La voiture de course rouge numéro 95 de Radiator Springs",
         "difficulty": "easy"
       }
     },
@@ -102,7 +102,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "The energetic Blue Heeler pup who loves to play",
+        "description": "La petite chienne bleue australienne qui adore inventer des jeux imaginaires",
         "difficulty": "easy"
       }
     },
@@ -120,7 +120,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "The little brown bear from French children's stories",
+        "description": "L'ourson coquin qui découvre le monde avec Papa Ours et Maman Ourse",
         "difficulty": "easy"
       }
     },
@@ -138,7 +138,7 @@
         "isSmiling": false
       },
       "metadata": {
-        "description": "The police pup from PAW Patrol - ready for action!",
+        "description": "Le berger allemand policier de la Pat' Patrouille - Aucune mission n'est trop dure !",
         "difficulty": "easy"
       }
     },
@@ -156,7 +156,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "The super cat hero from PJ Masks with amazing speed",
+        "description": "Yohou de super vitesse ! Le héros félin des Pyjamasques avec son costume bleu",
         "difficulty": "medium"
       }
     },
@@ -174,7 +174,7 @@
         "isSmiling": false
       },
       "metadata": {
-        "description": "D'oh! The famous Simpson dad who loves donuts",
+        "description": "D'oh ! Le père de famille de Springfield amateur de bière Duff et de donuts",
         "difficulty": "easy"
       }
     },
@@ -192,7 +192,7 @@
         "isSmiling": false
       },
       "metadata": {
-        "description": "What's up, Doc? The clever Looney Tunes rabbit",
+        "description": "Vers l'infini et au-delà ! Le ranger de l'espace jouet de Andy",
         "difficulty": "easy"
       }
     },
@@ -210,7 +210,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "Your friendly neighborhood wall-crawling superhero",
+        "description": "L'homme-araignée tisseur de toiles qui protège New York",
         "difficulty": "medium"
       }
     },
@@ -228,7 +228,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "I'm ready! The optimistic sea sponge from Bikini Bottom",
+        "description": "Je suis prêt ! L'éponge carrée qui fait des Pâtés de Crabe à Bikini Bottom",
         "difficulty": "easy"
       }
     },
@@ -246,7 +246,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "Pika pika! The electric Pokémon and Ash's best friend",
+        "description": "Pika pika ! Le Pokémon souris électrique, meilleur ami de Sacha",
         "difficulty": "easy"
       }
     },
@@ -264,7 +264,7 @@
         "isSmiling": true
       },
       "metadata": {
-        "description": "The Man of Steel from planet Krypton",
+        "description": "L'Homme d'Acier venu de la planète Krypton avec sa cape rouge",
         "difficulty": "medium"
       }
     }

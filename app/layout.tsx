@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Qui est-ce ?",
     images: [
       {
-        url: "/images/logo/logo.png",
+        url: "/images/logo/qui-est-ce-logo-large.png",
         width: 1200,
         height: 630,
         alt: "Qui est-ce ? - Jeu de devinettes avec personnages de dessins animés",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qui est-ce ?",
     description: "Devine les personnages de dessins animés !",
-    images: ["/images/logo/logo.png"],
+    images: ["/images/logo/qui-est-ce-logo-large.png"],
   },
   
   // Additional SEO metadata

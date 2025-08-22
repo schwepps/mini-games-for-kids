@@ -108,7 +108,7 @@ const CharacterCard = memo(function CharacterCard({
                   key="species"
                   characteristic="species"
                   value={character.characteristics.species}
-                  size="lg"
+                  size="responsive"
                   className="opacity-90 hover:opacity-100 transition-opacity"
                 />
               )}
@@ -117,7 +117,7 @@ const CharacterCard = memo(function CharacterCard({
                   key="age"
                   characteristic="age"
                   value={character.characteristics.age}
-                  size="lg"
+                  size="responsive"
                   className="opacity-90 hover:opacity-100 transition-opacity"
                 />
               )}
@@ -128,7 +128,7 @@ const CharacterCard = memo(function CharacterCard({
                   key="isSuperhero"
                   characteristic="isSuperhero"
                   value={true}
-                  size="lg"
+                  size="responsive"
                   className="opacity-90 hover:opacity-100 transition-opacity"
                 />
               )}
@@ -139,7 +139,7 @@ const CharacterCard = memo(function CharacterCard({
                   key="hasHat"
                   characteristic="hasHat"
                   value={true}
-                  size="lg"
+                  size="responsive"
                   className="opacity-90 hover:opacity-100 transition-opacity"
                 />
               )}

@@ -7,14 +7,15 @@ import { getCharacteristicImage } from '@/lib/characteristicImages';
 interface CharacteristicIconProps {
   characteristic: string;
   value: unknown;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'responsive';
   className?: string;
 }
 
 const sizeConfig = {
   sm: { width: 20, height: 20, className: 'w-5 h-5' },
   md: { width: 32, height: 32, className: 'w-8 h-8' },
-  lg: { width: 48, height: 48, className: 'w-12 h-12' }
+  lg: { width: 48, height: 48, className: 'w-12 h-12' },
+  responsive: { width: 48, height: 48, className: 'w-6 h-6 md:w-10 md:h-10' }
 };
 
 /**
