@@ -145,7 +145,7 @@ export default function GuessWhoGame() {
             <Button 
               onClick={startNewGame}
               size="lg"
-              className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 hover:from-yellow-500 hover:via-orange-500 hover:to-pink-500 text-white font-bold text-2xl px-12 py-6 rounded-full shadow-2xl border-4 border-white/50 backdrop-blur-sm transform transition-all duration-200 hover:shadow-3xl"
+              className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 hover:from-yellow-500 hover:via-orange-500 hover:to-pink-500 text-white font-bold text-lg sm:text-xl lg:text-2xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 rounded-full shadow-2xl border-4 border-white/50 backdrop-blur-sm transform transition-all duration-200 hover:shadow-3xl"
             >
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}

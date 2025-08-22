@@ -102,7 +102,7 @@ export default function CelebrationModal({
       )}
 
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-md bg-gradient-to-br from-yellow-100 to-pink-100 border-4 border-yellow-400">
+        <DialogContent className="max-w-[95vw] sm:max-w-md lg:max-w-lg max-h-[95vh] overflow-y-auto bg-gradient-to-br from-yellow-100 to-pink-100 border-4 border-yellow-400">
           <DialogHeader className="text-center">
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
