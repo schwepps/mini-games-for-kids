@@ -30,9 +30,6 @@ export default function GameSetup({
         >
           Choisis ta difficulté ! 🎯
         </motion.h2>
-        <p className="text-xl text-white/90 drop-shadow">
-          Sélectionne combien de paires tu veux retrouver
-        </p>
       </div>
 
       {/* Difficulty Options Grid - 2-row horizontal layout for better screen fit */}
@@ -71,29 +68,7 @@ export default function GameSetup({
                 
                 {/* Card Count */}
                 <div className="bg-gradient-to-r from-blue-400 to-purple-400 text-white rounded-full px-4 py-2 mb-3 inline-block">
-                  <span className="font-bold">{option.cards} cartes</span>
-                </div>
-                
-                {/* Pairs Display */}
-                <p className="text-sm text-gray-600 mb-3">
-                  {option.pairs} {option.pairs === 1 ? 'paire' : 'paires'} à retrouver
-                </p>
-                
-                {/* Visual Card Preview - Larger cards for better visibility */}
-                <div className="flex justify-center gap-1 flex-wrap">
-                  {Array.from({ length: Math.min(option.cards, 8) }, (_, i) => (
-                    <div
-                      key={i}
-                      className={`w-3 h-3 sm:w-4 sm:h-4 rounded border-2 transition-colors ${
-                        selectedPairCount === option.pairs
-                          ? 'bg-yellow-400 border-yellow-500'
-                          : 'bg-purple-200 border-purple-300'
-                      }`}
-                    />
-                  ))}
-                  {option.cards > 8 && (
-                    <span className="text-xs text-gray-500 ml-1">+{option.cards - 8}</span>
-                  )}
+                  <span className="font-bold">{option.pairs} paires</span>
                 </div>
                 
                 {/* Selected indicator */}
@@ -113,32 +88,6 @@ export default function GameSetup({
           </motion.div>
         ))}
       </div>
-
-      {/* Selected Option Summary */}
-      {selectedPairCount > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
-        >
-          <Card className="bg-white/95 shadow-lg max-w-md mx-auto">
-            <CardContent className="p-6">
-              <h4 className="text-xl font-bold text-gray-800 mb-2">
-                Difficulté sélectionnée
-              </h4>
-              <div className="text-3xl mb-2">
-                {PAIR_COUNT_OPTIONS.find(opt => opt.pairs === selectedPairCount)?.emoji}
-              </div>
-              <p className="text-lg font-medium text-gray-700 mb-1">
-                {PAIR_COUNT_OPTIONS.find(opt => opt.pairs === selectedPairCount)?.difficulty}
-              </p>
-              <p className="text-purple-600 font-bold">
-                {selectedPairCount * 2} cartes • {selectedPairCount} {selectedPairCount === 1 ? 'paire' : 'paires'}
-              </p>
-            </CardContent>
-          </Card>
-        </motion.div>
-      )}
 
       {/* Start Game Button */}
       <motion.div 
