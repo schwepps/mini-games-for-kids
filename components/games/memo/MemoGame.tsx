@@ -11,6 +11,7 @@ import GameSetup from './GameSetup';
 import MemoGrid from './MemoGrid';
 import GameStatus from './GameStatus';
 import CelebrationModal from './CelebrationModal';
+import ImagePreloader from './ImagePreloader';
 import { useMemoGame } from '@/hooks/games/memo/useMemoGame';
 
 export default function MemoGame() {
@@ -143,6 +144,12 @@ export default function MemoGame() {
               transition={{ duration: 0.5 }}
               className="space-y-6"
             >
+              {/* Preload character images to eliminate grey placeholder delay */}
+              <ImagePreloader 
+                characters={cards.map(card => card.character).filter((char, index, self) => 
+                  self.findIndex(c => c.id === char.id) === index
+                )}
+              />
               
               {/* Game Status */}
               <GameStatus
