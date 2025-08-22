@@ -72,7 +72,7 @@ const CharacterAvatar = memo(function CharacterAvatar({
         fill
         className="object-cover"
         onError={handleImageError}
-        onLoadingComplete={handleImageLoad}
+        onLoad={handleImageLoad}
         sizes={size === 'xl' ? '192px' : size === 'lg' ? '96px' : size === 'md' ? '64px' : '32px'}
         priority={false}
         loading="lazy"

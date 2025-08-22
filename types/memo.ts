@@ -99,17 +99,12 @@ export const GRID_LAYOUTS: Record<number, GridLayout> = {
   24: { cols: 6, rows: 4, maxCardSize: '90px', gap: '0.5rem' }
 };
 
-// Pair count options for the setup screen
+// Pair count options for the setup screen - Kid-friendly simplified levels
 export const PAIR_COUNT_OPTIONS = [
   { pairs: 2, cards: 4, difficulty: 'Très facile', emoji: '🌟' },
   { pairs: 3, cards: 6, difficulty: 'Facile', emoji: '😊' },
   { pairs: 4, cards: 8, difficulty: 'Moyen', emoji: '🎯' },
   { pairs: 5, cards: 10, difficulty: 'Difficile', emoji: '🚀' },
   { pairs: 6, cards: 12, difficulty: 'Très difficile', emoji: '🏆' },
-  { pairs: 7, cards: 14, difficulty: 'Expert', emoji: '🌈' },
-  { pairs: 8, cards: 16, difficulty: 'Champion', emoji: '👑' },
-  { pairs: 9, cards: 18, difficulty: 'Maître', emoji: '🥇' },
-  { pairs: 10, cards: 20, difficulty: 'Légende', emoji: '⭐' },
-  { pairs: 11, cards: 22, difficulty: 'Héros', emoji: '🦸' },
-  { pairs: 12, cards: 24, difficulty: 'Ultime', emoji: '🔥' }
+  { pairs: 8, cards: 16, difficulty: 'Expert', emoji: '🌈' }
 ];

@@ -129,36 +129,33 @@ export function getGridLayoutClasses(cardCount: number): string {
 }
 
 /**
- * Get responsive grid layout CSS classes
+ * Get responsive grid layout CSS classes - Kid-friendly with proper card sizes
  */
 export function getResponsiveGridClasses(cardCount: number): string {
-  const baseClasses = 'grid gap-2 sm:gap-3 md:gap-4 justify-center items-center mx-auto';
+  const baseClasses = 'grid gap-3 sm:gap-4 justify-center items-stretch mx-auto p-2 w-full';
   
   switch (cardCount) {
     case 4: 
-      return `${baseClasses} grid-cols-2 max-w-xs sm:max-w-sm`;
+      // 2x2 grid - perfect for young kids, use more width
+      return `${baseClasses} grid-cols-2 max-w-lg sm:max-w-xl`;
     case 6: 
-      return `${baseClasses} grid-cols-2 sm:grid-cols-3 max-w-sm sm:max-w-md`;
+      // 2x3 on mobile, 3x2 on larger screens
+      return `${baseClasses} grid-cols-2 sm:grid-cols-3 max-w-xl sm:max-w-2xl`;
     case 8: 
-      return `${baseClasses} grid-cols-2 sm:grid-cols-4 max-w-sm sm:max-w-lg`;
+      // 2x4 on mobile, 4x2 on larger screens
+      return `${baseClasses} grid-cols-2 sm:grid-cols-4 max-w-xl sm:max-w-4xl`;
     case 10: 
-      return `${baseClasses} grid-cols-2 sm:grid-cols-5 max-w-sm sm:max-w-2xl`;
+      // 2x5 on mobile, 5x2 on larger screens
+      return `${baseClasses} grid-cols-2 sm:grid-cols-5 max-w-xl sm:max-w-5xl`;
     case 12: 
-      return `${baseClasses} grid-cols-3 sm:grid-cols-4 max-w-md sm:max-w-xl`;
-    case 14: 
-      return `${baseClasses} grid-cols-2 sm:grid-cols-7 max-w-sm sm:max-w-3xl`;
+      // 3x4 grid - good balance
+      return `${baseClasses} grid-cols-3 sm:grid-cols-4 max-w-2xl sm:max-w-4xl`;
     case 16: 
-      return `${baseClasses} grid-cols-4 sm:grid-cols-4 max-w-md sm:max-w-lg`;
-    case 18: 
-      return `${baseClasses} grid-cols-3 sm:grid-cols-6 max-w-md sm:max-w-2xl`;
-    case 20: 
-      return `${baseClasses} grid-cols-4 sm:grid-cols-5 max-w-lg sm:max-w-2xl`;
-    case 22: 
-      return `${baseClasses} grid-cols-3 sm:grid-cols-6 max-w-md sm:max-w-3xl`;
-    case 24: 
-      return `${baseClasses} grid-cols-4 sm:grid-cols-6 max-w-lg sm:max-w-3xl`;
+      // 4x4 grid - classic memory game layout
+      return `${baseClasses} grid-cols-4 max-w-2xl sm:max-w-4xl`;
     default: 
-      return `${baseClasses} grid-cols-2 max-w-xs`;
+      // Fallback for any other card count
+      return `${baseClasses} grid-cols-2 max-w-lg`;
   }
 }
 

@@ -32,11 +32,11 @@ const MemoCard = memo(function MemoCard({
       className={cn(
         "relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg border-4 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400/50",
         isMatched
-          ? "border-green-400 shadow-green-200"
+          ? "border-green-400 shadow-green-200 shadow-xl"
           : isFlipped
-          ? "border-blue-400 shadow-blue-200"
+          ? "border-blue-400 shadow-blue-200 shadow-xl"
           : "border-white shadow-purple-200 hover:shadow-purple-300",
-        disabled ? "cursor-not-allowed opacity-75" : "cursor-pointer hover:scale-105"
+        disabled ? "cursor-not-allowed opacity-75" : "cursor-pointer hover:scale-105 active:scale-95"
       )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -45,90 +45,83 @@ const MemoCard = memo(function MemoCard({
       aria-pressed={isFlipped}
       whileHover={disabled ? {} : { scale: 1.05 }}
       whileTap={disabled ? {} : { scale: 0.95 }}
-      initial={false}
-      animate={isFlipped ? { rotateY: 180 } : { rotateY: 0 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
-      style={{ transformStyle: "preserve-3d" }}
     >
-      {/* Card Back */}
-      <motion.div
-        className={cn(
-          "absolute inset-0 w-full h-full backface-hidden",
-          isFlipped && "opacity-0"
-        )}
-        initial={false}
-        animate={isFlipped ? { opacity: 0 } : { opacity: 1 }}
-        transition={{ duration: 0.3, delay: isFlipped ? 0 : 0.3 }}
-      >
-        <div className="relative w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-yellow-400 rounded-xl flex items-center justify-center">
-          <Image
-            src="/images/games/memo/card-backward.png"
-            alt="Carte cachée"
-            fill
-            className="object-cover rounded-xl p-2"
-            sizes="(max-width: 768px) 150px, 200px"
-            priority
-          />
-          
-          {/* Decorative overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-xl" />
-          
-          {/* Question mark overlay for small screens */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-white text-4xl font-bold drop-shadow-lg sm:hidden">?</span>
+      {/* Card Content - Show character if flipped OR matched */}
+      {!isFlipped && !isMatched ? (
+        /* Card Back */
+        <motion.div
+          className="absolute inset-0 w-full h-full"
+          initial={{ opacity: 0, rotateY: -180 }}
+          animate={{ opacity: 1, rotateY: 0 }}
+          exit={{ opacity: 0, rotateY: 180 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="relative w-full h-full bg-gradient-to-br from-purple-400 via-pink-400 to-yellow-400 rounded-xl flex items-center justify-center">
+            <Image
+              src="/images/games/memo/card-backward.png"
+              alt="Carte cachée"
+              fill
+              className="object-cover rounded-xl p-2"
+              sizes="(max-width: 768px) 200px, 300px"
+              priority
+            />
+            
+            {/* Decorative overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-xl" />
           </div>
-        </div>
-      </motion.div>
-
-      {/* Card Front (Character) */}
-      <motion.div
-        className={cn(
-          "absolute inset-0 w-full h-full backface-hidden",
-          !isFlipped && "opacity-0"
-        )}
-        initial={false}
-        animate={isFlipped ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.3, delay: isFlipped ? 0.3 : 0 }}
-        style={{ transform: "rotateY(180deg)" }}
-      >
-        <div className="relative w-full h-full bg-white rounded-xl overflow-hidden">
-          <Image
-            src={`/images/profiles/cartoon-characters/${card.character.image}`}
-            alt={card.character.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 150px, 200px"
-          />
-          
-          {/* Character name overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-            <p className="text-white text-sm font-bold text-center truncate">
-              {card.character.name}
-            </p>
-          </div>
-          
-          {/* Matched indicator */}
-          {isMatched && (
-            <div className="absolute top-2 right-2">
-              <motion.div
-                className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
-              >
-                <span className="text-white text-sm font-bold">✓</span>
-              </motion.div>
+        </motion.div>
+      ) : (
+        /* Card Front (Character) */
+        <motion.div
+          className="absolute inset-0 w-full h-full"
+          initial={{ opacity: 0, rotateY: -180 }}
+          animate={{ opacity: 1, rotateY: 0 }}
+          exit={{ opacity: 0, rotateY: 180 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="relative w-full h-full bg-white rounded-xl overflow-hidden">
+            <Image
+              src={`/images/profiles/cartoon-characters/${card.character.image}`}
+              alt={card.character.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 200px, 300px"
+            />
+            
+            {/* Character name overlay - Enhanced for kids */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-2 sm:p-3">
+              <p className="text-white text-sm sm:text-base font-bold text-center truncate drop-shadow-md">
+                {card.character.name}
+              </p>
             </div>
-          )}
-        </div>
-      </motion.div>
-      
-      {/* Loading/Disabled overlay */}
-      {disabled && (
-        <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
-          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin" />
-        </div>
+            
+            {/* Matched indicator - Enhanced for kids */}
+            {isMatched && (
+              <div className="absolute top-2 right-2">
+                <motion.div
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shadow-xl border-2 border-white"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ 
+                    scale: 1, 
+                    rotate: 0
+                  }}
+                  transition={{ 
+                    delay: 0.3, 
+                    type: "spring", 
+                    stiffness: 300
+                  }}
+                  style={{
+                    boxShadow: "0 0 0 2px rgba(34, 197, 94, 0.5)"
+                  }}
+                >
+                  <span className="text-white text-lg sm:text-xl font-bold">✓</span>
+                </motion.div>
+              </div>
+            )}
+          </div>
+        </motion.div>
       )}
+      
     </motion.button>
   );
 });

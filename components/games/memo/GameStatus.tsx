@@ -178,12 +178,14 @@ export default function GameStatus({
                   }`}
                   initial={{ scale: 0 }}
                   animate={{ 
-                    scale: index < matchedPairs ? [0, 1.3, 1] : 1,
+                    scale: index < matchedPairs ? 1 : 1,
                   }}
                   transition={{ 
                     delay: index * 0.1,
                     duration: 0.5,
-                    type: "spring"
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 15
                   }}
                 >
                   ⭐

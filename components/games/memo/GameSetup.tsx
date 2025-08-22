@@ -35,8 +35,8 @@ export default function GameSetup({
         </p>
       </div>
 
-      {/* Difficulty Options Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      {/* Difficulty Options Grid - 2-row horizontal layout for better screen fit */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-4xl mx-auto">
         {PAIR_COUNT_OPTIONS.map((option, index) => (
           <motion.div
             key={option.pairs}
@@ -79,20 +79,20 @@ export default function GameSetup({
                   {option.pairs} {option.pairs === 1 ? 'paire' : 'paires'} à retrouver
                 </p>
                 
-                {/* Visual Card Preview */}
+                {/* Visual Card Preview - Larger cards for better visibility */}
                 <div className="flex justify-center gap-1 flex-wrap">
-                  {Array.from({ length: Math.min(option.cards, 6) }, (_, i) => (
+                  {Array.from({ length: Math.min(option.cards, 8) }, (_, i) => (
                     <div
                       key={i}
-                      className={`w-4 h-4 rounded border-2 ${
+                      className={`w-3 h-3 sm:w-4 sm:h-4 rounded border-2 transition-colors ${
                         selectedPairCount === option.pairs
                           ? 'bg-yellow-400 border-yellow-500'
                           : 'bg-purple-200 border-purple-300'
                       }`}
                     />
                   ))}
-                  {option.cards > 6 && (
-                    <span className="text-xs text-gray-500 ml-1">+{option.cards - 6}</span>
+                  {option.cards > 8 && (
+                    <span className="text-xs text-gray-500 ml-1">+{option.cards - 8}</span>
                   )}
                 </div>
                 

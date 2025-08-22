@@ -14,7 +14,7 @@ export default function HomeButton({ variant = 'home', className = '' }: HomeBut
     <Link
       href="/"
       className={`
-        fixed top-4 left-4 z-50
+        absolute top-4 left-4 z-40
         inline-flex items-center gap-2
         min-w-[140px] min-h-[56px] px-4 py-3
         bg-gradient-to-r from-yellow-400 to-orange-500

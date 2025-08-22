@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, ArrowLeft } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -44,7 +44,7 @@ export default function MemoGame() {
 
   const handleNewGame = () => {
     setShowCelebration(false);
-    resetGame();
+    startNewGame();
   };
 
   // Loading state
@@ -197,7 +197,7 @@ export default function MemoGame() {
                       size="lg"
                       className="border-2 border-white/70 bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 font-medium px-6 py-3 rounded-full"
                     >
-                      Changer Difficulté
+                      Changer la difficulté
                     </Button>
                   </motion.div>
                 </div>
@@ -231,7 +231,41 @@ export default function MemoGame() {
             >
               <div className="text-6xl mb-4">🏆</div>
               <h2 className="text-4xl font-bold text-white mb-4">Victoire !</h2>
-              <p className="text-white/90 text-xl">Toutes les paires ont été trouvées !</p>
+              <p className="text-white/90 text-xl mb-8">Toutes les paires ont été trouvées !</p>
+              
+              {/* Game Controls */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                {/* New Game Button */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    onClick={handleNewGame}
+                    size="lg"
+                    className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-xl px-10 py-4 rounded-full shadow-xl border-4 border-white/50"
+                  >
+                    <RotateCcw className="w-6 h-6 mr-3" />
+                    Rejouer
+                  </Button>
+                </motion.div>
+
+                {/* Back to Setup Button */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    onClick={() => resetGame()}
+                    variant="outline"
+                    size="lg"
+                    className="bg-white/20 border-2 border-white/50 text-white hover:bg-white/30 font-bold text-lg px-8 py-3 rounded-full backdrop-blur-sm"
+                  >
+                    <ArrowLeft className="w-5 h-5 mr-2" />
+                    Changer la difficulté
+                  </Button>
+                </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

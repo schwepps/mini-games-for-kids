@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
@@ -64,6 +64,9 @@ export default function SharedCelebrationModal({
       {open && (
         <Dialog open={open} onOpenChange={onOpenChange}>
           <DialogContent className="max-w-2xl p-0 border-0 bg-transparent">
+            <DialogTitle className="sr-only">
+              {config.customTitle || GAME_TEXT.CELEBRATION.TITLE}
+            </DialogTitle>
             <motion.div
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
