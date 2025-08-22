@@ -127,5 +127,3 @@ const MemoCard = memo(function MemoCard({
 });
 
 export default MemoCard;
-
-// CSS for backface-hidden is now in globals.css
