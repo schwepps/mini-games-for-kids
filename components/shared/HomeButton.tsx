@@ -16,7 +16,7 @@ export default function HomeButton({ variant = 'home', className = '' }: HomeBut
       className={`
         absolute top-4 left-4 z-40
         inline-flex items-center gap-2
-        min-w-[100px] sm:min-w-[140px] min-h-[48px] sm:min-h-[56px] px-3 sm:px-4 py-2 sm:py-3
+        w-fit min-h-[48px] sm:min-h-[56px] px-3 sm:px-4 py-2 sm:py-3
         bg-gradient-to-r from-yellow-400 to-orange-500
         border-2 border-white/30
         rounded-full shadow-xl

@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mini-games-schwepps.vercel.app'),
   title: "Jeux pour Enfants",
   description: "Découvre nos jeux amusants avec tes personnages préférés !",
   
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jeux pour Enfants",
     description: "Découvre nos jeux amusants avec tes personnages préférés !",
-    url: "https://qui-est-ce-schwepps.vercel.app/",
+    url: "https://mini-games-schwepps.vercel.app/",
     siteName: "Jeux pour Enfants",
     images: [
       {
