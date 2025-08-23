@@ -1,36 +1,64 @@
-# Guess Who - Solo Game
+# Kids Games Platform
 
-A modern, browser-based solo version of the classic Guess Who game built with Next.js. Load different character profiles and play with various persona sets.
+A modern, browser-based gaming platform for kids featuring multiple fun games with beloved cartoon characters. Built with Next.js and featuring a shared character system across all games.
 
 ## 🎮 Features
 
-- **Multiple Profile Sets**: Load different themed character sets with unique personas
-- **Customizable Characters**: Each profile set defined via JSON configuration
-- **Solo Gameplay**: Single-player experience against the computer
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Dark Mode Support**: Automatic theme switching based on system preferences
+### 🎯 Multiple Games Available
+- **Qui est-ce? (Guess Who)**: Classic guessing game - ask questions to find the hidden character
+- **Mémo (Memory Game)**: Match pairs of character cards to test your memory
+- **Game Selection Hub**: Easy-to-use interface to choose between available games
+
+### 🌟 Shared Character System
+- **Unified Character Profiles**: Same beloved cartoon characters used across all games
+- **Consistent Experience**: Familiar characters provide continuity between games
+- **Profile Management**: Centralized character loading and caching system
+- **Extensible Design**: Easy to add new character sets that work with all games
+
+### 🎨 Kid-Friendly Design
+- **Intuitive Interface**: Simple, colorful design perfect for children
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **French Language**: All games available in French for young French speakers
+- **Visual Feedback**: Engaging animations and celebrations
 
 ## 📁 Project Structure
 
 ```
-guess-who/
-├── app/                    # Next.js App Router pages and components
-├── components/             # Reusable React components
-├── lib/                    # Utility functions and services
-├── types/                  # TypeScript type definitions
+kids-games-platform/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Game selection hub
+│   ├── qui-est-ce/        # Guess Who game pages
+│   └── memo/              # Memory game pages
+├── components/            # React components
+│   ├── shared/            # Shared components (GameLayout, PageWrapper, etc.)
+│   ├── games/
+│   │   ├── guess-who/     # Guess Who game components
+│   │   └── memo/          # Memory game components
+│   └── ui/                # Reusable UI components
+├── hooks/                 # Custom React hooks
+│   ├── shared/            # Shared hooks
+│   └── games/             # Game-specific hooks
+├── lib/                   # Utility functions and services
+│   ├── profileLoader.ts   # Shared character profile system
+│   ├── games/             # Game-specific logic
+│   └── constants/         # Game and platform constants
+├── types/                 # TypeScript type definitions
 ├── public/
 │   ├── data/
-│   │   └── profiles/       # Character profile JSON configurations
+│   │   └── profiles/      # Character profile JSON configurations
 │   └── images/
-│       └── profiles/       # Character images organized by profile
-│           └── [profile-name]/ # Images for each profile set
+│       ├── logo/          # Game and platform logos
+│       └── profiles/      # Character images organized by profile
+│           └── cartoon-characters/ # Current character set
 └── ...
 ```
 
-### Profile Organization
-- **Configuration**: `public/data/profiles/[profile-name].json` - Character data and schema definitions
-- **Images**: `public/images/profiles/[profile-name]/` - Character portraits and assets
-- **Environment**: `.env.local` - Profile selection via `NEXT_PUBLIC_GAME_PROFILE`
+### Shared Profile System
+- **Configuration**: `public/data/profiles/cartoon-characters.json` - Character data and schema definitions
+- **Images**: `public/images/profiles/cartoon-characters/` - Character portraits and assets
+- **ProfileLoader**: Centralized system that loads character data for all games
+- **Cross-Game Compatibility**: Same characters work seamlessly in both games
+- **Environment**: Optional `NEXT_PUBLIC_GAME_PROFILE` override (defaults to 'cartoon-characters')
 
 ## 🚀 Getting Started
 
@@ -77,23 +105,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the g
 Create an optimized production build:
 ```bash
 npm run build
-# or
-yarn build
-# or
-pnpm build
-# or
-bun build
 ```
 
 Run the production server:
 ```bash
 npm run start
-# or
-yarn start
-# or
-pnpm start
-# or
-bun start
 ```
 
 ### Linting
@@ -101,22 +117,30 @@ bun start
 Run ESLint to check code quality:
 ```bash
 npm run lint
-# or
-yarn lint
-# or
-pnpm lint
-# or
-bun lint
 ```
 
 ## 🎯 How to Play
 
-1. Select a character profile set from the available options
-2. The computer randomly selects a mystery character
-3. Ask yes/no questions about character attributes to narrow down possibilities
-4. Eliminate characters that don't match the answers
+### 🏠 Game Selection
+1. Open the app to see the game selection hub
+2. Choose between **Qui est-ce?** and **Mémo** games
+3. Each game uses the same beloved cartoon characters
+
+### 🔍 Qui est-ce? (Guess Who)
+1. The computer randomly selects a mystery character
+2. Ask yes/no questions about character attributes (hair color, age, species, etc.)
+3. Characters that don't match the answer are eliminated
+4. Use the question builder to construct smart questions
 5. Make your guess when you think you know the mystery character
 6. Try to guess in as few questions as possible!
+
+### 🧠 Mémo (Memory Game)
+1. Choose your difficulty level (number of character pairs)
+2. Character cards are shuffled and placed face-down
+3. Click on cards to flip them and reveal the characters
+4. Find matching pairs of the same character
+5. Matched pairs stay visible
+6. Complete the game by finding all pairs with the fewest moves!
 
 ## 🎨 Adding Custom Profiles
 
@@ -163,58 +187,63 @@ Create your own character sets by adding new profile configurations:
 
 ## 🏗️ Architecture & Features
 
-### ✅ Character Management System
+### ✅ Shared Character Management System
 
-The game includes a comprehensive character management system with the following features:
+The platform features a unified character management system that powers all games:
 
-1. **Smart Profile Loading System** 
-   - Automatic path resolution based on `.env` configuration
-   - JSON file loading: `public/data/profiles/{PROFILE}.json`
-   - Image path resolution: `public/images/profiles/{PROFILE}/`
-   - Profile caching for performance
+1. **Centralized ProfileLoader System**
+   - Single source of truth for character data across all games
+   - Automatic profile loading and caching for performance
+   - Cross-game character consistency
+   - JSON file loading: `public/data/profiles/cartoon-characters.json`
+   - Image path resolution: `public/images/profiles/cartoon-characters/`
+   - Error handling and validation
 
-2. **Flexible JSON Structure**
-   - Extensible characteristic schema per profile
-   - Type-safe character definitions
-   - Support for different characteristic types (boolean, enum, range, etc.)
-   - Profile metadata and versioning
+2. **Cross-Game Character Schema**
+   - Extensible characteristic schema supports different game types
+   - Type-safe character definitions work for both guessing and memory games
+   - Rich character attributes: appearance, demographics, personality traits
+   - Profile metadata and versioning for future expansion
 
-3. **Advanced Game Logic**
-   - Smart character filtering based on questions
-   - Question suggestion engine with effectiveness scoring
-   - Game state management
-   - Automatic question optimization
+3. **Game-Specific Logic Built on Shared Data**
+   - **Guess Who**: Smart character filtering, question suggestion engine, effectiveness scoring
+   - **Memory Game**: Character pair generation, shuffling algorithms, match validation
+   - **Shared**: Game state management, progress tracking, celebration systems
 
 4. **Type Safety & Validation**
-   - Complete TypeScript interfaces
+   - Complete TypeScript interfaces for all games
    - Zod schema validation for runtime safety
-   - Comprehensive error handling
+   - Comprehensive error handling across games
    - Development-friendly validation warnings
 
-### 📦 Key Classes
+### 📦 Key System Components
 
-- **ProfileLoader**: Environment integration, path resolution, caching, validation
-- **CharacterFilter**: Smart filtering, question engine, game logic utilities
+- **ProfileLoader**: Centralized profile loading, caching, and validation for all games
+- **CharacterFilter**: Guess Who game filtering and question engine
+- **MemoGame Logic**: Memory game card generation and matching logic
+- **Shared Hooks**: Cross-game performance rating and state management
 - **GameValidation**: Runtime validation with Zod schemas
 
-### 🎮 Demo Features
+### 🎮 Multi-Game Features
 
-The included ProfileDemo component demonstrates:
-- ✅ Profile loading and switching
-- ✅ Character filtering in real-time  
-- ✅ Question suggestion engine
-- ✅ Game state management
-- ✅ Effectiveness scoring
-- ✅ Win/lose conditions
+The platform demonstrates:
+- ✅ Shared character profiles across multiple game types
+- ✅ Consistent character rendering and display
+- ✅ Cross-game navigation and state management
+- ✅ Unified celebration and feedback systems
+- ✅ Performance optimization through profile caching
+- ✅ Responsive design optimized for all games
 
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 15.4](https://nextjs.org/) with App Router
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **React**: [React 19](https://react.dev/)
-- **Development**: Turbopack for fast builds
-- **Font**: Geist Sans & Geist Mono
+- **Language**: [TypeScript](https://www.typescriptlang.org/) with strict mode
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom design system
+- **React**: [React 19](https://react.dev/) with modern hooks and patterns
+- **Animation**: [Framer Motion](https://www.framer.com/motion/) for smooth game interactions
+- **Validation**: [Zod](https://zod.dev/) for runtime type safety
+- **Development**: Turbopack for fast development builds
+- **Font**: Geist Sans & Geist Mono for optimal readability
 
 ## 📄 License
 
