@@ -103,20 +103,20 @@ export default function SharedCelebrationModal({
               </div>
 
               <Card className={`bg-gradient-to-br ${GAME_COLORS.GRADIENTS.CELEBRATION} shadow-2xl border-4 border-white/80 max-h-[90vh] overflow-y-auto`}>
-                <CardContent className="p-4 sm:p-6 lg:p-8 text-center">
+                <CardContent className="p-3 sm:p-4 lg:p-6 text-center">
                   
                   {/* Logo */}
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-                    className="mb-6"
+                    className="mb-4"
                   >
                     <Image
                       src={config.logoPath}
                       alt={config.logoAlt}
-                      width={200}
-                      height={100}
+                      width={150}
+                      height={75}
                       className="mx-auto drop-shadow-xl"
                     />
                   </motion.div>
@@ -126,16 +126,16 @@ export default function SharedCelebrationModal({
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.4, type: "spring", stiffness: 300 }}
-                    className="mb-8"
+                    className="mb-6"
                   >
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600 bg-clip-text text-transparent mb-4">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600 bg-clip-text text-transparent mb-3">
                       {config.customTitle || GAME_TEXT.CELEBRATION.TITLE}
                     </h1>
-                    <p className="text-lg sm:text-xl md:text-2xl font-semibold text-purple-700 mb-2">
+                    <p className="text-base sm:text-lg md:text-xl font-semibold text-purple-700 mb-2">
                       {config.customSubtitle || GAME_TEXT.CELEBRATION.SUBTITLE}
                     </p>
                     {config.getVictoryMessage && (
-                      <p className="text-lg text-purple-600">
+                      <p className="text-base text-purple-600">
                         {config.getVictoryMessage()}
                       </p>
                     )}
@@ -146,14 +146,14 @@ export default function SharedCelebrationModal({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
-                    className="mb-8"
+                    className="mb-6"
                   >
-                    <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6">
-                      <div className="text-4xl sm:text-5xl md:text-6xl mb-3">{performance.emoji}</div>
-                      <h2 className={`text-xl sm:text-2xl md:text-3xl font-bold ${performance.color} mb-2`}>
+                    <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-4">
+                      <div className="text-3xl sm:text-4xl md:text-5xl mb-2">{performance.emoji}</div>
+                      <h2 className={`text-lg sm:text-xl md:text-2xl font-bold ${performance.color} mb-2`}>
                         {performance.rating}
                       </h2>
-                      <p className="text-purple-600 font-medium">
+                      <p className="text-sm text-purple-600 font-medium">
                         Performance : {efficiency}%
                       </p>
                     </div>
@@ -164,7 +164,7 @@ export default function SharedCelebrationModal({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6"
                   >
                     {config.gameStats.map((stat, index) => (
                       <div key={index} className={`bg-gradient-to-r ${stat.gradient} text-white rounded-xl p-3 sm:p-4`}>
@@ -179,13 +179,13 @@ export default function SharedCelebrationModal({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className="mb-8"
+                    className="mb-6"
                   >
-                    <div className="flex justify-center gap-2">
+                    <div className="flex justify-center gap-1">
                       {Array.from({ length: 5 }, (_, i) => (
                         <motion.span
                           key={i}
-                          className={`text-2xl sm:text-3xl md:text-4xl ${
+                          className={`text-xl sm:text-2xl md:text-3xl ${
                             i < starRating ? 'text-yellow-400' : 'text-gray-300'
                           }`}
                           initial={{ scale: 0, rotate: -180 }}
@@ -216,7 +216,7 @@ export default function SharedCelebrationModal({
                       <Button
                         onClick={handleNewGameClick}
                         size="lg"
-                        className={`bg-gradient-to-r ${GAME_COLORS.GRADIENTS.BUTTON} hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-lg sm:text-xl px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full shadow-xl border-4 border-white/50`}
+                        className={`bg-gradient-to-r ${GAME_COLORS.GRADIENTS.BUTTON} hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 rounded-full shadow-xl border-4 border-white/50`}
                       >
                         <motion.span
                           animate={{ rotate: [0, 10, -10, 0] }}

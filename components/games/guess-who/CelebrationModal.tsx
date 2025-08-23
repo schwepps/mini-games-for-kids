@@ -112,19 +112,19 @@ export default function CelebrationModal({
                 ...SPRING_CONFIGS.MEDIUM,
                 delay: SPRING_CONFIGS.DELAYS.MEDIUM
               }}
-              className="mx-auto mb-4"
+              className="mx-auto mb-3"
             >
-              <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
-                <Trophy className="w-12 h-12 text-yellow-800" />
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                <Trophy className="w-10 h-10 text-yellow-800" />
               </div>
             </motion.div>
 
-            <DialogTitle className="text-3xl font-bold text-gray-800 mb-2">
+            <DialogTitle className="text-2xl font-bold text-gray-800 mb-2">
               🎉 Tu as Gagné ! 🎉
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Character reveal */}
             {hiddenCharacter && (
               <motion.div
@@ -133,8 +133,8 @@ export default function CelebrationModal({
                 transition={{ delay: SPRING_CONFIGS.DELAYS.LONG }}
                 className="text-center"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
-                  <h3 className="text-lg font-bold text-gray-800 mb-4">
+                <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-yellow-300">
+                  <h3 className="text-base font-bold text-gray-800 mb-3">
                     Tu as trouvé le personnage caché !
                   </h3>
                   
@@ -157,7 +157,7 @@ export default function CelebrationModal({
                     </motion.div>
                   </div>
                   
-                  <h4 className="text-xl font-bold text-gray-800 mt-4">
+                  <h4 className="text-lg font-bold text-gray-800 mt-3">
                     {hiddenCharacter.name}
                   </h4>
                   
@@ -175,9 +175,9 @@ export default function CelebrationModal({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 }}
-              className="bg-white rounded-xl p-4 shadow-md border-2 border-pink-200"
+              className="bg-white rounded-xl p-3 shadow-md border-2 border-pink-200"
             >
-              <div className="text-center space-y-3">
+              <div className="text-center space-y-2">
                 <div className="flex items-center justify-center gap-2">
                   <Target className="w-5 h-5 text-blue-600" />
                   <span className="font-medium text-gray-700">Ta Performance</span>
@@ -209,7 +209,7 @@ export default function CelebrationModal({
                 
                 <div className="space-y-2">
                   <Badge 
-                    className={`text-lg px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white`}
+                    className={`text-base px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white`}
                   >
                     {rating.emoji} {rating.text}
                   </Badge>
@@ -240,7 +240,7 @@ export default function CelebrationModal({
                 <Button
                   onClick={handleNewGame}
                   size="lg"
-                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-400 hover:from-purple-600 hover:via-pink-600 hover:to-red-500 text-white font-bold text-2xl px-12 py-6 rounded-full shadow-2xl border-4 border-white transform transition-all duration-200 hover:shadow-3xl"
+                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-400 hover:from-purple-600 hover:via-pink-600 hover:to-red-500 text-white font-bold text-xl px-8 py-4 rounded-full shadow-2xl border-4 border-white transform transition-all duration-200 hover:shadow-3xl"
                 >
                   <motion.div
                     animate={{ rotate: [0, 360] }}
