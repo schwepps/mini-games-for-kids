@@ -24,10 +24,10 @@ export default function ImagePreloader({ characters }: ImagePreloaderProps) {
           key={`preload-${character.id}`}
           src={`/images/profiles/cartoon-characters/${character.image}`}
           alt=""
-          width={1}
-          height={1}
+          width={300}
+          height={300}
           priority
-          sizes="1px"
+          sizes="(max-width: 768px) 200px, 300px"
         />
       ))}
     </div>

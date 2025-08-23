@@ -87,6 +87,7 @@ const MemoCard = memo(function MemoCard({
               fill
               className="object-cover"
               sizes="(max-width: 768px) 200px, 300px"
+              loading="eager"
             />
             
             {/* Character name overlay - Enhanced for kids */}
