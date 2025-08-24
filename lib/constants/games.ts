@@ -29,11 +29,25 @@ export const GAMES: GameConfig[] = [
       keywords: ['jeu', 'mémoire', 'mémo', 'dessins animés', 'enfants', 'memory'],
     },
   },
+  {
+    id: 'sudoku',
+    title: 'Sudoku',
+    description: 'Résous les grilles !',
+    logo: '/images/logo/sudoku-logo-large.png',
+    href: '/sudoku',
+    bgColor: 'from-orange-400 to-red-400',
+    available: true,
+    metadata: {
+      title: 'Sudoku - Jeu de logique',
+      description: 'Jeu de Sudoku avec tes personnages préférés !',
+      keywords: ['jeu', 'sudoku', 'logique', 'dessins animés', 'enfants', 'puzzle'],
+    },
+  },
 ];
 
 export const PLATFORM_METADATA = {
   title: 'Jeux pour Enfants',
   description: 'Découvre nos jeux amusants avec tes personnages préférés !',
-  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes'],
+  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes', 'sudoku', 'logique'],
   logo: '/images/logo/logo-large.png',
 };
