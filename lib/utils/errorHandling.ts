@@ -138,19 +138,21 @@ export function logError(processedError: ProcessedError): void {
     metadata: context.metadata
   };
   
-  switch (severity) {
-    case 'critical':
-      console.error('🚨 CRITICAL ERROR:', logData);
-      break;
-    case 'high':
-      console.error('🔴 HIGH SEVERITY ERROR:', logData);
-      break;
-    case 'medium':
-      console.warn('🟡 MEDIUM SEVERITY ERROR:', logData);
-      break;
-    case 'low':
-      console.info('🔵 LOW SEVERITY ERROR:', logData);
-      break;
+  if (process.env.NODE_ENV !== 'production') {
+    switch (severity) {
+      case 'critical':
+        console.error('🚨 CRITICAL ERROR:', logData);
+        break;
+      case 'high':
+        console.error('🔴 HIGH SEVERITY ERROR:', logData);
+        break;
+      case 'medium':
+        console.warn('🟡 MEDIUM SEVERITY ERROR:', logData);
+        break;
+      case 'low':
+        console.info('🔵 LOW SEVERITY ERROR:', logData);
+        break;
+    }
   }
 }
 

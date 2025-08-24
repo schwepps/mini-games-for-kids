@@ -86,34 +86,20 @@ body {
   }
 }
 
-/* Memo Game Animations and Accessibility */
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-/* Smooth animations for better UX */
+/* Accessibility improvements */
 @layer utilities {
-  .transform-style-preserve-3d {
-    transform-style: preserve-3d;
-  }
-  
   /* Respect reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
-    .motion-reduce {
+    * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-    }
-    
-    /* Disable flip animations for accessibility */
-    .memo-card-flip {
-      transition: none !important;
     }
   }
   
   /* High contrast support */
   @media (prefers-contrast: high) {
-    .memo-card {
+    .card {
       border-width: 3px !important;
       border-color: currentColor !important;
     }
