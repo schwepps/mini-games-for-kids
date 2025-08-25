@@ -136,3 +136,9 @@ export const PERFORMANCE_HELPERS = {
     return Math.min(Math.ceil(efficiency / 20), 5);
   }
 } as const;
+
+// Mahjong-specific layout constants
+export const MAHJONG_LAYOUT = {
+  TILE_SPACING: 4,  // Pixel spacing between tiles (increased from 2px for better visual appeal)
+  LAYER_OFFSET: 10  // Pixel offset per layer for 3D effect
+} as const;

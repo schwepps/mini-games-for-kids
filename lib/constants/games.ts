@@ -43,6 +43,20 @@ export const GAMES: GameConfig[] = [
       keywords: ['jeu', 'sudoku', 'logique', 'dessins animés', 'enfants', 'puzzle'],
     },
   },
+  {
+    id: 'mahjong',
+    title: 'MahJong',
+    description: 'Trouve les paires !',
+    logo: '/images/logo/mahjong-logo-large.png',
+    href: '/mahjong',
+    bgColor: 'from-indigo-400 to-purple-400',
+    available: true,
+    metadata: {
+      title: 'MahJong - Jeu de logique',
+      description: 'Jeu de MahJong avec tes personnages préférés !',
+      keywords: ['jeu', 'mahjong', 'paires', 'dessins animés', 'enfants', 'logique'],
+    },
+  },
 ];
 
 export const PLATFORM_METADATA = {
