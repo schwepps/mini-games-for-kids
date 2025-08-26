@@ -41,9 +41,9 @@ export default function MahjongBoard({
     const deviceType = isReady && size.width > 0 ? 
       (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
     const paddingByDevice = {
-      mobile: 32,   // 16px each side (px-4)
-      tablet: 64,   // 32px each side (px-8)
-      desktop: 96   // 48px each side (px-12)
+      mobile: 8,    // 4px each side (px-1)
+      tablet: 16,   // 8px each side (px-2)
+      desktop: 16   // 8px each side (px-2)
     };
     const availableWidth = isReady && size.width > 0 ? 
       size.width - paddingByDevice[deviceType] : 800;
@@ -51,9 +51,9 @@ export default function MahjongBoard({
     // Enhanced responsive UI zone sizing
     const dynamicsDeviceType = availableWidth < 640 ? 'mobile' : availableWidth < 1024 ? 'tablet' : 'desktop';
     const uiZoneHeights = {
-      mobile: { top: 40, bottom: 32, buffer: 80 },    // Compact UI for mobile
-      tablet: { top: 48, bottom: 40, buffer: 100 },   // Moderate UI for tablet
-      desktop: { top: 56, bottom: 48, buffer: 120 }   // Generous UI for desktop
+      mobile: { top: 24, bottom: 20, buffer: 48 },    // Optimized for game area
+      tablet: { top: 30, bottom: 24, buffer: 60 },    // Balanced UI for tablet
+      desktop: { top: 34, bottom: 28, buffer: 72 }    // Efficient UI for desktop
     };
     
     const uiZones = uiZoneHeights[dynamicsDeviceType];
@@ -100,9 +100,37 @@ export default function MahjongBoard({
     };
   };
 
-  const tileSize = board.tiles[0]?.x !== undefined && board.tiles[1]?.x !== undefined
-    ? Math.abs(board.tiles[1].x - board.tiles[0].x) || 60
-    : 60;
+  // Dynamic tile sizing based on screen size and tile density
+  const calculateOptimalTileSize = () => {
+    // Get available dimensions
+    const deviceType = isReady && size.width > 0 ? 
+      (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
+    
+    // Base tile sizes by device type for optimal UX
+    const baseTileSizes = {
+      mobile: 45,   // Smaller for mobile screens
+      tablet: 55,   // Medium for tablets
+      desktop: 65   // Larger for desktop
+    };
+    
+    // Try to calculate spacing from tile positions (if available)
+    let spacingBasedSize = 60;
+    if (board.tiles[0]?.x !== undefined && board.tiles[1]?.x !== undefined) {
+      spacingBasedSize = Math.abs(board.tiles[1].x - board.tiles[0].x) || 60;
+    }
+    
+    // Choose between base size and spacing-based size
+    const deviceBaseSize = baseTileSizes[deviceType];
+    const preferredSize = Math.min(spacingBasedSize, deviceBaseSize);
+    
+    // Ensure minimum touch target size (44px) and reasonable maximum (80px)
+    return Math.max(44, Math.min(preferredSize, 80));
+  };
+  
+  const tileSize = calculateOptimalTileSize();
+  
+  // Calculate proportional 3D layer offset (15% of tile size)
+  const layerOffset = Math.round(tileSize * 0.15);
 
   // Calculate actual tile bounds for dynamic background sizing
   const calculateTileBounds = () => {
@@ -116,9 +144,9 @@ export default function MahjongBoard({
     let maxY = -Infinity;
 
     board.tiles.forEach(tile => {
-      // Account for 3D layer offsets (same as used in MahjongTile.tsx)
-      const tileX = tile.x + (tile.layer * 10);
-      const tileY = tile.y - (tile.layer * 10);
+      // Account for proportional 3D layer offsets
+      const tileX = tile.x + (tile.layer * layerOffset);
+      const tileY = tile.y - (tile.layer * layerOffset);
       const tileRight = tileX + tileSize;
       const tileBottom = tileY + tileSize;
 
@@ -164,24 +192,24 @@ export default function MahjongBoard({
   const currentDeviceType = isReady && size.width > 0 ? 
     (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
   const paddingByDevice = {
-    mobile: 32,   // 16px each side (px-4)
-    tablet: 64,   // 32px each side (px-8)
-    desktop: 96   // 48px each side (px-12)
+    mobile: 8,    // 4px each side (px-1)
+    tablet: 16,   // 8px each side (px-2)
+    desktop: 16   // 8px each side (px-2)
   };
   const currentWidth = isReady && size.width > 0 ? 
     size.width - paddingByDevice[currentDeviceType] : 800;
   const uiDeviceType = currentWidth < 640 ? 'mobile' : currentWidth < 1024 ? 'tablet' : 'desktop';
   const uiZoneHeights = {
-    mobile: { top: 40, bottom: 32, buffer: 80 },
-    tablet: { top: 48, bottom: 40, buffer: 100 },
-    desktop: { top: 56, bottom: 48, buffer: 120 }
+    mobile: { top: 24, bottom: 20, buffer: 48 },
+    tablet: { top: 30, bottom: 24, buffer: 60 },
+    desktop: { top: 34, bottom: 28, buffer: 72 }
   };
   const uiZones = uiZoneHeights[uiDeviceType];
 
   return (
     <div 
       ref={useAdaptiveLayout && !forceStaticLayout && !hasError ? containerRef : undefined}
-      className="flex flex-col gap-2 w-full px-4 sm:px-8 lg:px-12 py-4 sm:py-6 lg:py-8"
+      className="flex flex-col gap-2 w-full px-1 sm:px-2 py-2 sm:py-3 lg:py-4"
       style={{ 
         minHeight: `${containerHeight + uiZones.buffer}px`, // Device-aware UI space
         height: 'auto' // Allow height to grow as needed
@@ -223,15 +251,16 @@ export default function MahjongBoard({
             transformOrigin: 'center center'
           }}
         >
-        {/* Background Board Layer - Container-relative positioning */}
+        {/* Background Board Layer - Smart content-aware sizing */}
         <div
           id='background_layer'
           className="absolute rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 shadow-2xl border border-slate-200/50"
           style={{
-            left: '20px', // Container-relative positioning
-            top: '20px',
-            width: `${containerWidth - 40}px`, // Fit within container with padding
-            height: `${containerHeight - 40}px`,
+            // Smart margins: proportional to tile size with minimums for visual appeal
+            left: `${Math.max(8, Math.round(tileSize * 0.15))}px`,
+            top: `${Math.max(8, Math.round(tileSize * 0.15))}px`,
+            width: `${containerWidth - 2 * Math.max(8, Math.round(tileSize * 0.15))}px`,
+            height: `${containerHeight - 2 * Math.max(8, Math.round(tileSize * 0.15))}px`,
             transform: 'translateZ(-20px) rotateX(1deg)',
             background: `
               radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.7)),
@@ -259,6 +288,7 @@ export default function MahjongBoard({
               showHint={showHintTileIds.includes(tile.id)}
               offsetX={tileBounds.minX}
               offsetY={tileBounds.minY}
+              layerOffset={layerOffset}
             />
           ))}
         </div>
