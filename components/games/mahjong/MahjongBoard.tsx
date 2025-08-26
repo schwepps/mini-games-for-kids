@@ -208,9 +208,9 @@ export default function MahjongBoard({
     size.width - paddingByDevice[currentDeviceType] : 800;
   const uiDeviceType = currentWidth < 640 ? 'mobile' : currentWidth < 1024 ? 'tablet' : 'desktop';
   const uiZoneHeights = {
-    mobile: { top: 24, bottom: 20, buffer: 48 },
-    tablet: { top: 30, bottom: 24, buffer: 60 },
-    desktop: { top: 34, bottom: 28, buffer: 72 }
+    mobile: { top: 24, bottom: 20, buffer: 140 },
+    tablet: { top: 30, bottom: 24, buffer: 140 },
+    desktop: { top: 34, bottom: 28, buffer: 140 }
   };
   const uiZones = uiZoneHeights[uiDeviceType];
 
@@ -248,9 +248,9 @@ export default function MahjongBoard({
           className="relative mx-auto"
           style={{
             width: `${containerWidth}px`,
-            height: `${containerHeight}px`,
+            minHeight: `${containerHeight}px`, // Use minHeight instead of fixed height
+            height: 'auto', // Let content determine actual height
             maxWidth: '100%', // Allow full width utilization
-            maxHeight: '100%', // Allow full height utilization
             transformStyle: 'preserve-3d',
             perspective: useAdaptiveLayout ? '1400px' : '1800px', // Enhanced perspective for better 3D depth
             perspectiveOrigin: 'center 40%', // Adjusted for better viewing angle

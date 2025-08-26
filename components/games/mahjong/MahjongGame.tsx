@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import MahjongSetup from './MahjongSetup';
@@ -129,6 +130,16 @@ export default function MahjongGame() {
       error={error}
       onRetry={resetGame}
     >
+      {/* Game Logo */}
+      <Image
+        src="/images/logo/mahjong-logo-large.png"
+        alt="Mahjong - Jeu de Mahjong"
+        width={200}
+        height={200}
+        className="mx-auto drop-shadow-lg"
+        priority
+      />
+
       {/* Game Statistics */}
       <MahjongGameStats 
         stats={{
@@ -149,7 +160,7 @@ export default function MahjongGame() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5 }}
-            className="w-full py-6 sm:py-8 lg:py-12 px-2 sm:px-4 lg:px-6"
+            className="w-full px-2 sm:px-4 lg:px-6 mt-4 sm:mt-6 lg:mt-8 mb-24"
           >
             <MahjongBoard
               board={board}

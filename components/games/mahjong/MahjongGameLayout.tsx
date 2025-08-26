@@ -72,7 +72,7 @@ export default function MahjongGameLayout({
     <div className="min-h-screen p-4 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6 pb-8">
         {/* Game Content with Dynamic Spacing */}
-        <div className={`flex flex-col items-center justify-center transition-all duration-300 ${dynamicSpacing}`}>
+        <div className={`space-y-6 transition-all duration-300 ${dynamicSpacing}`}>
           {children}
         </div>
       </div>

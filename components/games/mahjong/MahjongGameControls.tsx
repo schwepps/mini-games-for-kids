@@ -25,9 +25,9 @@ export default function MahjongGameControls({
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.5 }}
-      className="mt-16"
+      className="mt-20"
     >
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 px-2">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 px-2 mt-20">
         
         {/* Hint Button */}
         <motion.div
