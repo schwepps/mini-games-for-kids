@@ -220,22 +220,6 @@ export default function MahjongBoard({
         height: 'auto' // Allow height to grow as needed
       }}
     >
-      {/* Top UI Bar - Layer Indicator */}
-      <div 
-        className="flex justify-end items-center px-2"
-        style={{ height: `${uiZones.top}px` }}
-      >
-        <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg border border-white/20">
-          <div className="flex items-center gap-2">
-            <span 
-              className={`font-bold text-gray-700 ${uiDeviceType === 'mobile' ? 'text-xs' : uiDeviceType === 'tablet' ? 'text-sm' : 'text-base'}`}
-            >
-              {board.layers} niveaux
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Game Board Container - Pure game content */}
       <div id='parent_div' className="flex-1 flex justify-center items-center">
         <motion.div
