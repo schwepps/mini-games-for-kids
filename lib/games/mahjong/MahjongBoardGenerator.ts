@@ -5,8 +5,8 @@ import {
   MahjongLayout, 
   MahjongDifficulty 
 } from '@/types/mahjong';
-import { MAHJONG_LAYOUTS } from './layouts';
-import { AdaptiveLayoutGenerator, AdaptiveLayoutConfig } from './adaptiveLayoutGenerator';
+import { getRandomLayoutByDifficulty } from './layouts';
+// Removed unused import - AdaptiveLayoutGenerator no longer needed
 import { ContainerSize } from '@/hooks/shared/useContainerSize';
 import { MAHJONG_LAYOUT } from '@/lib/constants/gameConstants';
 
@@ -24,7 +24,7 @@ export class MahjongBoardGenerator {
     difficulty: MahjongDifficulty,
     tileSize: number
   ): MahjongBoard {
-    const layout = MAHJONG_LAYOUTS.find(l => l.difficulty === difficulty);
+    const layout = getRandomLayoutByDifficulty(difficulty);
     if (!layout) {
       throw new Error(`Layout not found for difficulty: ${difficulty}`);
     }
@@ -50,32 +50,28 @@ export class MahjongBoardGenerator {
     containerSize: ContainerSize,
     pairCount?: number
   ): MahjongBoard {
+    // Get a random static layout for this difficulty
+    const baseLayout = getRandomLayoutByDifficulty(difficulty);
+    if (!baseLayout) {
+      throw new Error(`No layouts found for difficulty: ${difficulty}`);
+    }
+
     // Get optimal tile size based on container and difficulty
     const tileSize = this.getOptimalTileSize(containerSize, difficulty, pairCount);
     
-    // Calculate pair count based on difficulty if not provided
-    const targetPairCount = pairCount || this.getPairCountForDifficulty(difficulty);
+    // Scale the layout to fit the container if needed
+    const scaledLayout = this.scaleLayoutToContainer(baseLayout, containerSize, tileSize);
     
-    // Generate adaptive layout
-    const config: AdaptiveLayoutConfig = {
-      containerSize,
-      pairCount: targetPairCount,
-      difficulty,
-      tileSize,
-      maxLayers: this.getMaxLayersForDevice(containerSize),
-      minTileSpacing: MAHJONG_LAYOUT.TILE_SPACING
-    };
+    // Create tiles using the scaled layout
+    const tiles = this.createTiles(scaledLayout, characters, tileSize);
     
-    const layout = AdaptiveLayoutGenerator.generateAdaptiveLayout(config);
-    
-    // Create tiles using the adaptive layout
-    const tiles = this.createTiles(layout, characters, tileSize);
+    // Calculate board dimensions
     const board: MahjongBoard = {
       tiles,
-      layout,
-      width: this.calculateAdaptiveBoardWidth(layout, tileSize),
-      height: this.calculateAdaptiveBoardHeight(layout, tileSize),
-      layers: layout.maxLayers
+      layout: scaledLayout,
+      width: this.calculateAdaptiveBoardWidth(scaledLayout, tileSize),
+      height: this.calculateAdaptiveBoardHeight(scaledLayout, tileSize),
+      layers: scaledLayout.maxLayers
     };
 
     // Center tiles within container for better UX
@@ -354,5 +350,76 @@ export class MahjongBoardGenerator {
     const layerOffset = maxLayer * 10;
     
     return calculatedHeight + layerOffset;
+  }
+
+  /**
+   * Scale a static layout to fit within container constraints
+   * Preserves the shape and structure while adapting to screen size
+   */
+  static scaleLayoutToContainer(
+    layout: MahjongLayout,
+    containerSize: ContainerSize,
+    tileSize: number
+  ): MahjongLayout {
+    if (layout.positions.length === 0) {
+      return layout;
+    }
+
+    // Find the bounds of the original layout
+    let minRow = Infinity, maxRow = -Infinity;
+    let minCol = Infinity, maxCol = -Infinity;
+    
+    layout.positions.forEach(pos => {
+      minRow = Math.min(minRow, pos.row);
+      maxRow = Math.max(maxRow, pos.row);
+      minCol = Math.min(minCol, pos.col);
+      maxCol = Math.max(maxCol, pos.col);
+    });
+
+    // Calculate original layout dimensions
+    const originalRows = maxRow - minRow + 1;
+    const originalCols = maxCol - minCol + 1;
+    const maxLayer = Math.max(...layout.positions.map(p => p.layer));
+    
+    // Calculate space needed including layer offsets
+    const spacing = MAHJONG_LAYOUT.TILE_SPACING;
+    const layerOffset = maxLayer * 10;
+    
+    const requiredWidth = (originalCols * (tileSize + spacing)) + layerOffset;
+    const requiredHeight = (originalRows * (tileSize + spacing)) + layerOffset;
+    
+    // Check if scaling is needed
+    const availableWidth = containerSize.width - 32; // padding
+    const availableHeight = containerSize.height - 100; // UI elements
+    
+    let scaleFactor = 1;
+    
+    if (requiredWidth > availableWidth || requiredHeight > availableHeight) {
+      // Calculate scale factor to fit container
+      const widthScale = availableWidth / requiredWidth;
+      const heightScale = availableHeight / requiredHeight;
+      scaleFactor = Math.min(widthScale, heightScale, 1); // Never scale up, only down
+      
+      // Ensure minimum playable size
+      scaleFactor = Math.max(scaleFactor, 0.5);
+    }
+
+    // If no scaling needed, return original
+    if (scaleFactor === 1) {
+      return layout;
+    }
+
+    // Scale the positions
+    const scaledPositions = layout.positions.map(pos => ({
+      row: Math.round((pos.row - minRow) * scaleFactor) + minRow,
+      col: Math.round((pos.col - minCol) * scaleFactor) + minCol,
+      layer: pos.layer // Don't scale layers
+    }));
+
+    // Return scaled layout
+    return {
+      ...layout,
+      positions: scaledPositions
+    };
   }
 }
