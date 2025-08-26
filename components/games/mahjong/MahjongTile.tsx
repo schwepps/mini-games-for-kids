@@ -52,11 +52,11 @@ export default function MahjongTile({
         }}
         animate={{ 
           scale: 1, 
-          opacity: tile.isCovered ? 0.7 : 1, // Dimmed for covered tiles
+          opacity: 1, // Always fully opaque - use visual styling for states
           rotateY: 0,
           x: (tile.x - offsetX) + (tile.layer * layerOffset), // Normalized position with proportional layer offset
           y: (tile.y - offsetY) - (tile.layer * layerOffset), // Normalized position with tiles "resting" on lower ones
-          z: tile.z
+          z: tile.z // Proper z-index layering: higher layers appear on top
         }}
         exit={{ 
           scale: 0,
@@ -87,6 +87,7 @@ export default function MahjongTile({
           minWidth: '44px', // Ensure minimum touch target size
           minHeight: '44px',
           transformStyle: 'preserve-3d',
+          zIndex: tile.layer * 10, // Critical: CSS z-index for proper stacking (higher layers on top)
         }}
         onClick={handleClick}
         role="button"
@@ -107,8 +108,8 @@ export default function MahjongTile({
             ${tile.isSelectable && !disabled
               ? 'cursor-pointer shadow-lg hover:shadow-2xl'
               : tile.isCovered 
-                ? 'cursor-not-allowed' 
-                : 'cursor-not-allowed opacity-60 grayscale'
+                ? 'cursor-not-allowed shadow-md' // Covered tiles: subtle shadow, no transparency
+                : 'cursor-not-allowed opacity-60 grayscale' // Non-selectable tiles: dimmed
             }
             ${tile.isSelected || showHint
               ? 'ring-4 ring-pink-400 ring-opacity-90 shadow-2xl'
@@ -118,9 +119,9 @@ export default function MahjongTile({
           style={{
             background: tile.isSelectable 
               ? 'linear-gradient(145deg, #ffffff 0%, #fefefe 30%, #f9fafb 70%, #f3f4f6 100%)'
-              : tile.isCovered
-                ? 'linear-gradient(145deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%)'
-                : 'linear-gradient(145deg, #f3f4f6 0%, #e5e7eb 50%, #d1d5db 100%)',
+              : tile.isCovered 
+                ? 'linear-gradient(145deg, #f8fafc 0%, #f1f5f9 30%, #e2e8f0 70%, #cbd5e1 100%)' // Covered: cooler, muted gradient
+                : 'linear-gradient(145deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%)', // Non-selectable: darker gradient
             boxShadow: tile.isSelectable
               ? `
                 0 ${(tile.layer + 1) * 8}px ${(tile.layer + 1) * 16}px rgba(0, 0, 0, 0.25),

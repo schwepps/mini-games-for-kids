@@ -289,7 +289,10 @@ export default function MahjongBoard({
             transform: 'translateZ(0)', // Create stacking context for tiles
           }}
         >
-          {board.tiles.map((tile) => (
+          {board.tiles
+            .slice() // Create copy to avoid mutating original array
+            .sort((a, b) => a.layer - b.layer) // Sort by layer: lowest first, highest last
+            .map((tile) => (
             <MahjongTile
               key={tile.id}
               tile={tile}
