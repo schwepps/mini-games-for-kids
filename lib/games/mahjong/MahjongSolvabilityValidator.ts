@@ -1,22 +1,36 @@
 import { MahjongBoard, MahjongTile } from '@/types/mahjong';
 
 /**
- * MahJong Solvability Validator
- * Focused on game rules validation and tile selectability
+ * Authentic MahJong Solvability Validator
+ * Implements proper mahjong rules with slide-out selectability logic
  */
 export class MahjongSolvabilityValidator {
   
   /**
-   * Update tile selectability based on MahJong rules
+   * Update tile selectability based on authentic MahJong rules
+   * A tile is selectable if:
+   * 1. It's not covered by tiles above
+   * 2. It can slide out (left OR right) without hitting other tiles
    */
   static updateTileSelectability(board: MahjongBoard): void {
     board.tiles.forEach(tile => {
       if (tile.isMatched) {
         tile.isSelectable = false;
+        tile.leftBlocked = false;
+        tile.rightBlocked = false;
+        tile.leftBlockedBy = [];
+        tile.rightBlockedBy = [];
         return;
       }
 
-      tile.isSelectable = this.isTileSelectable(tile, board);
+      // Update coverage first
+      this.updateTileCoverageForTile(tile, board);
+      
+      // Update adjacency blocking
+      this.updateTileAdjacency(tile, board);
+      
+      // Determine selectability
+      tile.isSelectable = this.isTileSelectable(tile);
     });
   }
 
@@ -25,51 +39,166 @@ export class MahjongSolvabilityValidator {
    */
   static updateTileCoverage(board: MahjongBoard): void {
     board.tiles.forEach(tile => {
-      if (tile.isMatched) {
-        tile.isCovered = false;
-        tile.coveredBy = [];
-        return;
-      }
-
-      // Find all tiles covering this tile
-      const coveringTiles = board.tiles.filter(otherTile =>
-        !otherTile.isMatched &&
-        otherTile.layer === tile.layer + 1 &&
-        otherTile.row === tile.row &&
-        otherTile.col === tile.col
-      );
-
-      tile.isCovered = coveringTiles.length > 0;
-      tile.coveredBy = coveringTiles.map(t => t.id);
+      this.updateTileCoverageForTile(tile, board);
     });
   }
 
   /**
-   * Check if a tile is selectable (proper MahJong rules)
-   * A tile is selectable if:
-   * 1. It's not covered by another tile above
-   * 2. It has at least one free side (left or right)
+   * Update coverage information using authentic support relationships
    */
-  static isTileSelectable(tile: MahjongTile, board: MahjongBoard): boolean {
+  static updateTileCoverageForTile(tile: MahjongTile, board: MahjongBoard): void {
+    if (tile.isMatched) {
+      tile.isCovered = false;
+      tile.coveredBy = [];
+      tile.supporting = [];
+      tile.supportedBy = [];
+      return;
+    }
+
+    // Use predefined support relationships from layout first
+    const layoutSupportedBy = tile.supportedBy || [];
+    
+    // Find tiles that cover this tile from above (direct physical overlap)
+    const coveringTiles = board.tiles.filter(otherTile =>
+      !otherTile.isMatched &&
+      otherTile.layer > tile.layer &&
+      this.tilesDirectlyOverlap(tile, otherTile)
+    );
+
+    // Find tiles this tile actually rests on (using layout relationships + physical overlap)
+    const supportingTiles = board.tiles.filter(otherTile =>
+      !otherTile.isMatched &&
+      otherTile.layer < tile.layer &&
+      (layoutSupportedBy.includes(otherTile.id) || this.tilesDirectlyOverlap(tile, otherTile))
+    );
+
+    // Find tiles that rest on this tile 
+    const supportedTiles = board.tiles.filter(otherTile =>
+      !otherTile.isMatched &&
+      otherTile.layer > tile.layer &&
+      ((otherTile.supportedBy || []).includes(tile.id) || this.tilesDirectlyOverlap(tile, otherTile))
+    );
+
+    tile.isCovered = coveringTiles.length > 0;
+    tile.coveredBy = coveringTiles.map(t => t.id);
+    tile.supportedBy = supportingTiles.map(t => t.id);
+    tile.supporting = supportedTiles.map(t => t.id);
+  }
+
+  /**
+   * Update adjacency blocking information for a specific tile
+   */
+  static updateTileAdjacency(tile: MahjongTile, board: MahjongBoard): void {
+    if (tile.isMatched) {
+      tile.leftBlocked = false;
+      tile.rightBlocked = false;
+      tile.leftBlockedBy = [];
+      tile.rightBlockedBy = [];
+      return;
+    }
+
+    // Check for tiles blocking left movement
+    const leftBlockingTiles = board.tiles.filter(otherTile =>
+      !otherTile.isMatched &&
+      otherTile.layer === tile.layer &&
+      this.tileBlocksLeftMovement(tile, otherTile)
+    );
+
+    // Check for tiles blocking right movement
+    const rightBlockingTiles = board.tiles.filter(otherTile =>
+      !otherTile.isMatched &&
+      otherTile.layer === tile.layer &&
+      this.tileBlocksRightMovement(tile, otherTile)
+    );
+
+    tile.leftBlocked = leftBlockingTiles.length > 0;
+    tile.rightBlocked = rightBlockingTiles.length > 0;
+    tile.leftBlockedBy = leftBlockingTiles.map(t => t.id);
+    tile.rightBlockedBy = rightBlockingTiles.map(t => t.id);
+  }
+
+  /**
+   * Check if a tile is selectable using authentic MahJong rules
+   * A tile is selectable if:
+   * 1. It's not covered by tiles above
+   * 2. It can slide out (left OR right) without hitting other tiles
+   */
+  static isTileSelectable(tile: MahjongTile): boolean {
     if (tile.isMatched || tile.isCovered) return false;
 
-    // Check if at least one side is free (left OR right)
-    const hasLeftTile = board.tiles.some(otherTile => 
-      !otherTile.isMatched &&
-      otherTile.layer === tile.layer &&
-      otherTile.row === tile.row &&
-      otherTile.col === tile.col - 1
+    // Authentic mahjong rule: tile must be able to slide left OR right
+    return !tile.leftBlocked || !tile.rightBlocked;
+  }
+
+  /**
+   * Check if two tiles overlap (using footprint-based detection)
+   */
+  static tilesOverlap(tile1: MahjongTile, tile2: MahjongTile): boolean {
+    return this.tilesDirectlyOverlap(tile1, tile2);
+  }
+
+  /**
+   * Check if two tiles directly overlap in pixel space (strict overlap)
+   */
+  static tilesDirectlyOverlap(tile1: MahjongTile, tile2: MahjongTile): boolean {
+    if (!tile1.footprint || !tile2.footprint) {
+      // Fallback to position-based overlap if footprints not available
+      const overlapX = Math.abs(tile1.x - tile2.x) < 60; // Standard tile width
+      const overlapY = Math.abs(tile1.y - tile2.y) < 60; // Standard tile height
+      return overlapX && overlapY;
+    }
+
+    // Check for any overlap (even partial)
+    return !(
+      tile1.footprint.maxX <= tile2.footprint.minX ||
+      tile1.footprint.minX >= tile2.footprint.maxX ||
+      tile1.footprint.maxY <= tile2.footprint.minY ||
+      tile1.footprint.minY >= tile2.footprint.maxY
+    );
+  }
+
+  /**
+   * Check if otherTile blocks tile's leftward movement (pixel-perfect)
+   */
+  static tileBlocksLeftMovement(tile: MahjongTile, otherTile: MahjongTile): boolean {
+    if (!tile.footprint || !otherTile.footprint) {
+      // Fallback: check if other tile is immediately to the left and vertically aligned
+      const isToTheLeft = otherTile.x < tile.x;
+      const isTouching = Math.abs(otherTile.x + 60 - tile.x) < 5; // Within 5px of touching
+      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60; // Vertical overlap
+      return isToTheLeft && isTouching && verticalOverlap;
+    }
+
+    // Check if otherTile is directly adjacent to the left and prevents sliding
+    const isDirectlyLeft = Math.abs(otherTile.footprint.maxX - tile.footprint.minX) < 5;
+    const verticalOverlap = !(
+      otherTile.footprint.maxY <= tile.footprint.minY ||
+      otherTile.footprint.minY >= tile.footprint.maxY
     );
 
-    const hasRightTile = board.tiles.some(otherTile => 
-      !otherTile.isMatched &&
-      otherTile.layer === tile.layer &&
-      otherTile.row === tile.row &&
-      otherTile.col === tile.col + 1
+    return isDirectlyLeft && verticalOverlap;
+  }
+
+  /**
+   * Check if otherTile blocks tile's rightward movement (pixel-perfect)
+   */
+  static tileBlocksRightMovement(tile: MahjongTile, otherTile: MahjongTile): boolean {
+    if (!tile.footprint || !otherTile.footprint) {
+      // Fallback: check if other tile is immediately to the right and vertically aligned
+      const isToTheRight = otherTile.x > tile.x;
+      const isTouching = Math.abs(tile.x + 60 - otherTile.x) < 5; // Within 5px of touching
+      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60; // Vertical overlap
+      return isToTheRight && isTouching && verticalOverlap;
+    }
+
+    // Check if otherTile is directly adjacent to the right and prevents sliding
+    const isDirectlyRight = Math.abs(tile.footprint.maxX - otherTile.footprint.minX) < 5;
+    const verticalOverlap = !(
+      otherTile.footprint.maxY <= tile.footprint.minY ||
+      otherTile.footprint.minY >= tile.footprint.maxY
     );
 
-    // At least one side must be free
-    return !hasLeftTile || !hasRightTile;
+    return isDirectlyRight && verticalOverlap;
   }
 
   /**

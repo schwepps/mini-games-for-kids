@@ -5,17 +5,39 @@ export type MahjongDifficulty = 'easy' | 'medium' | 'hard';
 export interface MahjongTile {
   id: string;
   character: ICharacter;
+  
+  // Enhanced 3D positioning system
   layer: number;
   row: number;
   col: number;
+  x: number; // Absolute position in pixels
+  y: number; // Absolute position in pixels
+  z: number; // 3D depth for layering
+  
+  // State management
   isSelectable: boolean;
   isSelected: boolean;
   isMatched: boolean;
-  isCovered: boolean; // True if tile is covered by another tile above
-  coveredBy: string[]; // IDs of tiles covering this tile
-  x: number; // Position in pixels
-  y: number; // Position in pixels
-  z: number; // Layer depth
+  
+  // Enhanced coverage and support system
+  isCovered: boolean; // True if tile has tiles resting on top
+  coveredBy: string[]; // IDs of tiles directly covering this tile
+  supportedBy: string[]; // IDs of tiles this tile rests on (supports from below)
+  supporting: string[]; // IDs of tiles this tile supports (tiles resting on this tile)
+  
+  // Adjacency and selectability system for authentic mahjong rules
+  leftBlocked: boolean; // True if cannot slide left
+  rightBlocked: boolean; // True if cannot slide right
+  leftBlockedBy: string[]; // IDs of tiles blocking left movement
+  rightBlockedBy: string[]; // IDs of tiles blocking right movement
+  
+  // Tile footprint for overlap detection
+  footprint: {
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
+  };
 }
 
 export interface MahjongBoard {
@@ -34,9 +56,14 @@ export interface MahjongLayout {
 }
 
 export interface TilePosition {
-  row: number;
-  col: number;
-  layer: number;
+  // Absolute pixel positioning for authentic mahjong structure
+  x: number; // Absolute X coordinate in pixels
+  y: number; // Absolute Y coordinate in pixels
+  layer: number; // Z-layer (0 = bottom layer)
+  
+  // Support relationships for authentic 3D structure
+  supportedBy?: string[]; // IDs of tiles this tile rests on
+  id?: string; // Optional tile identifier for support relationships
 }
 
 export interface MahjongGameState {
@@ -72,8 +99,7 @@ export interface MahjongDifficultyConfig {
   difficulty: MahjongDifficulty;
   displayName: string;
   description: string;
-  layoutName: string; // @deprecated - kept for legacy compatibility
-  pairCount: number; // New mobile-first approach
+  pairCount: number; // Tiles will be created from authentic layouts
   characterCount: number;
   hintsAvailable: number;
   tileSize: {
@@ -87,9 +113,8 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'easy',
     displayName: 'Facile',
-    description: '12 paires - Parfait pour débuter !',
-    layoutName: 'turtle-small', // @deprecated
-    pairCount: 12, // 24 tiles total - manageable for beginners
+    description: '12 paires - Formation Tortue Authentique',
+    pairCount: 12, // Uses authentic turtle formation (24 tiles)
     characterCount: 4, // Fewer character types = easier matching
     hintsAvailable: 5,
     tileSize: {
@@ -101,9 +126,8 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'medium',
     displayName: 'Moyen',
-    description: '18 paires - Un bon défi !',
-    layoutName: 'turtle-medium', // @deprecated
-    pairCount: 18, // 36 tiles total - balanced challenge
+    description: '18 paires - Formation Dragon Authentique',
+    pairCount: 18, // Uses authentic dragon formation (36 tiles)
     characterCount: 6, // Moderate character variety
     hintsAvailable: 3,
     tileSize: {
@@ -115,9 +139,8 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'hard',
     displayName: 'Difficile',
-    description: '24 paires - Pour les experts !',
-    layoutName: 'turtle-large', // @deprecated
-    pairCount: 24, // 48 tiles total - expert level
+    description: '24 paires - Formation Pyramide Authentique',
+    pairCount: 24, // Uses authentic pyramid formation (48 tiles)
     characterCount: 8, // High character variety = harder matching
     hintsAvailable: 1,
     tileSize: {

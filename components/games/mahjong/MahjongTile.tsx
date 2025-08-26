@@ -117,17 +117,30 @@ export default function MahjongTile({
           `}
           style={{
             background: tile.isSelectable 
-              ? 'linear-gradient(145deg, #ffffff, #fef7f7)'
-              : 'linear-gradient(145deg, #f0f0f0, #e8e8e8)',
-            boxShadow: `
-              0 ${(tile.layer + 1) * 6}px ${(tile.layer + 1) * 12}px rgba(0, 0, 0, 0.3),
-              0 ${(tile.layer + 1) * 3}px ${(tile.layer + 1) * 6}px rgba(0, 0, 0, 0.2),
-              0 ${tile.layer * 2}px ${tile.layer * 4}px rgba(0, 0, 0, 0.15),
-              inset 0 2px 0 rgba(255, 255, 255, 0.7),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.15)
-            `,
-            zIndex: tile.layer * 100 + tile.row * 10 + tile.col,
-            border: '2px solid rgba(255, 255, 255, 0.8)',
+              ? 'linear-gradient(145deg, #ffffff 0%, #fefefe 30%, #f9fafb 70%, #f3f4f6 100%)'
+              : tile.isCovered
+                ? 'linear-gradient(145deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%)'
+                : 'linear-gradient(145deg, #f3f4f6 0%, #e5e7eb 50%, #d1d5db 100%)',
+            boxShadow: tile.isSelectable
+              ? `
+                0 ${(tile.layer + 1) * 8}px ${(tile.layer + 1) * 16}px rgba(0, 0, 0, 0.25),
+                0 ${(tile.layer + 1) * 4}px ${(tile.layer + 1) * 8}px rgba(0, 0, 0, 0.15),
+                0 ${tile.layer * 3}px ${tile.layer * 6}px rgba(0, 0, 0, 0.1),
+                inset 0 3px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.5)
+              `
+              : `
+                0 ${(tile.layer + 1) * 4}px ${(tile.layer + 1) * 8}px rgba(0, 0, 0, 0.3),
+                0 ${(tile.layer + 1) * 2}px ${(tile.layer + 1) * 4}px rgba(0, 0, 0, 0.2),
+                0 ${tile.layer * 2}px ${tile.layer * 4}px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2)
+              `,
+            zIndex: tile.layer * 1000 + tile.row * 100 + tile.col, // Enhanced z-indexing for better layering
+            border: tile.isSelectable 
+              ? '2px solid rgba(255, 255, 255, 0.9)'
+              : '1px solid rgba(255, 255, 255, 0.5)',
           }}
         >
           {/* Character Image */}
@@ -234,6 +247,28 @@ export default function MahjongTile({
                 🔒
               </div>
             </div>
+          )}
+
+          {/* Authentic Mahjong Blocking Indicators */}
+          {!tile.isSelectable && !tile.isCovered && (
+            <>
+              {/* Left/Right blocking indicators for authentic mahjong "slide out" rules */}
+              {tile.leftBlocked && !tile.rightBlocked && (
+                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-orange-400 text-xs opacity-70">
+                  ←❌
+                </div>
+              )}
+              {tile.rightBlocked && !tile.leftBlocked && (
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 text-orange-400 text-xs opacity-70">
+                  ❌→
+                </div>
+              )}
+              {tile.leftBlocked && tile.rightBlocked && (
+                <div className="absolute inset-0 flex items-center justify-center text-orange-500 text-xs opacity-80">
+                  ←❌→
+                </div>
+              )}
+            </>
           )}
 
           {/* 3D Edge Effect */}

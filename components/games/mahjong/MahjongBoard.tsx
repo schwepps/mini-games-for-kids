@@ -252,29 +252,35 @@ export default function MahjongBoard({
             maxWidth: '100%', // Allow full width utilization
             maxHeight: '100%', // Allow full height utilization
             transformStyle: 'preserve-3d',
-            perspective: useAdaptiveLayout ? '1200px' : '1500px',
-            perspectiveOrigin: 'center 35%',
+            perspective: useAdaptiveLayout ? '1400px' : '1800px', // Enhanced perspective for better 3D depth
+            perspectiveOrigin: 'center 40%', // Adjusted for better viewing angle
             // Apply proportional scaling when content exceeds container
-            transform: scale < 1 ? `scale(${scale})` : undefined,
+            transform: scale < 1 ? `scale(${scale}) rotateX(2deg)` : 'rotateX(2deg)', // Slight rotation for 3D effect
             transformOrigin: 'center center'
           }}
         >
-        {/* Background Board Layer - Positioned to center under normalized tile formation */}
+        {/* Enhanced Background Board Layer for Authentic Mahjong */}
         <div
           id='background_layer'
-          className="absolute rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 shadow-2xl border border-slate-200/50"
+          className="absolute rounded-3xl border border-slate-200/30"
           style={{
-            // Position relative to container origin with proper padding (tiles are normalized to 0,0)
-            left: `${-Math.max(12, Math.round(tileSize * 0.2))}px`,
-            top: `${-Math.max(12, Math.round(tileSize * 0.2))}px`,
-            width: `${tileBounds.width + 2 * Math.max(12, Math.round(tileSize * 0.2))}px`,
-            height: `${tileBounds.height + 2 * Math.max(12, Math.round(tileSize * 0.2))}px`,
-            transform: 'translateZ(-20px) rotateX(1deg)',
+            // Position relative to container origin with enhanced padding for authentic formations
+            left: `${-Math.max(16, Math.round(tileSize * 0.25))}px`,
+            top: `${-Math.max(16, Math.round(tileSize * 0.25))}px`,
+            width: `${tileBounds.width + 2 * Math.max(16, Math.round(tileSize * 0.25))}px`,
+            height: `${tileBounds.height + 2 * Math.max(16, Math.round(tileSize * 0.25))}px`,
+            transform: 'translateZ(-25px) rotateX(3deg)', // Enhanced depth and angle
             background: `
-              radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.7)),
-              linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)
+              radial-gradient(ellipse at center top, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.8) 50%, rgba(241, 245, 249, 0.6)),
+              linear-gradient(145deg, #fafafa 0%, #f1f5f9 30%, #e2e8f0 70%, #cbd5e1 100%)
             `,
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1)'
+            boxShadow: `
+              0 25px 50px rgba(0, 0, 0, 0.2),
+              0 15px 30px rgba(0, 0, 0, 0.15),
+              0 5px 15px rgba(0, 0, 0, 0.1),
+              inset 0 2px 4px rgba(255, 255, 255, 0.3),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.1)
+            `
           }}
         />
 

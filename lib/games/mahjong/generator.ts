@@ -23,7 +23,8 @@ import { MahjongSolvabilityValidator } from './MahjongSolvabilityValidator';
 export class MahjongGenerator {
   
   /**
-   * Generate a solvable MahJong board (legacy method)
+   * Generate authentic MahJong board using predefined layouts
+   * Uses traditional formations (Turtle, Dragon, Pyramid) with proper mahjong rules
    */
   static generateBoard(
     characters: ICharacter[], 
@@ -40,7 +41,8 @@ export class MahjongGenerator {
   }
 
   /**
-   * Generate an adaptive MahJong board
+   * Generate adaptive MahJong board with scaled layouts
+   * @deprecated Use generateBoard() for authentic mahjong gameplay
    */
   static generateAdaptiveBoard(
     characters: ICharacter[], 
@@ -71,8 +73,8 @@ export class MahjongGenerator {
     MahjongSolvabilityValidator.updateTileCoverage(board);
   }
 
-  static isTileSelectable(tile: MahjongTile, board: MahjongBoard): boolean {
-    return MahjongSolvabilityValidator.isTileSelectable(tile, board);
+  static isTileSelectable(tile: MahjongTile): boolean {
+    return MahjongSolvabilityValidator.isTileSelectable(tile);
   }
 
   static canMatchTiles(tile1: MahjongTile, tile2: MahjongTile): boolean {

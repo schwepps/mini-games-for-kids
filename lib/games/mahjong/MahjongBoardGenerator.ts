@@ -81,7 +81,7 @@ export class MahjongBoardGenerator {
   }
 
   /**
-   * Create tiles from layout and characters
+   * Create tiles from pixel-perfect layout positions
    */
   static createTiles(
     layout: MahjongLayout, 
@@ -92,7 +92,7 @@ export class MahjongBoardGenerator {
     const characterPairs = this.generateCharacterPairs(characters, layout.positions.length);
     let characterIndex = 0;
 
-    // Create tiles from layout positions
+    // Create tiles from absolute pixel positions
     for (let i = 0; i < layout.positions.length; i++) {
       const position = layout.positions[i];
       if (!position) continue;
@@ -100,22 +100,37 @@ export class MahjongBoardGenerator {
       const character = characterPairs[characterIndex];
       if (!character) continue;
 
-      const { x, y } = this.calculateTilePixelPosition(position, tileSize);
+      // Use direct pixel coordinates from layout (scaled by tileSize/60)
+      const scaleFactor = tileSize / 60; // Base tile size is 60px
+      const scaledX = position.x * scaleFactor;
+      const scaledY = position.y * scaleFactor;
 
       const tile: MahjongTile = {
-        id: `tile-${i}`,
+        id: position.id || `tile-${i}`,
         character,
         layer: position.layer,
-        row: position.row,
-        col: position.col,
+        row: 0, // Legacy compatibility - not used in pixel positioning
+        col: 0, // Legacy compatibility - not used in pixel positioning
         isSelectable: false,
         isSelected: false,
         isMatched: false,
         isCovered: false,
         coveredBy: [],
-        x,
-        y,
-        z: position.layer * 4 // 4px per layer for 3D effect
+        supportedBy: position.supportedBy || [],
+        supporting: [],
+        leftBlocked: false,
+        rightBlocked: false,
+        leftBlockedBy: [],
+        rightBlockedBy: [],
+        x: scaledX,
+        y: scaledY,
+        z: position.layer * 6, // 6px per layer for enhanced 3D effect
+        footprint: {
+          minX: scaledX,
+          maxX: scaledX + tileSize,
+          minY: scaledY,
+          maxY: scaledY + tileSize
+        }
       };
 
       tiles.push(tile);
@@ -165,30 +180,54 @@ export class MahjongBoardGenerator {
   }
 
   /**
-   * Calculate pixel position for a tile based on grid position and size
+   * Calculate board dimensions from pixel positions
    */
-  private static calculateTilePixelPosition(
-    position: { row: number; col: number; layer: number },
+  private static calculateBoardDimensions(
+    positions: { x: number; y: number; layer: number }[],
     tileSize: number
-  ): { x: number; y: number } {
-    const spacing = MAHJONG_LAYOUT.TILE_SPACING;
-    const x = position.col * (tileSize + spacing);
-    const y = position.row * (tileSize + spacing);
+  ): { width: number; height: number; maxLayer: number } {
+    if (positions.length === 0) {
+      return { width: 0, height: 0, maxLayer: 0 };
+    }
+
+    const scaleFactor = tileSize / 60; // Base tile size is 60px
+    let maxX = 0;
+    let maxY = 0;
+    let maxLayer = 0;
+
+    positions.forEach(pos => {
+      const scaledX = pos.x * scaleFactor;
+      const scaledY = pos.y * scaleFactor;
+      
+      maxX = Math.max(maxX, scaledX + tileSize);
+      maxY = Math.max(maxY, scaledY + tileSize);
+      maxLayer = Math.max(maxLayer, pos.layer);
+    });
+
+    // Add layer offset for 3D effect
+    const layerOffset = maxLayer * 6;
     
-    return { x, y };
+    return {
+      width: maxX + layerOffset,
+      height: maxY + layerOffset,
+      maxLayer
+    };
   }
 
   /**
-   * Calculate board dimensions
+   * Calculate board width using pixel-perfect dimensions
    */
   private static calculateBoardWidth(layout: MahjongLayout, tileSize: number): number {
-    const maxCol = Math.max(...layout.positions.map(p => p.col));
-    return (maxCol + 1) * (tileSize + 2) + tileSize;
+    const dimensions = this.calculateBoardDimensions(layout.positions, tileSize);
+    return dimensions.width;
   }
 
+  /**
+   * Calculate board height using pixel-perfect dimensions
+   */
   private static calculateBoardHeight(layout: MahjongLayout, tileSize: number): number {
-    const maxRow = Math.max(...layout.positions.map(p => p.row));
-    return (maxRow + 1) * (tileSize + 2) + tileSize;
+    const dimensions = this.calculateBoardDimensions(layout.positions, tileSize);
+    return dimensions.height;
   }
 
   /**
@@ -221,7 +260,9 @@ export class MahjongBoardGenerator {
   private static estimateTileSizeFromBoard(board: MahjongBoard): number {
     if (board.tiles.length >= 2) {
       const tile1 = board.tiles[0];
-      const tile2 = board.tiles.find(t => t.row === tile1?.row && t.col !== tile1?.col) || board.tiles[1];
+      const tile2 = board.tiles.find(t => 
+        Math.abs(t.x - tile1!.x) > 0 && Math.abs(t.y - tile1!.y) < 30
+      ) || board.tiles[1];
       
       if (tile1 && tile2 && tile1.x !== undefined && tile2.x !== undefined) {
         const estimatedSize = Math.abs(tile2.x - tile1.x);
@@ -365,55 +406,57 @@ export class MahjongBoardGenerator {
       return layout;
     }
 
-    // Find the bounds of the original layout
-    let minRow = Infinity, maxRow = -Infinity;
-    let minCol = Infinity, maxCol = -Infinity;
+    // Find the bounds of the original layout using pixel coordinates
+    let minX = Infinity, maxX = -Infinity;
+    let minY = Infinity, maxY = -Infinity;
     
     layout.positions.forEach(pos => {
-      minRow = Math.min(minRow, pos.row);
-      maxRow = Math.max(maxRow, pos.row);
-      minCol = Math.min(minCol, pos.col);
-      maxCol = Math.max(maxCol, pos.col);
+      minX = Math.min(minX, pos.x);
+      maxX = Math.max(maxX, pos.x);
+      minY = Math.min(minY, pos.y);
+      maxY = Math.max(maxY, pos.y);
     });
 
-    // Calculate original layout dimensions
-    const originalRows = maxRow - minRow + 1;
-    const originalCols = maxCol - minCol + 1;
+    // Calculate original layout dimensions in pixels
+    const originalWidth = maxX - minX + 60; // Add tile width
+    const originalHeight = maxY - minY + 60; // Add tile height
     const maxLayer = Math.max(...layout.positions.map(p => p.layer));
     
     // Calculate space needed including layer offsets
-    const spacing = MAHJONG_LAYOUT.TILE_SPACING;
-    const layerOffset = maxLayer * 10;
+    const layerOffset = maxLayer * 6; // 6px per layer offset
+    const scaleFactor = tileSize / 60; // Scale based on tile size
     
-    const requiredWidth = (originalCols * (tileSize + spacing)) + layerOffset;
-    const requiredHeight = (originalRows * (tileSize + spacing)) + layerOffset;
+    const requiredWidth = (originalWidth * scaleFactor) + layerOffset;
+    const requiredHeight = (originalHeight * scaleFactor) + layerOffset;
     
     // Check if scaling is needed
     const availableWidth = containerSize.width - 32; // padding
     const availableHeight = containerSize.height - 100; // UI elements
     
-    let scaleFactor = 1;
+    let layoutScaleFactor = 1;
     
     if (requiredWidth > availableWidth || requiredHeight > availableHeight) {
       // Calculate scale factor to fit container
       const widthScale = availableWidth / requiredWidth;
       const heightScale = availableHeight / requiredHeight;
-      scaleFactor = Math.min(widthScale, heightScale, 1); // Never scale up, only down
+      layoutScaleFactor = Math.min(widthScale, heightScale, 1); // Never scale up, only down
       
       // Ensure minimum playable size
-      scaleFactor = Math.max(scaleFactor, 0.5);
+      layoutScaleFactor = Math.max(layoutScaleFactor, 0.5);
     }
 
     // If no scaling needed, return original
-    if (scaleFactor === 1) {
+    if (layoutScaleFactor === 1) {
       return layout;
     }
 
-    // Scale the positions
+    // Scale the positions using pixel coordinates
     const scaledPositions = layout.positions.map(pos => ({
-      row: Math.round((pos.row - minRow) * scaleFactor) + minRow,
-      col: Math.round((pos.col - minCol) * scaleFactor) + minCol,
-      layer: pos.layer // Don't scale layers
+      x: Math.round((pos.x - minX) * layoutScaleFactor) + minX,
+      y: Math.round((pos.y - minY) * layoutScaleFactor) + minY,
+      layer: pos.layer, // Don't scale layers
+      supportedBy: pos.supportedBy,
+      id: pos.id
     }));
 
     // Return scaled layout

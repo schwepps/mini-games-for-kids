@@ -56,20 +56,12 @@ export function useMahjongGameLogic(dispatch: (action: any) => void) {
       const shuffledCharacters = [...profile.characters].sort(() => Math.random() - 0.5);
       const gameCharacters = shuffledCharacters.slice(0, difficultyConfig.characterCount);
       
-      // Generate board - adaptive if container size available
-      let board;
-      if (containerSize && containerSize.width > 0 && containerSize.height > 0) {
-        board = MahjongGenerator.generateAdaptiveBoard(
-          gameCharacters, 
-          difficulty, 
-          containerSize,
-          difficultyConfig.pairCount
-        );
-      } else {
-        // Fallback to legacy method
-        const tileSize = MahjongGenerator.getResponsiveTileSize(screenWidth || 768, difficulty);
-        board = MahjongGenerator.generateBoard(gameCharacters, difficulty, tileSize);
-      }
+      // Generate board - ALWAYS use authentic predefined layouts
+      const tileSize = MahjongGenerator.getResponsiveTileSize(
+        containerSize?.width || screenWidth || 768, 
+        difficulty
+      );
+      const board = MahjongGenerator.generateBoard(gameCharacters, difficulty, tileSize);
       
       dispatch({ type: 'START_GAME', board });
       

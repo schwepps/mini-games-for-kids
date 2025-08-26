@@ -177,7 +177,7 @@ export class PatternRegistry {
       
       // Basic validation: all positions should be valid
       return positions.every(pos => 
-        pos.row >= 0 && pos.col >= 0 && pos.layer >= 0
+        pos.x >= 0 && pos.y >= 0 && pos.layer >= 0
       );
       
     } catch (error) {

@@ -110,12 +110,13 @@ export abstract class LayoutPattern {
 }
 
 /**
- * Helper function to create position objects
+ * Helper function to create position objects (deprecated)
+ * @deprecated Use direct pixel coordinates instead
  * @param row Row position in grid
  * @param col Column position in grid  
  * @param layer Layer/height position
- * @returns TilePosition object
+ * @returns TilePosition object with pixel coordinates
  */
 export function createPosition(row: number, col: number, layer: number): TilePosition {
-  return { row, col, layer };
+  return { x: col * 60, y: row * 60, layer };
 }

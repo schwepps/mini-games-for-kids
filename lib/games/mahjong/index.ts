@@ -21,8 +21,13 @@ export { AdaptiveLayoutGenerator } from './adaptiveLayoutGenerator';
 export type { AdaptiveLayoutConfig } from './adaptiveLayoutGenerator';
 
 // Static layouts and patterns
-export { MAHJONG_LAYOUTS } from './layouts';
-export * from './patterns/index';
+export { 
+  TURTLE_FORMATION, 
+  DRAGON_FORMATION, 
+  PYRAMID_FORMATION,
+  getRandomLayoutByDifficulty,
+  getAllLayouts 
+} from './layouts';
 
 // Types (re-export for convenience)
 export type { LayerConfiguration } from './DeviceLayoutOptimizer';
