@@ -78,7 +78,7 @@ export default function MahjongSetup({
                     hoverClass: 'hover:from-green-300 hover:to-emerald-400',
                     borderClass: 'border-green-400',
                     title: 'FACILE',
-                    subtitle: 'Parfait pour commencer !',
+                    subtitle: '4 personnages différents',
                     icon: '😊'
                   },
                   medium: {
@@ -87,7 +87,7 @@ export default function MahjongSetup({
                     hoverClass: 'hover:from-yellow-300 hover:to-orange-400',
                     borderClass: 'border-yellow-400',
                     title: 'MOYEN',
-                    subtitle: 'Plus de défi !',
+                    subtitle: '8 personnages différents',
                     icon: '🤔'
                   },
                   hard: {
@@ -96,7 +96,7 @@ export default function MahjongSetup({
                     hoverClass: 'hover:from-red-400 hover:to-pink-500',
                     borderClass: 'border-red-400',
                     title: 'DIFFICILE',
-                    subtitle: 'Pour les champions !',
+                    subtitle: '12 personnages différents',
                     icon: '😎'
                   }
                 };

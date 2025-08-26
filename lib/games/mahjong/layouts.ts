@@ -6,108 +6,142 @@ import { MahjongLayout, TilePosition } from '@/types/mahjong';
  * Standard tile size: 60px x 60px (will be scaled as needed)
  */
 
-// AUTHENTIC TURTLE FORMATION - Easy (24 tiles, 12 pairs)
-// Classic mahjong turtle with realistic 3D stacking
+// ENHANCED TURTLE FORMATION - Easy (48 tiles, 24 pairs)
+// Expanded turtle formation maintaining square shape with strategic layering
 const turtleFormationPositions: TilePosition[] = [
-  // === LAYER 0 (BASE) ===
-  // Turtle shell base - outer perimeter
-  { x: 60, y: 0, layer: 0, id: 't1' },   // Top row
-  { x: 120, y: 0, layer: 0, id: 't2' },
-  { x: 180, y: 0, layer: 0, id: 't3' },
-  { x: 240, y: 0, layer: 0, id: 't4' },
+  // === LAYER 0 (BASE) - 24 tiles forming turtle shell perimeter ===
+  // Extended top row
+  { x: 30, y: 0, layer: 0, id: 't1' },
+  { x: 90, y: 0, layer: 0, id: 't2' },
+  { x: 150, y: 0, layer: 0, id: 't3' },
+  { x: 210, y: 0, layer: 0, id: 't4' },
+  { x: 270, y: 0, layer: 0, id: 't5' },
+  { x: 330, y: 0, layer: 0, id: 't6' },
   
-  { x: 0, y: 60, layer: 0, id: 't5' },   // Left side
-  { x: 300, y: 60, layer: 0, id: 't6' }, // Right side
+  // Extended sides
+  { x: 0, y: 30, layer: 0, id: 't7' },   // Left outer
+  { x: 360, y: 30, layer: 0, id: 't8' }, // Right outer
+  { x: 0, y: 90, layer: 0, id: 't9' },
+  { x: 360, y: 90, layer: 0, id: 't10' },
+  { x: 0, y: 150, layer: 0, id: 't11' },
+  { x: 360, y: 150, layer: 0, id: 't12' },
+  { x: 0, y: 210, layer: 0, id: 't13' },
+  { x: 360, y: 210, layer: 0, id: 't14' },
   
-  { x: 0, y: 120, layer: 0, id: 't7' },  // Left side
-  { x: 300, y: 120, layer: 0, id: 't8' }, // Right side
+  // Extended bottom row
+  { x: 30, y: 240, layer: 0, id: 't15' },
+  { x: 90, y: 240, layer: 0, id: 't16' },
+  { x: 150, y: 240, layer: 0, id: 't17' },
+  { x: 210, y: 240, layer: 0, id: 't18' },
+  { x: 270, y: 240, layer: 0, id: 't19' },
+  { x: 330, y: 240, layer: 0, id: 't20' },
   
-  { x: 60, y: 180, layer: 0, id: 't9' },  // Bottom row
-  { x: 120, y: 180, layer: 0, id: 't10' },
-  { x: 180, y: 180, layer: 0, id: 't11' },
-  { x: 240, y: 180, layer: 0, id: 't12' },
+  // Turtle head and tail extensions
+  { x: 180, y: -60, layer: 0, id: 't21' }, // Head
+  { x: 180, y: 300, layer: 0, id: 't22' }, // Tail
   
-  // Turtle head and tail
-  { x: 150, y: -60, layer: 0, id: 't13' }, // Head
-  { x: 150, y: 240, layer: 0, id: 't14' }, // Tail
+  // Inner shell ring
+  { x: 60, y: 60, layer: 0, id: 't23' },
+  { x: 300, y: 60, layer: 0, id: 't24' },
   
-  // === LAYER 1 (MIDDLE) ===
-  // Positioned at intersections of base tiles
-  { x: 90, y: 30, layer: 1, id: 't15', supportedBy: ['t1', 't5'] },
-  { x: 150, y: 30, layer: 1, id: 't16', supportedBy: ['t2', 't3'] },
-  { x: 210, y: 30, layer: 1, id: 't17', supportedBy: ['t3', 't6'] },
+  // === LAYER 1 (MIDDLE) - 16 tiles ===
+  { x: 60, y: 30, layer: 1, id: 't25', supportedBy: ['t1', 't2'] },
+  { x: 120, y: 30, layer: 1, id: 't26', supportedBy: ['t2', 't3'] },
+  { x: 180, y: 30, layer: 1, id: 't27', supportedBy: ['t3', 't4'] },
+  { x: 240, y: 30, layer: 1, id: 't28', supportedBy: ['t4', 't5'] },
+  { x: 300, y: 30, layer: 1, id: 't29', supportedBy: ['t5', 't6'] },
   
-  { x: 30, y: 90, layer: 1, id: 't18', supportedBy: ['t5', 't7'] },
-  { x: 270, y: 90, layer: 1, id: 't19', supportedBy: ['t6', 't8'] },
+  { x: 30, y: 60, layer: 1, id: 't30', supportedBy: ['t7', 't23'] },
+  { x: 330, y: 60, layer: 1, id: 't31', supportedBy: ['t8', 't24'] },
   
-  { x: 90, y: 150, layer: 1, id: 't20', supportedBy: ['t7', 't9'] },
-  { x: 150, y: 150, layer: 1, id: 't21', supportedBy: ['t10', 't11'] },
-  { x: 210, y: 150, layer: 1, id: 't22', supportedBy: ['t11', 't8'] },
+  { x: 30, y: 120, layer: 1, id: 't32', supportedBy: ['t9', 't11'] },
+  { x: 330, y: 120, layer: 1, id: 't33', supportedBy: ['t10', 't12'] },
   
-  // === LAYER 2 (TOP) ===
-  // Final peak tiles
-  { x: 120, y: 60, layer: 2, id: 't23', supportedBy: ['t15', 't16'] },
-  { x: 180, y: 120, layer: 2, id: 't24', supportedBy: ['t21', 't22'] },
+  { x: 30, y: 180, layer: 1, id: 't34', supportedBy: ['t11', 't13'] },
+  { x: 330, y: 180, layer: 1, id: 't35', supportedBy: ['t12', 't14'] },
+  
+  { x: 60, y: 210, layer: 1, id: 't36', supportedBy: ['t15', 't16'] },
+  { x: 120, y: 210, layer: 1, id: 't37', supportedBy: ['t16', 't17'] },
+  { x: 180, y: 210, layer: 1, id: 't38', supportedBy: ['t17', 't18'] },
+  { x: 240, y: 210, layer: 1, id: 't39', supportedBy: ['t18', 't19'] },
+  { x: 300, y: 210, layer: 1, id: 't40', supportedBy: ['t19', 't20'] },
+  
+  // === LAYER 2 (TOP) - 8 tiles ===
+  { x: 90, y: 60, layer: 2, id: 't41', supportedBy: ['t25', 't26'] },
+  { x: 150, y: 60, layer: 2, id: 't42', supportedBy: ['t26', 't27'] },
+  { x: 210, y: 60, layer: 2, id: 't43', supportedBy: ['t27', 't28'] },
+  { x: 270, y: 60, layer: 2, id: 't44', supportedBy: ['t28', 't29'] },
+  
+  { x: 90, y: 180, layer: 2, id: 't45', supportedBy: ['t36', 't37'] },
+  { x: 150, y: 180, layer: 2, id: 't46', supportedBy: ['t37', 't38'] },
+  { x: 210, y: 180, layer: 2, id: 't47', supportedBy: ['t38', 't39'] },
+  { x: 270, y: 180, layer: 2, id: 't48', supportedBy: ['t39', 't40'] },
 ];
 
-// AUTHENTIC DRAGON FORMATION - Medium (36 tiles, 18 pairs)
-// Serpentine winding structure with flowing 3D layers
-const dragonFormationPositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - Dragon body spine ===
-  { x: 0, y: 120, layer: 0, id: 'd1' },     // Head
-  { x: 60, y: 120, layer: 0, id: 'd2' },
-  { x: 120, y: 120, layer: 0, id: 'd3' },
-  { x: 180, y: 120, layer: 0, id: 'd4' },
-  { x: 240, y: 120, layer: 0, id: 'd5' },   // Center body
+// TOWER FORMATION - Medium (48 tiles, 24 pairs)
+// Square-based pagoda tower with stepped layers
+const towerFormationPositions: TilePosition[] = [
+  // === LAYER 0 (BASE) - 20 tiles forming square foundation ===
+  // Outer square perimeter
+  { x: 0, y: 0, layer: 0, id: 'tw1' },
+  { x: 60, y: 0, layer: 0, id: 'tw2' },
+  { x: 120, y: 0, layer: 0, id: 'tw3' },
+  { x: 180, y: 0, layer: 0, id: 'tw4' },
+  { x: 240, y: 0, layer: 0, id: 'tw5' },
+  { x: 300, y: 0, layer: 0, id: 'tw6' },
   
-  // First curve upward
-  { x: 300, y: 60, layer: 0, id: 'd6' },
-  { x: 360, y: 60, layer: 0, id: 'd7' },
-  { x: 420, y: 60, layer: 0, id: 'd8' },
+  { x: 0, y: 60, layer: 0, id: 'tw7' },
+  { x: 300, y: 60, layer: 0, id: 'tw8' },
+  { x: 0, y: 120, layer: 0, id: 'tw9' },
+  { x: 300, y: 120, layer: 0, id: 'tw10' },
+  { x: 0, y: 180, layer: 0, id: 'tw11' },
+  { x: 300, y: 180, layer: 0, id: 'tw12' },
+  { x: 0, y: 240, layer: 0, id: 'tw13' },
+  { x: 300, y: 240, layer: 0, id: 'tw14' },
   
-  // Curve back down
-  { x: 480, y: 120, layer: 0, id: 'd9' },
-  { x: 540, y: 120, layer: 0, id: 'd10' },
-  { x: 600, y: 120, layer: 0, id: 'd11' },
+  { x: 0, y: 300, layer: 0, id: 'tw15' },
+  { x: 60, y: 300, layer: 0, id: 'tw16' },
+  { x: 120, y: 300, layer: 0, id: 'tw17' },
+  { x: 180, y: 300, layer: 0, id: 'tw18' },
+  { x: 240, y: 300, layer: 0, id: 'tw19' },
+  { x: 300, y: 300, layer: 0, id: 'tw20' },
   
-  // Second curve downward
-  { x: 660, y: 180, layer: 0, id: 'd12' },
-  { x: 720, y: 180, layer: 0, id: 'd13' },
-  { x: 780, y: 180, layer: 0, id: 'd14' },  // Tail
+  // === LAYER 1 (SECOND) - 16 tiles ===
+  { x: 30, y: 30, layer: 1, id: 'tw21', supportedBy: ['tw1', 'tw2'] },
+  { x: 90, y: 30, layer: 1, id: 'tw22', supportedBy: ['tw2', 'tw3'] },
+  { x: 150, y: 30, layer: 1, id: 'tw23', supportedBy: ['tw3', 'tw4'] },
+  { x: 210, y: 30, layer: 1, id: 'tw24', supportedBy: ['tw4', 'tw5'] },
+  { x: 270, y: 30, layer: 1, id: 'tw25', supportedBy: ['tw5', 'tw6'] },
   
-  // Dragon wings (extending sides)
-  { x: 180, y: 60, layer: 0, id: 'd15' },
-  { x: 300, y: 180, layer: 0, id: 'd16' },
-  { x: 480, y: 60, layer: 0, id: 'd17' },
-  { x: 600, y: 180, layer: 0, id: 'd18' },
+  { x: 30, y: 90, layer: 1, id: 'tw26', supportedBy: ['tw7', 'tw21'] },
+  { x: 270, y: 90, layer: 1, id: 'tw27', supportedBy: ['tw8', 'tw25'] },
+  { x: 30, y: 150, layer: 1, id: 'tw28', supportedBy: ['tw9', 'tw26'] },
+  { x: 270, y: 150, layer: 1, id: 'tw29', supportedBy: ['tw10', 'tw27'] },
+  { x: 30, y: 210, layer: 1, id: 'tw30', supportedBy: ['tw11', 'tw28'] },
+  { x: 270, y: 210, layer: 1, id: 'tw31', supportedBy: ['tw12', 'tw29'] },
   
-  // === LAYER 1 (MIDDLE) - Dragon scales ===
-  { x: 90, y: 120, layer: 1, id: 'd19', supportedBy: ['d2', 'd3'] },
-  { x: 210, y: 90, layer: 1, id: 'd20', supportedBy: ['d4', 'd15'] },
-  { x: 330, y: 90, layer: 1, id: 'd21', supportedBy: ['d6', 'd7'] },
-  { x: 450, y: 90, layer: 1, id: 'd22', supportedBy: ['d8', 'd17'] },
-  { x: 570, y: 120, layer: 1, id: 'd23', supportedBy: ['d10', 'd11'] },
-  { x: 690, y: 150, layer: 1, id: 'd24', supportedBy: ['d12', 'd13'] },
+  { x: 30, y: 270, layer: 1, id: 'tw32', supportedBy: ['tw13', 'tw16'] },
+  { x: 90, y: 270, layer: 1, id: 'tw33', supportedBy: ['tw16', 'tw17'] },
+  { x: 150, y: 270, layer: 1, id: 'tw34', supportedBy: ['tw17', 'tw18'] },
+  { x: 210, y: 270, layer: 1, id: 'tw35', supportedBy: ['tw18', 'tw19'] },
+  { x: 270, y: 270, layer: 1, id: 'tw36', supportedBy: ['tw19', 'tw20'] },
   
-  // Dragon crest
-  { x: 240, y: 60, layer: 1, id: 'd25', supportedBy: ['d15', 'd5'] },
-  { x: 360, y: 120, layer: 1, id: 'd26', supportedBy: ['d7', 'd8'] },
-  { x: 540, y: 60, layer: 1, id: 'd27', supportedBy: ['d17', 'd9'] },
-  { x: 660, y: 120, layer: 1, id: 'd28', supportedBy: ['d11', 'd12'] },
+  // === LAYER 2 (THIRD) - 8 tiles ===
+  { x: 60, y: 60, layer: 2, id: 'tw37', supportedBy: ['tw21', 'tw22'] },
+  { x: 120, y: 60, layer: 2, id: 'tw38', supportedBy: ['tw22', 'tw23'] },
+  { x: 180, y: 60, layer: 2, id: 'tw39', supportedBy: ['tw23', 'tw24'] },
+  { x: 240, y: 60, layer: 2, id: 'tw40', supportedBy: ['tw24', 'tw25'] },
   
-  // === LAYER 2 (TOP) - Dragon spine ridge ===
-  { x: 270, y: 90, layer: 2, id: 'd29', supportedBy: ['d20', 'd25'] },
-  { x: 390, y: 90, layer: 2, id: 'd30', supportedBy: ['d21', 'd26'] },
-  { x: 510, y: 90, layer: 2, id: 'd31', supportedBy: ['d22', 'd27'] },
-  { x: 630, y: 120, layer: 2, id: 'd32', supportedBy: ['d23', 'd28'] },
+  { x: 60, y: 240, layer: 2, id: 'tw41', supportedBy: ['tw32', 'tw33'] },
+  { x: 120, y: 240, layer: 2, id: 'tw42', supportedBy: ['tw33', 'tw34'] },
+  { x: 180, y: 240, layer: 2, id: 'tw43', supportedBy: ['tw34', 'tw35'] },
+  { x: 240, y: 240, layer: 2, id: 'tw44', supportedBy: ['tw35', 'tw36'] },
   
-  // === LAYER 3 (PEAK) - Dragon crown ===
-  { x: 330, y: 90, layer: 3, id: 'd33', supportedBy: ['d29', 'd30'] },
-  { x: 450, y: 90, layer: 3, id: 'd34', supportedBy: ['d30', 'd31'] },
-  { x: 570, y: 105, layer: 3, id: 'd35', supportedBy: ['d31', 'd32'] },
-  
-  // Dragon eye (center peak)
-  { x: 390, y: 90, layer: 4, id: 'd36', supportedBy: ['d33', 'd34'] },
+  // === LAYER 3 (FOURTH) - 4 tiles forming tower peak ===
+  { x: 90, y: 120, layer: 3, id: 'tw45', supportedBy: ['tw37', 'tw38'] },
+  { x: 150, y: 120, layer: 3, id: 'tw46', supportedBy: ['tw38', 'tw39'] },
+  { x: 210, y: 120, layer: 3, id: 'tw47', supportedBy: ['tw39', 'tw40'] },
+  { x: 150, y: 180, layer: 3, id: 'tw48', supportedBy: ['tw41', 'tw42'] },
 ];
 
 // AUTHENTIC PYRAMID FORMATION - Hard (48 tiles, 24 pairs)
@@ -181,17 +215,17 @@ const pyramidFormationPositions: TilePosition[] = [
 
 // Layout definitions
 export const TURTLE_FORMATION: MahjongLayout = {
-  name: 'Authentic Turtle',
+  name: 'Enhanced Turtle',
   difficulty: 'easy',
   positions: turtleFormationPositions,
   maxLayers: 3
 };
 
-export const DRAGON_FORMATION: MahjongLayout = {
-  name: 'Authentic Dragon',
+export const TOWER_FORMATION: MahjongLayout = {
+  name: 'Tower Pagoda',
   difficulty: 'medium', 
-  positions: dragonFormationPositions,
-  maxLayers: 5
+  positions: towerFormationPositions,
+  maxLayers: 4
 };
 
 export const PYRAMID_FORMATION: MahjongLayout = {
@@ -203,7 +237,7 @@ export const PYRAMID_FORMATION: MahjongLayout = {
 
 // Layout collections by difficulty
 const easyLayouts = [TURTLE_FORMATION];
-const mediumLayouts = [DRAGON_FORMATION];
+const mediumLayouts = [TOWER_FORMATION];
 const hardLayouts = [PYRAMID_FORMATION];
 
 export function getRandomLayoutByDifficulty(difficulty: string): MahjongLayout | null {
@@ -220,5 +254,5 @@ export function getRandomLayoutByDifficulty(difficulty: string): MahjongLayout |
 }
 
 export function getAllLayouts(): MahjongLayout[] {
-  return [TURTLE_FORMATION, DRAGON_FORMATION, PYRAMID_FORMATION];
+  return [TURTLE_FORMATION, TOWER_FORMATION, PYRAMID_FORMATION];
 }

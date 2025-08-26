@@ -113,9 +113,9 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'easy',
     displayName: 'Facile',
-    description: '12 paires - Formation Tortue Authentique',
-    pairCount: 12, // Uses authentic turtle formation (24 tiles)
-    characterCount: 4, // Fewer character types = easier matching
+    description: '4 personnages différents - Formation Tortue',
+    pairCount: 24, // All difficulties use 24 pairs (48 tiles) in square layouts
+    characterCount: 4, // 4 characters × 6 pairs each = easier pattern recognition
     hintsAvailable: 5,
     tileSize: {
       mobile: 48,
@@ -126,9 +126,9 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'medium',
     displayName: 'Moyen',
-    description: '18 paires - Formation Dragon Authentique',
-    pairCount: 18, // Uses authentic dragon formation (36 tiles)
-    characterCount: 6, // Moderate character variety
+    description: '8 personnages différents - Formation Tour',
+    pairCount: 24, // All difficulties use 24 pairs (48 tiles) in square layouts
+    characterCount: 8, // 8 characters × 3 pairs each = moderate cognitive load
     hintsAvailable: 3,
     tileSize: {
       mobile: 44,
@@ -139,9 +139,9 @@ export const DIFFICULTY_OPTIONS: MahjongDifficultyConfig[] = [
   {
     difficulty: 'hard',
     displayName: 'Difficile',
-    description: '24 paires - Formation Pyramide Authentique',
-    pairCount: 24, // Uses authentic pyramid formation (48 tiles)
-    characterCount: 8, // High character variety = harder matching
+    description: '12 personnages différents - Formation Pyramide',
+    pairCount: 24, // All difficulties use 24 pairs (48 tiles) in square layouts
+    characterCount: 12, // 12 characters × 2 pairs each = high cognitive complexity
     hintsAvailable: 1,
     tileSize: {
       mobile: 40,

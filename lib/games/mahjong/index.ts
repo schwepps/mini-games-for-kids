@@ -23,7 +23,7 @@ export type { AdaptiveLayoutConfig } from './adaptiveLayoutGenerator';
 // Static layouts and patterns
 export { 
   TURTLE_FORMATION, 
-  DRAGON_FORMATION, 
+  TOWER_FORMATION, 
   PYRAMID_FORMATION,
   getRandomLayoutByDifficulty,
   getAllLayouts 
