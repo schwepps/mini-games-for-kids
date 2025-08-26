@@ -177,6 +177,10 @@ export default function MahjongBoard({
   const { width: containerWidth, height: containerHeight, scale } = calculateDynamicDimensions();
 
   const tileBounds = calculateTileBounds();
+  
+  // Calculate centering offsets to ensure perfect horizontal and vertical centering
+  const centerOffsetX = (containerWidth - tileBounds.width) / 2 - tileBounds.minX;
+  const centerOffsetY = (containerHeight - tileBounds.height) / 2 - tileBounds.minY;
 
   // Show loading indicator only briefly, then render board with fallback dimensions
   const showLoadingSpinner = useAdaptiveLayout && !isReady && Date.now() - startTime < 1000;
@@ -264,9 +268,9 @@ export default function MahjongBoard({
           id='background_layer'
           className="absolute rounded-3xl border border-slate-200/30"
           style={{
-            // Position relative to container origin with enhanced padding for authentic formations
-            left: `${-Math.max(16, Math.round(tileSize * 0.25))}px`,
-            top: `${-Math.max(16, Math.round(tileSize * 0.25))}px`,
+            // Position with centering offset and enhanced padding for authentic formations
+            left: `${centerOffsetX - Math.max(16, Math.round(tileSize * 0.25))}px`,
+            top: `${centerOffsetY - Math.max(16, Math.round(tileSize * 0.25))}px`,
             width: `${tileBounds.width + 2 * Math.max(16, Math.round(tileSize * 0.25))}px`,
             height: `${tileBounds.height + 2 * Math.max(16, Math.round(tileSize * 0.25))}px`,
             transform: 'translateZ(-25px) rotateX(3deg)', // Enhanced depth and angle
@@ -300,8 +304,8 @@ export default function MahjongBoard({
               onTileClick={onTileClick}
               disabled={disabled}
               showHint={showHintTileIds.includes(tile.id)}
-              offsetX={tileBounds.minX}
-              offsetY={tileBounds.minY}
+              offsetX={tileBounds.minX - centerOffsetX}
+              offsetY={tileBounds.minY - centerOffsetY}
               layerOffset={layerOffset}
             />
           ))}
