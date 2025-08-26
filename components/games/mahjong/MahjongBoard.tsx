@@ -39,21 +39,21 @@ export default function MahjongBoard({
     // Get available space with enhanced device-aware adjustments
     // Progressive padding based on device type for better visual spacing
     const deviceType = isReady && size.width > 0 ? 
-      (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
+      (size.width < 768 ? 'mobile' : size.width < 1280 ? 'tablet' : 'desktop') : 'tablet';
     const paddingByDevice = {
-      mobile: 8,    // 4px each side (px-1)
-      tablet: 16,   // 8px each side (px-2)
-      desktop: 16   // 8px each side (px-2)
+      mobile: 8,    // 4px each side (px-1) for < 768px
+      tablet: 16,   // 8px each side (px-2) for 768px - 1279px  
+      desktop: 16   // 8px each side (px-2) for ≥ 1280px
     };
     const availableWidth = isReady && size.width > 0 ? 
       size.width - paddingByDevice[deviceType] : 800;
     
     // Enhanced responsive UI zone sizing
-    const dynamicsDeviceType = availableWidth < 640 ? 'mobile' : availableWidth < 1024 ? 'tablet' : 'desktop';
+    const dynamicsDeviceType = availableWidth < 768 ? 'mobile' : availableWidth < 1280 ? 'tablet' : 'desktop';
     const uiZoneHeights = {
-      mobile: { top: 24, bottom: 20, buffer: 48 },    // Optimized for game area
-      tablet: { top: 30, bottom: 24, buffer: 60 },    // Balanced UI for tablet
-      desktop: { top: 34, bottom: 28, buffer: 72 }    // Efficient UI for desktop
+      mobile: { top: 24, bottom: 20, buffer: 48 },    // Optimized for mobile < 768px
+      tablet: { top: 30, bottom: 24, buffer: 60 },    // Balanced UI for MD+ 768px - 1279px
+      desktop: { top: 34, bottom: 28, buffer: 72 }    // Efficient UI for XL+ ≥ 1280px
     };
     
     const uiZones = uiZoneHeights[dynamicsDeviceType];
@@ -69,11 +69,11 @@ export default function MahjongBoard({
     const contentHeight = Math.max(tileBounds.height + structurePadding, board.height || 400);
     
     // Device-aware scaling factors for optimal UX
-    const scalingDeviceType = availableWidth < 640 ? 'mobile' : availableWidth < 1024 ? 'tablet' : 'desktop';
+    const scalingDeviceType = availableWidth < 768 ? 'mobile' : availableWidth < 1280 ? 'tablet' : 'desktop';
     const deviceScaleFactors = {
-      mobile: { min: 0.6, preferred: 0.8 }, // More aggressive scaling for tall formations on mobile
-      tablet: { min: 0.7, preferred: 0.9 }, // Moderate scaling on tablet  
-      desktop: { min: 0.8, preferred: 0.95 } // Conservative scaling on desktop
+      mobile: { min: 0.6, preferred: 0.8 }, // More aggressive scaling for mobile < 768px
+      tablet: { min: 0.7, preferred: 0.9 }, // Moderate scaling for MD+ 768px - 1279px  
+      desktop: { min: 0.8, preferred: 0.95 } // Conservative scaling for XL+ ≥ 1280px
     };
     
     const factors = deviceScaleFactors[scalingDeviceType];
@@ -108,31 +108,24 @@ export default function MahjongBoard({
     };
   };
 
-  // Dynamic tile sizing based on screen size and tile density
+  // Unified tile sizing system - matches MahjongLayoutCalculator.ts
   const calculateOptimalTileSize = () => {
-    // Get available dimensions
+    // Get device type based on Tailwind CSS breakpoints
     const deviceType = isReady && size.width > 0 ? 
-      (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
+      (size.width < 768 ? 'mobile' : size.width < 1280 ? 'tablet' : 'desktop') : 'tablet';
     
-    // Base tile sizes by device type for optimal UX
+    // Unified tile sizes across generation and display systems
     const baseTileSizes = {
-      mobile: 45,   // Smaller for mobile screens
-      tablet: 55,   // Medium for tablets
-      desktop: 65   // Larger for desktop
+      mobile: 45,   // Mobile < 768px (Tailwind < MD)
+      tablet: 65,   // Tablet 768px - 1279px (Tailwind MD to XL) 
+      desktop: 75   // Desktop ≥ 1280px (Tailwind XL+)
     };
     
-    // Try to calculate spacing from tile positions (if available)
-    let spacingBasedSize = 60;
-    if (board.tiles[0]?.x !== undefined && board.tiles[1]?.x !== undefined) {
-      spacingBasedSize = Math.abs(board.tiles[1].x - board.tiles[0].x) || 60;
-    }
+    // Use device-based tile size only (unified system)
+    const preferredSize = baseTileSizes[deviceType];
     
-    // Choose between base size and spacing-based size
-    const deviceBaseSize = baseTileSizes[deviceType];
-    const preferredSize = Math.min(spacingBasedSize, deviceBaseSize);
-    
-    // Ensure minimum touch target size (44px) and reasonable maximum (80px)
-    return Math.max(44, Math.min(preferredSize, 80));
+    // Ensure minimum touch target size (44px) and reasonable maximum (90px)
+    return Math.max(44, Math.min(preferredSize, 90));
   };
   
   const tileSize = calculateOptimalTileSize();
@@ -202,7 +195,7 @@ export default function MahjongBoard({
 
   // Get device-specific UI zone heights for consistent styling
   const currentDeviceType = isReady && size.width > 0 ? 
-    (size.width < 640 ? 'mobile' : size.width < 1024 ? 'tablet' : 'desktop') : 'tablet';
+    (size.width < 768 ? 'mobile' : size.width < 1280 ? 'tablet' : 'desktop') : 'tablet';
   const paddingByDevice = {
     mobile: 8,    // 4px each side (px-1)
     tablet: 16,   // 8px each side (px-2)
@@ -210,7 +203,7 @@ export default function MahjongBoard({
   };
   const currentWidth = isReady && size.width > 0 ? 
     size.width - paddingByDevice[currentDeviceType] : 800;
-  const uiDeviceType = currentWidth < 640 ? 'mobile' : currentWidth < 1024 ? 'tablet' : 'desktop';
+  const uiDeviceType = currentWidth < 768 ? 'mobile' : currentWidth < 1280 ? 'tablet' : 'desktop';
   const uiZoneHeights = {
     mobile: { top: 24, bottom: 20, buffer: 140 },
     tablet: { top: 30, bottom: 24, buffer: 140 },

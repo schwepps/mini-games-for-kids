@@ -8,22 +8,25 @@ export class MahjongLayoutCalculator {
   
   /**
    * Get responsive tile size based on screen width and difficulty
-   * @deprecated Use getOptimalTileSize for container-aware sizing
+   * Unified with MahjongBoard.tsx tile sizing system
    */
   static getResponsiveTileSize(
     screenWidth: number, 
     difficulty: MahjongDifficulty
   ): number {
+    // Updated to use consistent breakpoints (768px/1280px) and larger tile sizes
+    // Aligned with MahjongBoard.tsx calculateOptimalTileSize()
     const baseSize = {
-      easy: { mobile: 48, tablet: 60, desktop: 72 },
-      medium: { mobile: 44, tablet: 56, desktop: 68 },
-      hard: { mobile: 40, tablet: 52, desktop: 64 }
+      easy: { mobile: 45, tablet: 65, desktop: 75 },
+      medium: { mobile: 45, tablet: 65, desktop: 75 },
+      hard: { mobile: 45, tablet: 65, desktop: 75 }
     };
 
     const sizes = baseSize[difficulty];
 
-    if (screenWidth < 640) return sizes.mobile;
-    if (screenWidth < 1024) return sizes.tablet;
-    return sizes.desktop;
+    // Use Tailwind CSS aligned breakpoints
+    if (screenWidth < 768) return sizes.mobile;   // Mobile: < MD
+    if (screenWidth < 1280) return sizes.tablet; // Tablet: MD to XL  
+    return sizes.desktop;                         // Desktop: XL+
   }
 }
