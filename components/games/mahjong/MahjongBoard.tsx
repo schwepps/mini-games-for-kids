@@ -63,35 +63,43 @@ export default function MahjongBoard({
     // First calculate tile bounds to understand actual content requirements
     const tileBounds = calculateTileBounds();
     
-    // Content requirements = tile bounds + padding for backgrounds
-    const contentWidth = Math.max(tileBounds.width + 40, board.width || 600); // Include background padding
-    const contentHeight = Math.max(tileBounds.height + 40, board.height || 400);
+    // Content requirements = actual tile bounds + adequate padding for tall formations
+    const structurePadding = Math.max(40, Math.round(tileSize * 0.4)); // Dynamic padding based on tile size
+    const contentWidth = Math.max(tileBounds.width + structurePadding, board.width || 600);
+    const contentHeight = Math.max(tileBounds.height + structurePadding, board.height || 400);
     
     // Device-aware scaling factors for optimal UX
     const scalingDeviceType = availableWidth < 640 ? 'mobile' : availableWidth < 1024 ? 'tablet' : 'desktop';
     const deviceScaleFactors = {
-      mobile: { min: 0.7, preferred: 0.85 }, // More aggressive scaling on mobile
-      tablet: { min: 0.8, preferred: 0.92 }, // Moderate scaling on tablet  
-      desktop: { min: 0.9, preferred: 0.98 } // Minimal scaling on desktop
+      mobile: { min: 0.6, preferred: 0.8 }, // More aggressive scaling for tall formations on mobile
+      tablet: { min: 0.7, preferred: 0.9 }, // Moderate scaling on tablet  
+      desktop: { min: 0.8, preferred: 0.95 } // Conservative scaling on desktop
     };
     
     const factors = deviceScaleFactors[scalingDeviceType];
     
-    // Calculate scaling with device preferences
+    // Calculate scaling with priority on fitting tall formations
     const rawScaleX = availableWidth / contentWidth;
     const rawScaleY = availableHeight / contentHeight;
     const rawScale = Math.min(rawScaleX, rawScaleY, 1); // Never scale up
     
-    // Apply device-aware scaling preferences
-    const scale = Math.max(rawScale, factors.min); // Respect minimum scale per device
-    const preferredScale = Math.min(factors.preferred, scale);
+    // For very tall formations, prioritize fitting over preferred scale
+    const isVeryTall = contentHeight > availableHeight * 0.8;
+    const adaptiveScale = isVeryTall 
+      ? Math.max(rawScale, factors.min * 0.9) // Allow more aggressive scaling for tall formations
+      : Math.max(rawScale, factors.min);
     
-    // Determine final dimensions with aspect ratio preservation
+    const preferredScale = Math.min(factors.preferred, adaptiveScale);
+    
+    // Determine final dimensions ensuring tall formations fit
     const scaledWidth = contentWidth * preferredScale;
     const scaledHeight = contentHeight * preferredScale;
     
     const finalWidth = Math.min(scaledWidth, availableWidth);
-    const finalHeight = Math.min(scaledHeight, availableHeight);
+    // For tall formations, allow container to grow beyond initial available height if needed
+    const finalHeight = isVeryTall 
+      ? Math.max(scaledHeight, Math.min(contentHeight * factors.min, availableHeight * 1.2))
+      : Math.min(scaledHeight, availableHeight);
     
     return {
       width: Math.max(finalWidth, 320), // Minimum mobile width
@@ -251,16 +259,16 @@ export default function MahjongBoard({
             transformOrigin: 'center center'
           }}
         >
-        {/* Background Board Layer - Smart content-aware sizing */}
+        {/* Background Board Layer - Positioned to center under normalized tile formation */}
         <div
           id='background_layer'
           className="absolute rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 shadow-2xl border border-slate-200/50"
           style={{
-            // Smart margins: proportional to tile size with minimums for visual appeal
-            left: `${Math.max(8, Math.round(tileSize * 0.15))}px`,
-            top: `${Math.max(8, Math.round(tileSize * 0.15))}px`,
-            width: `${containerWidth - 2 * Math.max(8, Math.round(tileSize * 0.15))}px`,
-            height: `${containerHeight - 2 * Math.max(8, Math.round(tileSize * 0.15))}px`,
+            // Position relative to container origin with proper padding (tiles are normalized to 0,0)
+            left: `${-Math.max(12, Math.round(tileSize * 0.2))}px`,
+            top: `${-Math.max(12, Math.round(tileSize * 0.2))}px`,
+            width: `${tileBounds.width + 2 * Math.max(12, Math.round(tileSize * 0.2))}px`,
+            height: `${tileBounds.height + 2 * Math.max(12, Math.round(tileSize * 0.2))}px`,
             transform: 'translateZ(-20px) rotateX(1deg)',
             background: `
               radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.7)),
