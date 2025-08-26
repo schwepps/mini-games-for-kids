@@ -223,15 +223,15 @@ export default function MahjongBoard({
             transformOrigin: 'center center'
           }}
         >
-        {/* Background Board Layer - Clean single layer with generous spacing */}
+        {/* Background Board Layer - Container-relative positioning */}
         <div
           id='background_layer'
           className="absolute rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 shadow-2xl border border-slate-200/50"
           style={{
-            left: `${tileBounds.minX - 50}px`, // Generous padding around tiles
-            top: `${tileBounds.minY - 50}px`,
-            width: `${tileBounds.width + 100}px`,
-            height: `${tileBounds.height + 100}px`,
+            left: '20px', // Container-relative positioning
+            top: '20px',
+            width: `${containerWidth - 40}px`, // Fit within container with padding
+            height: `${containerHeight - 40}px`,
             transform: 'translateZ(-20px) rotateX(1deg)',
             background: `
               radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.7)),
@@ -257,6 +257,8 @@ export default function MahjongBoard({
               onTileClick={onTileClick}
               disabled={disabled}
               showHint={showHintTileIds.includes(tile.id)}
+              offsetX={tileBounds.minX}
+              offsetY={tileBounds.minY}
             />
           ))}
         </div>

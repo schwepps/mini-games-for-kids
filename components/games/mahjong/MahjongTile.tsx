@@ -11,6 +11,8 @@ interface MahjongTileProps {
   onTileClick: (tileId: string) => void;
   disabled: boolean;
   showHint?: boolean;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export default function MahjongTile({ 
@@ -18,7 +20,9 @@ export default function MahjongTile({
   tileSize, 
   onTileClick, 
   disabled,
-  showHint = false
+  showHint = false,
+  offsetX = 0,
+  offsetY = 0
 }: MahjongTileProps) {
   
   const handleClick = () => {
@@ -48,8 +52,8 @@ export default function MahjongTile({
           scale: 1, 
           opacity: tile.isCovered ? 0.7 : 1, // Dimmed for covered tiles
           rotateY: 0,
-          x: tile.x + (tile.layer * 10), // Enhanced layer offset for 3D effect
-          y: tile.y - (tile.layer * 10), // Tiles "rest" on lower ones
+          x: (tile.x - offsetX) + (tile.layer * 10), // Normalized position with layer offset
+          y: (tile.y - offsetY) - (tile.layer * 10), // Normalized position with tiles "resting" on lower ones
           z: tile.z
         }}
         exit={{ 

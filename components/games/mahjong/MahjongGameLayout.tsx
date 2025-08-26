@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-import Image from 'next/image';
 
 interface MahjongGameLayoutProps {
   children: ReactNode;
@@ -72,23 +71,6 @@ export default function MahjongGameLayout({
   return (
     <div className="min-h-screen p-4 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6 pb-8">
-        
-        {/* Game Logo */}
-        <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="text-center"
-        >
-          <Image
-            src="/images/logo/mahjong-logo-large.png"
-            alt="MahJong - Jeu de logique"
-            width={200}
-            height={100}
-            className="mx-auto drop-shadow-lg"
-            priority
-          />
-        </motion.div>
-
         {/* Game Content with Dynamic Spacing */}
         <div className={`flex flex-col items-center justify-center transition-all duration-300 ${dynamicSpacing}`}>
           {children}
