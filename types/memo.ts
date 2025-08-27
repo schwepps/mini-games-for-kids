@@ -1,4 +1,4 @@
-import { ICharacter } from './game';
+import { ICharacter } from './shared';
 
 /**
  * Memory Game Types

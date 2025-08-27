@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { pictogramMapping } from '@/lib/games/guess-who/characteristicImages';
-import { IProfile } from '@/types/guess-who';
+import { IProfile } from '@/types/shared';
 import { IMAGE_DIMENSIONS } from './constants';
 
 interface CharacteristicSelectorProps {

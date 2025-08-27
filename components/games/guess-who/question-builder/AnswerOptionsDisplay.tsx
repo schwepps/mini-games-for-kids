@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { CharacterFilter } from '@/lib/characterFilter';
 import { characteristicImages } from '@/lib/games/guess-who/characteristicImages';
 import { kidFriendlyColors } from '@/lib/uiConstants';
-import { IProfile, ICharacter } from '@/types/guess-who';
+import { IProfile, ICharacter } from '@/types/shared';
 import { BUTTON_STYLES, BADGE_STYLES, IMAGE_DIMENSIONS } from './constants';
 
 interface AnswerOptionsDisplayProps {

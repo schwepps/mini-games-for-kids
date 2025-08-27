@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { ICharacter, IQuestion } from '@/types/guess-who';
+import { ICharacter } from '@/types/shared';
+import { IQuestion } from '@/types/guess-who';
 import { 
   Users, 
   MessageCircle, 

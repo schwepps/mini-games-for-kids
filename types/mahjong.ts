@@ -1,4 +1,4 @@
-import { ICharacter } from './game';
+import { ICharacter } from './shared';
 
 export type MahjongDifficulty = 'easy' | 'medium' | 'hard';
 

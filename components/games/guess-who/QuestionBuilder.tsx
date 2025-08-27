@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { IProfile, ICharacter, IQuestion } from '@/types/guess-who';
+import { IProfile, ICharacter } from '@/types/shared';
+import { IQuestion } from '@/types/guess-who';
 import { HelpCircle } from 'lucide-react';
 
 import CharacteristicSelector from './question-builder/CharacteristicSelector';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { IProfile } from '@/types/guess-who';
+import { IProfile } from '@/types/shared';
 import { MahjongDifficulty, DIFFICULTY_OPTIONS } from '@/types/mahjong';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { createErrorHandler } from '@/lib/utils/errorHandling';

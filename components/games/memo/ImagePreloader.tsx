@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { ICharacter } from '@/types/guess-who';
+import { ICharacter } from '@/types/shared';
 
 interface ImagePreloaderProps {
   characters: ICharacter[];

@@ -2,7 +2,8 @@
  * CharacterFilter - Utilities for filtering characters and managing game logic
  */
 
-import { ICharacter, IProfile, IFilterCriteria, IQuestion } from '@/types/guess-who';
+import { ICharacter, IProfile, IFilterCriteria } from '@/types/shared';
+import { IQuestion } from '@/types/guess-who';
 
 export class CharacterFilter {
   /**

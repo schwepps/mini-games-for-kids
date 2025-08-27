@@ -1,4 +1,4 @@
-import { ICharacter } from './game';
+import { ICharacter } from './shared';
 
 /**
  * Sudoku Game Types

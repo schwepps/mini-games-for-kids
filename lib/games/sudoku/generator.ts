@@ -1,5 +1,5 @@
 import { GridSize, SudokuGrid, SudokuCell, REGIONS } from '@/types/sudoku';
-import { ICharacter } from '@/types/guess-who';
+import { ICharacter } from '@/types/shared';
 
 /**
  * Sudoku puzzle generator and solver

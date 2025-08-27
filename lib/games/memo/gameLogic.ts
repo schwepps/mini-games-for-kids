@@ -1,4 +1,4 @@
-import { ICharacter } from '@/types/guess-who';
+import { ICharacter } from '@/types/shared';
 import { MemoCard, MemoGameState, MemoGameAction } from '@/types/memo';
 
 /**
