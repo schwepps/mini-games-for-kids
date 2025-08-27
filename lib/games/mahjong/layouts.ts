@@ -6,11 +6,7 @@ import { MahjongLayout, TilePosition } from '@/types/mahjong';
  * Standard tile size: 60px x 60px (will be scaled as needed)
  */
 
-// ENHANCED TURTLE FORMATION - Easy (48 tiles, 24 pairs)
-// Expanded turtle formation maintaining square shape with strategic layering
 const turtleFormationPositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 24 tiles forming turtle shell perimeter ===
-  // Extended top row
   { x: 30, y: 0, layer: 0, id: 't1' },
   { x: 90, y: 0, layer: 0, id: 't2' },
   { x: 150, y: 0, layer: 0, id: 't3' },
@@ -18,9 +14,8 @@ const turtleFormationPositions: TilePosition[] = [
   { x: 270, y: 0, layer: 0, id: 't5' },
   { x: 330, y: 0, layer: 0, id: 't6' },
   
-  // Extended sides
-  { x: 0, y: 30, layer: 0, id: 't7' },   // Left outer
-  { x: 360, y: 30, layer: 0, id: 't8' }, // Right outer
+  { x: 0, y: 30, layer: 0, id: 't7' },
+  { x: 360, y: 30, layer: 0, id: 't8' },
   { x: 0, y: 90, layer: 0, id: 't9' },
   { x: 360, y: 90, layer: 0, id: 't10' },
   { x: 0, y: 150, layer: 0, id: 't11' },
@@ -28,7 +23,6 @@ const turtleFormationPositions: TilePosition[] = [
   { x: 0, y: 210, layer: 0, id: 't13' },
   { x: 360, y: 210, layer: 0, id: 't14' },
   
-  // Extended bottom row
   { x: 30, y: 240, layer: 0, id: 't15' },
   { x: 90, y: 240, layer: 0, id: 't16' },
   { x: 150, y: 240, layer: 0, id: 't17' },
@@ -44,7 +38,6 @@ const turtleFormationPositions: TilePosition[] = [
   { x: 60, y: 60, layer: 0, id: 't23' },
   { x: 300, y: 60, layer: 0, id: 't24' },
   
-  // === LAYER 1 (MIDDLE) - 16 tiles ===
   { x: 60, y: 30, layer: 1, id: 't25', supportedBy: ['t1', 't2'] },
   { x: 120, y: 30, layer: 1, id: 't26', supportedBy: ['t2', 't3'] },
   { x: 180, y: 30, layer: 1, id: 't27', supportedBy: ['t3', 't4'] },
@@ -66,7 +59,6 @@ const turtleFormationPositions: TilePosition[] = [
   { x: 240, y: 210, layer: 1, id: 't39', supportedBy: ['t18', 't19'] },
   { x: 300, y: 210, layer: 1, id: 't40', supportedBy: ['t19', 't20'] },
   
-  // === LAYER 2 (TOP) - 8 tiles ===
   { x: 90, y: 60, layer: 2, id: 't41', supportedBy: ['t25', 't26'] },
   { x: 150, y: 60, layer: 2, id: 't42', supportedBy: ['t26', 't27'] },
   { x: 210, y: 60, layer: 2, id: 't43', supportedBy: ['t27', 't28'] },
@@ -78,10 +70,7 @@ const turtleFormationPositions: TilePosition[] = [
   { x: 270, y: 180, layer: 2, id: 't48', supportedBy: ['t39', 't40'] },
 ];
 
-// TOWER FORMATION - Medium (48 tiles, 24 pairs)
-// Square-based pagoda tower with stepped layers
 const towerFormationPositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles forming square foundation ===
   // Outer square perimeter
   { x: 0, y: 0, layer: 0, id: 'tw1' },
   { x: 60, y: 0, layer: 0, id: 'tw2' },
@@ -106,7 +95,6 @@ const towerFormationPositions: TilePosition[] = [
   { x: 240, y: 300, layer: 0, id: 'tw19' },
   { x: 300, y: 300, layer: 0, id: 'tw20' },
   
-  // === LAYER 1 (SECOND) - 16 tiles ===
   { x: 30, y: 30, layer: 1, id: 'tw21', supportedBy: ['tw1', 'tw2'] },
   { x: 90, y: 30, layer: 1, id: 'tw22', supportedBy: ['tw2', 'tw3'] },
   { x: 150, y: 30, layer: 1, id: 'tw23', supportedBy: ['tw3', 'tw4'] },
@@ -126,7 +114,6 @@ const towerFormationPositions: TilePosition[] = [
   { x: 210, y: 270, layer: 1, id: 'tw35', supportedBy: ['tw18', 'tw19'] },
   { x: 270, y: 270, layer: 1, id: 'tw36', supportedBy: ['tw19', 'tw20'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles ===
   { x: 60, y: 60, layer: 2, id: 'tw37', supportedBy: ['tw21', 'tw22'] },
   { x: 120, y: 60, layer: 2, id: 'tw38', supportedBy: ['tw22', 'tw23'] },
   { x: 180, y: 60, layer: 2, id: 'tw39', supportedBy: ['tw23', 'tw24'] },
@@ -137,17 +124,13 @@ const towerFormationPositions: TilePosition[] = [
   { x: 180, y: 240, layer: 2, id: 'tw43', supportedBy: ['tw34', 'tw35'] },
   { x: 240, y: 240, layer: 2, id: 'tw44', supportedBy: ['tw35', 'tw36'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles forming tower peak ===
   { x: 90, y: 120, layer: 3, id: 'tw45', supportedBy: ['tw37', 'tw38'] },
   { x: 150, y: 120, layer: 3, id: 'tw46', supportedBy: ['tw38', 'tw39'] },
   { x: 210, y: 120, layer: 3, id: 'tw47', supportedBy: ['tw39', 'tw40'] },
   { x: 150, y: 180, layer: 3, id: 'tw48', supportedBy: ['tw41', 'tw42'] },
 ];
 
-// AUTHENTIC PYRAMID FORMATION - Hard (48 tiles, 24 pairs)
-// Classic stepped pyramid with proper support structure
 const pyramidFormationPositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles (outer perimeter) ===
   // Bottom row
   { x: 0, y: 240, layer: 0, id: 'p1' },
   { x: 60, y: 240, layer: 0, id: 'p2' },
@@ -174,7 +157,6 @@ const pyramidFormationPositions: TilePosition[] = [
   { x: 300, y: 0, layer: 0, id: 'p19' },
   { x: 360, y: 0, layer: 0, id: 'p20' },
   
-  // === LAYER 1 (SECOND) - 16 tiles ===
   // Positioned at intersections of base tiles
   { x: 30, y: 30, layer: 1, id: 'p21', supportedBy: ['p14', 'p15'] },
   { x: 90, y: 30, layer: 1, id: 'p22', supportedBy: ['p15', 'p16'] },
@@ -195,7 +177,6 @@ const pyramidFormationPositions: TilePosition[] = [
   { x: 210, y: 210, layer: 1, id: 'p35', supportedBy: ['p4', 'p5'] },
   { x: 270, y: 210, layer: 1, id: 'p36', supportedBy: ['p5', 'p32'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles ===
   { x: 60, y: 60, layer: 2, id: 'p37', supportedBy: ['p21', 'p22'] },
   { x: 120, y: 60, layer: 2, id: 'p38', supportedBy: ['p22', 'p23'] },
   { x: 180, y: 60, layer: 2, id: 'p39', supportedBy: ['p23', 'p24'] },
@@ -206,14 +187,12 @@ const pyramidFormationPositions: TilePosition[] = [
   { x: 180, y: 180, layer: 2, id: 'p43', supportedBy: ['p34', 'p35'] },
   { x: 240, y: 180, layer: 2, id: 'p44', supportedBy: ['p35', 'p36'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles ===
   { x: 90, y: 90, layer: 3, id: 'p45', supportedBy: ['p37', 'p38'] },
   { x: 150, y: 90, layer: 3, id: 'p46', supportedBy: ['p38', 'p39'] },
   { x: 210, y: 90, layer: 3, id: 'p47', supportedBy: ['p39', 'p40'] },
   { x: 270, y: 90, layer: 3, id: 'p48', supportedBy: ['p40', 'p41'] },
 ];
 
-// Layout definitions
 export const TURTLE_FORMATION: MahjongLayout = {
   name: 'Enhanced Turtle',
   difficulty: 'easy',
@@ -235,10 +214,7 @@ export const PYRAMID_FORMATION: MahjongLayout = {
   maxLayers: 4
 };
 
-// DIAMOND SQUARE FORMATION - Easy (48 tiles, 24 pairs)
-// Diamond pattern within square boundary, mobile-optimized
 const diamondSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 24 tiles forming diamond perimeter ===
   // Top diamond point
   { x: 180, y: 0, layer: 0, id: 'd1' },
   
@@ -275,7 +251,6 @@ const diamondSquarePositions: TilePosition[] = [
   { x: 240, y: 270, layer: 0, id: 'd23' },
   { x: 180, y: 300, layer: 0, id: 'd24' },
   
-  // === LAYER 1 (MIDDLE) - 16 tiles ===
   { x: 150, y: 60, layer: 1, id: 'd25', supportedBy: ['d3', 'd6'] },
   { x: 180, y: 60, layer: 1, id: 'd26', supportedBy: ['d3', 'd4'] },
   { x: 210, y: 60, layer: 1, id: 'd27', supportedBy: ['d4', 'd7'] },
@@ -299,7 +274,6 @@ const diamondSquarePositions: TilePosition[] = [
   { x: 150, y: 240, layer: 1, id: 'd39', supportedBy: ['d18', 'd20'] },
   { x: 210, y: 240, layer: 1, id: 'd40', supportedBy: ['d19', 'd22'] },
   
-  // === LAYER 2 (TOP) - 8 tiles ===
   { x: 150, y: 90, layer: 2, id: 'd41', supportedBy: ['d25', 'd28'] },
   { x: 180, y: 90, layer: 2, id: 'd42', supportedBy: ['d26', 'd33'] },
   { x: 210, y: 90, layer: 2, id: 'd43', supportedBy: ['d27', 'd29'] },
@@ -312,10 +286,7 @@ const diamondSquarePositions: TilePosition[] = [
   { x: 210, y: 210, layer: 2, id: 'd48', supportedBy: ['d36', 'd40'] },
 ];
 
-// CROSS SQUARE FORMATION - Easy (48 tiles, 24 pairs)
-// Plus/cross shape within square boundary
 const crossSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 24 tiles forming cross shape ===
   // Vertical arm of cross - top section
   { x: 150, y: 0, layer: 0, id: 'c1' },
   { x: 180, y: 0, layer: 0, id: 'c2' },
@@ -348,7 +319,6 @@ const crossSquarePositions: TilePosition[] = [
   { x: 180, y: 300, layer: 0, id: 'c25' },
   { x: 210, y: 300, layer: 0, id: 'c26' },
   
-  // === LAYER 1 (MIDDLE) - 16 tiles ===
   { x: 150, y: 90, layer: 1, id: 'c27', supportedBy: ['c7', 'c8'] },
   { x: 180, y: 90, layer: 1, id: 'c28', supportedBy: ['c8', 'c9'] },
   { x: 210, y: 90, layer: 1, id: 'c29', supportedBy: ['c9', 'c13'] },
@@ -369,7 +339,6 @@ const crossSquarePositions: TilePosition[] = [
   { x: 180, y: 120, layer: 1, id: 'c41', supportedBy: ['c13', 'c14'] },
   { x: 180, y: 180, layer: 1, id: 'c42', supportedBy: ['c13', 'c14'] },
   
-  // === LAYER 2 (TOP) - 8 tiles ===
   { x: 120, y: 150, layer: 2, id: 'c43', supportedBy: ['c31', 'c35'] },
   { x: 150, y: 120, layer: 2, id: 'c44', supportedBy: ['c27', 'c41'] },
   { x: 180, y: 150, layer: 2, id: 'c45', supportedBy: ['c28', 'c41'] },
@@ -378,10 +347,7 @@ const crossSquarePositions: TilePosition[] = [
   { x: 150, y: 180, layer: 2, id: 'c48', supportedBy: ['c38', 'c42'] },
 ];
 
-// FRAME SQUARE FORMATION - Easy (48 tiles, 24 pairs)
-// Hollow square frame with center cluster
 const frameSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 24 tiles forming square frame ===
   // Top frame
   { x: 0, y: 0, layer: 0, id: 'f1' },
   { x: 60, y: 0, layer: 0, id: 'f2' },
@@ -414,7 +380,6 @@ const frameSquarePositions: TilePosition[] = [
   { x: 90, y: 90, layer: 0, id: 'f23' },
   { x: 210, y: 90, layer: 0, id: 'f24' },
   
-  // === LAYER 1 (MIDDLE) - 16 tiles ===
   // Inner frame
   { x: 60, y: 60, layer: 1, id: 'f25', supportedBy: ['f2', 'f7'] },
   { x: 120, y: 60, layer: 1, id: 'f26', supportedBy: ['f3', 'f23'] },
@@ -438,7 +403,6 @@ const frameSquarePositions: TilePosition[] = [
   { x: 210, y: 120, layer: 1, id: 'f39', supportedBy: ['f20', 'f24'] },
   { x: 150, y: 180, layer: 1, id: 'f40', supportedBy: ['f21', 'f22'] },
   
-  // === LAYER 2 (TOP) - 8 tiles ===
   { x: 90, y: 90, layer: 2, id: 'f41', supportedBy: ['f25', 'f26'] },
   { x: 150, y: 90, layer: 2, id: 'f42', supportedBy: ['f26', 'f27'] },
   { x: 210, y: 90, layer: 2, id: 'f43', supportedBy: ['f27', 'f28'] },
@@ -472,10 +436,7 @@ export const FRAME_SQUARE: MahjongLayout = {
   maxLayers: 3
 };
 
-// STEPPED SQUARE FORMATION - Medium (48 tiles, 24 pairs)
-// Concentric square layers with stepped elevation
 const steppedSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles forming outer square ===
   // Outer perimeter
   { x: 0, y: 0, layer: 0, id: 'st1' },
   { x: 60, y: 0, layer: 0, id: 'st2' },
@@ -500,7 +461,6 @@ const steppedSquarePositions: TilePosition[] = [
   { x: 240, y: 300, layer: 0, id: 'st19' },
   { x: 300, y: 300, layer: 0, id: 'st20' },
   
-  // === LAYER 1 (SECOND) - 16 tiles forming middle ring ===
   { x: 60, y: 60, layer: 1, id: 'st21', supportedBy: ['st2', 'st7'] },
   { x: 120, y: 60, layer: 1, id: 'st22', supportedBy: ['st3', 'st4'] },
   { x: 180, y: 60, layer: 1, id: 'st23', supportedBy: ['st4', 'st5'] },
@@ -522,7 +482,6 @@ const steppedSquarePositions: TilePosition[] = [
   { x: 90, y: 210, layer: 1, id: 'st35', supportedBy: ['st29', 'st30'] },
   { x: 210, y: 210, layer: 1, id: 'st36', supportedBy: ['st31', 'st32'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles forming inner ring ===
   { x: 120, y: 120, layer: 2, id: 'st37', supportedBy: ['st22', 'st25'] },
   { x: 180, y: 120, layer: 2, id: 'st38', supportedBy: ['st23', 'st26'] },
   { x: 120, y: 180, layer: 2, id: 'st39', supportedBy: ['st25', 'st27'] },
@@ -533,17 +492,13 @@ const steppedSquarePositions: TilePosition[] = [
   { x: 210, y: 150, layer: 2, id: 'st43', supportedBy: ['st34', 'st36'] },
   { x: 150, y: 210, layer: 2, id: 'st44', supportedBy: ['st35', 'st36'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles forming center ===
   { x: 120, y: 150, layer: 3, id: 'st45', supportedBy: ['st37', 'st39'] },
   { x: 150, y: 120, layer: 3, id: 'st46', supportedBy: ['st37', 'st38'] },
   { x: 180, y: 150, layer: 3, id: 'st47', supportedBy: ['st38', 'st40'] },
   { x: 150, y: 180, layer: 3, id: 'st48', supportedBy: ['st39', 'st40'] }
 ];
 
-// CORNER SQUARE FORMATION - Medium (48 tiles, 24 pairs)
-// Squares clustered in corners with center connections
 const cornerSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles in corner clusters ===
   // Top-left corner cluster
   { x: 0, y: 0, layer: 0, id: 'co1' },
   { x: 60, y: 0, layer: 0, id: 'co2' },
@@ -576,7 +531,6 @@ const cornerSquarePositions: TilePosition[] = [
   { x: 360, y: 300, layer: 0, id: 'co23' },
   { x: 360, y: 360, layer: 0, id: 'co24' },
   
-  // === LAYER 1 (SECOND) - 16 tiles bridging corners ===
   // Bridges from corners toward center
   { x: 90, y: 30, layer: 1, id: 'co25', supportedBy: ['co2', 'co3'] },
   { x: 120, y: 30, layer: 1, id: 'co26', supportedBy: ['co3', 'co7'] },
@@ -598,7 +552,6 @@ const cornerSquarePositions: TilePosition[] = [
   { x: 270, y: 330, layer: 1, id: 'co39', supportedBy: ['co19', 'co21'] },
   { x: 210, y: 330, layer: 1, id: 'co40', supportedBy: ['co19', 'co39'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles connecting toward center ===
   { x: 120, y: 90, layer: 2, id: 'co41', supportedBy: ['co25', 'co26'] },
   { x: 240, y: 90, layer: 2, id: 'co42', supportedBy: ['co27', 'co28'] },
   { x: 90, y: 120, layer: 2, id: 'co43', supportedBy: ['co29', 'co30'] },
@@ -609,10 +562,7 @@ const cornerSquarePositions: TilePosition[] = [
   { x: 240, y: 270, layer: 2, id: 'co48', supportedBy: ['co39', 'co40'] }
 ];
 
-// WINDMILL SQUARE FORMATION - Medium (48 tiles, 24 pairs)
-// Pinwheel pattern in square boundary with rotating arms
 const windmillSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles forming windmill arms ===
   // North arm
   { x: 150, y: 0, layer: 0, id: 'w1' },
   { x: 180, y: 0, layer: 0, id: 'w2' },
@@ -641,7 +591,6 @@ const windmillSquarePositions: TilePosition[] = [
   { x: 30, y: 180, layer: 0, id: 'w19' },
   { x: 30, y: 210, layer: 0, id: 'w20' },
   
-  // === LAYER 1 (SECOND) - 16 tiles forming inner windmill ===
   { x: 120, y: 60, layer: 1, id: 'w21', supportedBy: ['w1', 'w4'] },
   { x: 150, y: 60, layer: 1, id: 'w22', supportedBy: ['w2', 'w4'] },
   { x: 180, y: 60, layer: 1, id: 'w23', supportedBy: ['w4', 'w5'] },
@@ -662,7 +611,6 @@ const windmillSquarePositions: TilePosition[] = [
   { x: 90, y: 180, layer: 1, id: 'w35', supportedBy: ['w17', 'w18'] },
   { x: 90, y: 120, layer: 1, id: 'w36', supportedBy: ['w19', 'w20'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles forming center hub ===
   { x: 150, y: 90, layer: 2, id: 'w37', supportedBy: ['w21', 'w22'] },
   { x: 210, y: 90, layer: 2, id: 'w38', supportedBy: ['w23', 'w24'] },
   { x: 240, y: 150, layer: 2, id: 'w39', supportedBy: ['w25', 'w26'] },
@@ -672,7 +620,6 @@ const windmillSquarePositions: TilePosition[] = [
   { x: 120, y: 180, layer: 2, id: 'w43', supportedBy: ['w33', 'w34'] },
   { x: 120, y: 120, layer: 2, id: 'w44', supportedBy: ['w35', 'w36'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles center point ===
   { x: 150, y: 120, layer: 3, id: 'w45', supportedBy: ['w37', 'w44'] },
   { x: 180, y: 150, layer: 3, id: 'w46', supportedBy: ['w38', 'w39'] },
   { x: 210, y: 180, layer: 3, id: 'w47', supportedBy: ['w40', 'w41'] },
@@ -700,10 +647,7 @@ export const WINDMILL_SQUARE: MahjongLayout = {
   maxLayers: 4
 };
 
-// MAZE SQUARE FORMATION - Hard (48 tiles, 24 pairs)
-// Complex square maze pattern with intricate pathways
 const mazeSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 24 tiles forming maze walls ===
   // Outer maze walls
   { x: 0, y: 0, layer: 0, id: 'm1' },
   { x: 60, y: 0, layer: 0, id: 'm2' },
@@ -734,7 +678,6 @@ const mazeSquarePositions: TilePosition[] = [
   { x: 180, y: 180, layer: 0, id: 'm23' },
   { x: 240, y: 180, layer: 0, id: 'm24' },
   
-  // === LAYER 1 (SECOND) - 16 tiles creating upper maze level ===
   { x: 30, y: 30, layer: 1, id: 'm25', supportedBy: ['m1', 'm2'] },
   { x: 90, y: 30, layer: 1, id: 'm26', supportedBy: ['m2', 'm3'] },
   { x: 150, y: 30, layer: 1, id: 'm27', supportedBy: ['m3', 'm4'] },
@@ -756,7 +699,6 @@ const mazeSquarePositions: TilePosition[] = [
   { x: 210, y: 210, layer: 1, id: 'm40', supportedBy: ['m16', 'm17'] },
   { x: 270, y: 210, layer: 1, id: 'm41', supportedBy: ['m17', 'm24'] },
   
-  // === LAYER 2 (THIRD) - 6 tiles forming complex maze bridges ===
   { x: 60, y: 120, layer: 2, id: 'm42', supportedBy: ['m30', 'm31'] },
   { x: 120, y: 90, layer: 2, id: 'm43', supportedBy: ['m31', 'm32'] },
   { x: 240, y: 120, layer: 2, id: 'm44', supportedBy: ['m33', 'm36'] },
@@ -764,15 +706,11 @@ const mazeSquarePositions: TilePosition[] = [
   { x: 180, y: 150, layer: 2, id: 'm46', supportedBy: ['m35', 'm39'] },
   { x: 210, y: 180, layer: 2, id: 'm47', supportedBy: ['m39', 'm40'] },
   
-  // === LAYER 3 (FOURTH) - 2 tiles forming maze peaks ===
   { x: 90, y: 150, layer: 3, id: 'm48', supportedBy: ['m42', 'm45'] },
   { x: 180, y: 120, layer: 3, id: 'm49', supportedBy: ['m43', 'm46'] }
 ];
 
-// FORTRESS SQUARE FORMATION - Hard (48 tiles, 24 pairs)
-// Fortified square with internal defensive structure
 const fortressSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles forming fortress walls ===
   // Outer fortress walls
   { x: 0, y: 0, layer: 0, id: 'fo1' },
   { x: 60, y: 0, layer: 0, id: 'fo2' },
@@ -805,7 +743,6 @@ const fortressSquarePositions: TilePosition[] = [
   { x: 120, y: 180, layer: 0, id: 'fo25' },
   { x: 240, y: 180, layer: 0, id: 'fo26' },
   
-  // === LAYER 1 (SECOND) - 16 tiles forming defensive positions ===
   { x: 60, y: 60, layer: 1, id: 'fo27', supportedBy: ['fo2', 'fo8'] },
   { x: 120, y: 60, layer: 1, id: 'fo28', supportedBy: ['fo3', 'fo23'] },
   { x: 180, y: 60, layer: 1, id: 'fo29', supportedBy: ['fo4', 'fo5'] },
@@ -826,7 +763,6 @@ const fortressSquarePositions: TilePosition[] = [
   { x: 240, y: 240, layer: 1, id: 'fo41', supportedBy: ['fo20', 'fo26'] },
   { x: 300, y: 240, layer: 1, id: 'fo42', supportedBy: ['fo15', 'fo21'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles forming fortress towers ===
   { x: 90, y: 90, layer: 2, id: 'fo43', supportedBy: ['fo27', 'fo28'] },
   { x: 150, y: 90, layer: 2, id: 'fo44', supportedBy: ['fo28', 'fo29'] },
   { x: 210, y: 90, layer: 2, id: 'fo45', supportedBy: ['fo29', 'fo30'] },
@@ -837,17 +773,13 @@ const fortressSquarePositions: TilePosition[] = [
   { x: 210, y: 210, layer: 2, id: 'fo49', supportedBy: ['fo40', 'fo41'] },
   { x: 270, y: 210, layer: 2, id: 'fo50', supportedBy: ['fo41', 'fo42'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles forming fortress keep ===
   { x: 120, y: 150, layer: 3, id: 'fo51', supportedBy: ['fo43', 'fo44'] },
   { x: 180, y: 150, layer: 3, id: 'fo52', supportedBy: ['fo33', 'fo36'] },
   { x: 240, y: 150, layer: 3, id: 'fo53', supportedBy: ['fo45', 'fo46'] },
   { x: 180, y: 210, layer: 3, id: 'fo54', supportedBy: ['fo47', 'fo48'] }
 ];
 
-// SPIRAL SQUARE FORMATION - Hard (48 tiles, 24 pairs)
-// Square spiral from center outward with complex layering
 const spiralSquarePositions: TilePosition[] = [
-  // === LAYER 0 (BASE) - 20 tiles forming outer spiral arms ===
   // Starting from center and spiraling outward
   { x: 180, y: 150, layer: 0, id: 's1' }, // Center start
   
@@ -879,7 +811,6 @@ const spiralSquarePositions: TilePosition[] = [
   { x: 120, y: 120, layer: 0, id: 's24' },
   { x: 120, y: 90, layer: 0, id: 's25' },
   
-  // === LAYER 1 (SECOND) - 16 tiles continuing spiral elevation ===
   { x: 90, y: 90, layer: 1, id: 's26', supportedBy: ['s10', 's25'] },
   { x: 90, y: 120, layer: 1, id: 's27', supportedBy: ['s24', 's25'] },
   { x: 90, y: 150, layer: 1, id: 's28', supportedBy: ['s22', 's23'] },
@@ -897,7 +828,6 @@ const spiralSquarePositions: TilePosition[] = [
   { x: 270, y: 90, layer: 1, id: 's40', supportedBy: ['s11', 's10'] },
   { x: 270, y: 60, layer: 1, id: 's41', supportedBy: ['s10', 's11'] },
   
-  // === LAYER 2 (THIRD) - 8 tiles forming spiral peaks ===
   { x: 120, y: 60, layer: 2, id: 's42', supportedBy: ['s26', 's10'] },
   { x: 60, y: 120, layer: 2, id: 's43', supportedBy: ['s26', 's27'] },
   { x: 60, y: 180, layer: 2, id: 's44', supportedBy: ['s28', 's29'] },
@@ -907,7 +837,6 @@ const spiralSquarePositions: TilePosition[] = [
   { x: 300, y: 180, layer: 2, id: 's48', supportedBy: ['s36', 's37'] },
   { x: 300, y: 120, layer: 2, id: 's49', supportedBy: ['s38', 's39'] },
   
-  // === LAYER 3 (FOURTH) - 4 tiles spiral center peaks ===
   { x: 90, y: 90, layer: 3, id: 's50', supportedBy: ['s42', 's43'] },
   { x: 90, y: 270, layer: 3, id: 's51', supportedBy: ['s44', 's45'] },
   { x: 270, y: 270, layer: 3, id: 's52', supportedBy: ['s46', 's47'] },

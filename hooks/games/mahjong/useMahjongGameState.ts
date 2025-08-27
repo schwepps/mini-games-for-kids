@@ -8,7 +8,7 @@ import {
 } from '@/types/mahjong';
 import { MahjongGenerator } from '@/lib/games/mahjong/generator';
 
-// Initial state
+
 const initialMahjongGameState: MahjongGameState = {
   gamePhase: 'setup',
   difficulty: 'easy',
@@ -24,7 +24,7 @@ const initialMahjongGameState: MahjongGameState = {
   error: null,
 };
 
-// Reducer - Pure state management
+
 function mahjongGameReducer(state: MahjongGameState, action: MahjongGameAction): MahjongGameState {
   switch (action.type) {
     case 'SET_LOADING':

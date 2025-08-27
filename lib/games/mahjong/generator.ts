@@ -40,7 +40,6 @@ export class MahjongGenerator {
   }
 
 
-  // Delegate tile selectability and coverage methods
   static updateTileSelectability(board: MahjongBoard): void {
     MahjongSolvabilityValidator.updateTileSelectability(board);
   }
@@ -73,7 +72,6 @@ export class MahjongGenerator {
     return MahjongSolvabilityValidator.matchTiles(board, tile1Id, tile2Id);
   }
 
-  // Delegate responsive sizing
   static getResponsiveTileSize(screenWidth: number, difficulty: MahjongDifficulty): number {
     return MahjongLayoutCalculator.getResponsiveTileSize(screenWidth, difficulty);
   }

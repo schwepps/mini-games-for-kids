@@ -14,7 +14,7 @@ export function useMahjongGameEffects(
 ) {
   const [screenWidth, setScreenWidth] = useState(768);
 
-  // Handle screen resize for responsive tile sizing
+
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -27,21 +27,21 @@ export function useMahjongGameEffects(
     }
   }, []);
 
-  // Auto-match when 2 matching tiles are selected
+
   useEffect(() => {
     if (state.selectedTiles.length === 2 && !state.showingHint && state.board) {
       const tile1 = state.board.tiles.find(t => t.id === state.selectedTiles[0]);
       const tile2 = state.board.tiles.find(t => t.id === state.selectedTiles[1]);
       
       if (tile1 && tile2 && MahjongGenerator.canMatchTiles(tile1, tile2)) {
-        // Match found - brief delay for visual feedback
+
         const matchTimeout = setTimeout(() => {
           dispatch({ type: 'MATCH_TILES', tileIds: state.selectedTiles });
         }, 300);
         
         return () => clearTimeout(matchTimeout);
       } else if (tile1 && tile2) {
-        // No match - deselect after delay
+
         const deselectTimeout = setTimeout(() => {
           dispatch({ type: 'DESELECT_TILES', tileIds: state.selectedTiles });
         }, 500);
@@ -51,7 +51,7 @@ export function useMahjongGameEffects(
     }
   }, [state.selectedTiles, state.showingHint, state.board, dispatch]);
 
-  // Auto-hide hint after timeout
+
   useEffect(() => {
     if (state.showingHint) {
       const hintTimeout = setTimeout(() => {

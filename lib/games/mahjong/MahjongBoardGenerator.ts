@@ -109,7 +109,6 @@ export class MahjongBoardGenerator {
     const availableChars = [...characters];
     const pairsNeeded = totalTiles / 2;
 
-    // Shuffle available characters
     for (let i = availableChars.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = availableChars[i];
@@ -119,15 +118,13 @@ export class MahjongBoardGenerator {
       }
     }
 
-    // Create pairs
     for (let i = 0; i < pairsNeeded; i++) {
       const char = availableChars[i % availableChars.length];
       if (char) {
-        pairs.push(char, char); // Add each character twice for pair
+        pairs.push(char, char);
       }
     }
 
-    // Shuffle the pairs to randomize placement
     for (let i = pairs.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = pairs[i];
@@ -165,7 +162,6 @@ export class MahjongBoardGenerator {
       maxLayer = Math.max(maxLayer, pos.layer);
     });
 
-    // Add layer offset for 3D effect
     const layerOffset = maxLayer * 6;
     
     return {
@@ -217,7 +213,6 @@ export class MahjongBoardGenerator {
     });
   }
 
-  // Helper methods
   private static estimateTileSizeFromBoard(board: MahjongBoard): number {
     if (board.tiles.length >= 2) {
       const tile1 = board.tiles[0];
@@ -343,7 +338,6 @@ export class MahjongBoardGenerator {
       return layout;
     }
 
-    // Find the bounds of the original layout using pixel coordinates
     let minX = Infinity, maxX = -Infinity;
     let minY = Infinity, maxY = -Infinity;
     
@@ -354,49 +348,40 @@ export class MahjongBoardGenerator {
       maxY = Math.max(maxY, pos.y);
     });
 
-    // Calculate original layout dimensions in pixels
-    const originalWidth = maxX - minX + 60; // Add tile width
-    const originalHeight = maxY - minY + 60; // Add tile height
+    const originalWidth = maxX - minX + 60;
+    const originalHeight = maxY - minY + 60;
     const maxLayer = Math.max(...layout.positions.map(p => p.layer));
     
-    // Calculate space needed including layer offsets
-    const layerOffset = maxLayer * 6; // 6px per layer offset
-    const scaleFactor = tileSize / 60; // Scale based on tile size
+    const layerOffset = maxLayer * 6;
+    const scaleFactor = tileSize / 60;
     
     const requiredWidth = (originalWidth * scaleFactor) + layerOffset;
     const requiredHeight = (originalHeight * scaleFactor) + layerOffset;
     
-    // Check if scaling is needed
-    const availableWidth = containerSize.width - 32; // padding
-    const availableHeight = containerSize.height - 100; // UI elements
+    const availableWidth = containerSize.width - 32;
+    const availableHeight = containerSize.height - 100;
     
     let layoutScaleFactor = 1;
     
     if (requiredWidth > availableWidth || requiredHeight > availableHeight) {
-      // Calculate scale factor to fit container
       const widthScale = availableWidth / requiredWidth;
       const heightScale = availableHeight / requiredHeight;
-      layoutScaleFactor = Math.min(widthScale, heightScale, 1); // Never scale up, only down
-      
-      // Ensure minimum playable size
+      layoutScaleFactor = Math.min(widthScale, heightScale, 1);
       layoutScaleFactor = Math.max(layoutScaleFactor, 0.5);
     }
 
-    // If no scaling needed, return original
     if (layoutScaleFactor === 1) {
       return layout;
     }
 
-    // Scale the positions using pixel coordinates
     const scaledPositions = layout.positions.map(pos => ({
       x: Math.round((pos.x - minX) * layoutScaleFactor) + minX,
       y: Math.round((pos.y - minY) * layoutScaleFactor) + minY,
-      layer: pos.layer, // Don't scale layers
+      layer: pos.layer,
       supportedBy: pos.supportedBy,
       id: pos.id
     }));
 
-    // Return scaled layout
     return {
       ...layout,
       positions: scaledPositions

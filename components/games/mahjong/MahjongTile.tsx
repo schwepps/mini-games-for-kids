@@ -33,7 +33,6 @@ export default function MahjongTile({
     }
   };
 
-  // Don't render matched tiles (but show covered tiles in 3D structure)
   if (tile.isMatched) {
     return null;
   }
@@ -52,11 +51,11 @@ export default function MahjongTile({
         }}
         animate={{ 
           scale: 1, 
-          opacity: 1, // Always fully opaque - use visual styling for states
+          opacity: 1,
           rotateY: 0,
-          x: (tile.x - offsetX) + (tile.layer * layerOffset), // Normalized position with proportional layer offset
-          y: (tile.y - offsetY) - (tile.layer * layerOffset), // Normalized position with tiles "resting" on lower ones
-          z: tile.z // Proper z-index layering: higher layers appear on top
+          x: (tile.x - offsetX) + (tile.layer * layerOffset),
+          y: (tile.y - offsetY) - (tile.layer * layerOffset),
+          z: tile.z
         }}
         exit={{ 
           scale: 0,
@@ -65,13 +64,13 @@ export default function MahjongTile({
           transition: { duration: 0.4, ease: "easeInOut" }
         }}
         whileHover={tile.isSelectable && !disabled ? { 
-          scale: 1.02, // Reduced scale for better mobile performance
+          scale: 1.02,
           z: tile.z + 6,
-          rotateX: -3, // Subtle rotation for mobile
+          rotateX: -3,
           transition: { duration: 0.15 }
         } : {}}
         whileTap={tile.isSelectable && !disabled ? { 
-          scale: 0.97, // Improved tap feedback
+          scale: 0.97,
           transition: { duration: 0.1 }
         } : {}}
         transition={{ 
@@ -84,10 +83,10 @@ export default function MahjongTile({
         style={{
           width: tileSize,
           height: tileSize,
-          minWidth: '44px', // Ensure minimum touch target size
+          minWidth: '44px',
           minHeight: '44px',
           transformStyle: 'preserve-3d',
-          zIndex: tile.layer * 10, // Critical: CSS z-index for proper stacking (higher layers on top)
+          zIndex: tile.layer * 10,
         }}
         onClick={handleClick}
         role="button"
@@ -101,15 +100,14 @@ export default function MahjongTile({
           }
         }}
       >
-        {/* Tile Container with 3D Effects */}
         <div
           className={`
             relative w-full h-full rounded-lg transition-all duration-200
             ${tile.isSelectable && !disabled
               ? 'cursor-pointer shadow-lg hover:shadow-2xl'
               : tile.isCovered 
-                ? 'cursor-not-allowed shadow-md' // Covered tiles: subtle shadow, no transparency
-                : 'cursor-not-allowed opacity-60 grayscale' // Non-selectable tiles: dimmed
+                ? 'cursor-not-allowed shadow-md'
+                : 'cursor-not-allowed opacity-60 grayscale'
             }
             ${tile.isSelected || showHint
               ? 'ring-4 ring-pink-400 ring-opacity-90 shadow-2xl'
@@ -120,8 +118,8 @@ export default function MahjongTile({
             background: tile.isSelectable 
               ? 'linear-gradient(145deg, #ffffff 0%, #fefefe 30%, #f9fafb 70%, #f3f4f6 100%)'
               : tile.isCovered 
-                ? 'linear-gradient(145deg, #f8fafc 0%, #f1f5f9 30%, #e2e8f0 70%, #cbd5e1 100%)' // Covered: cooler, muted gradient
-                : 'linear-gradient(145deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%)', // Non-selectable: darker gradient
+                ? 'linear-gradient(145deg, #f8fafc 0%, #f1f5f9 30%, #e2e8f0 70%, #cbd5e1 100%)'
+                : 'linear-gradient(145deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%)',
             boxShadow: tile.isSelectable
               ? `
                 0 ${(tile.layer + 1) * 8}px ${(tile.layer + 1) * 16}px rgba(0, 0, 0, 0.25),
@@ -138,13 +136,12 @@ export default function MahjongTile({
                 inset 0 1px 0 rgba(255, 255, 255, 0.4),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2)
               `,
-            zIndex: tile.layer * 1000 + tile.row * 100 + tile.col, // Enhanced z-indexing for better layering
+            zIndex: tile.layer * 1000 + tile.row * 100 + tile.col,
             border: tile.isSelectable 
               ? '2px solid rgba(255, 255, 255, 0.9)'
               : '1px solid rgba(255, 255, 255, 0.5)',
           }}
         >
-          {/* Character Image */}
           <div className="absolute inset-1 rounded-md overflow-hidden bg-white/90">
             <Image
               src={imageUrl}
@@ -157,7 +154,6 @@ export default function MahjongTile({
             />
           </div>
 
-          {/* Selection Indicator */}
           <AnimatePresence>
             {(tile.isSelected || showHint) && (
               <motion.div
@@ -180,7 +176,6 @@ export default function MahjongTile({
                   }}
                   className="absolute inset-0 rounded-lg"
                 />
-                {/* Sparkle effect */}
                 <div className="absolute inset-0 overflow-hidden rounded-lg">
                   <motion.div
                     animate={{ 
@@ -216,7 +211,6 @@ export default function MahjongTile({
             )}
           </AnimatePresence>
 
-          {/* Hint Pulse Animation */}
           <AnimatePresence>
             {showHint && (
               <motion.div
@@ -233,14 +227,12 @@ export default function MahjongTile({
             )}
           </AnimatePresence>
 
-          {/* Non-selectable Overlay */}
           {!tile.isSelectable && !tile.isMatched && !tile.isCovered && (
             <div className="absolute inset-0 rounded-lg bg-black/20">
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/30 rounded-lg" />
             </div>
           )}
 
-          {/* Covered Tile Overlay */}
           {tile.isCovered && (
             <div className="absolute inset-0 rounded-lg bg-black/40">
               <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/30 to-black/50 rounded-lg" />
@@ -250,10 +242,8 @@ export default function MahjongTile({
             </div>
           )}
 
-          {/* Authentic Mahjong Blocking Indicators */}
           {!tile.isSelectable && !tile.isCovered && (
             <>
-              {/* Left/Right blocking indicators for authentic mahjong "slide out" rules */}
               {tile.leftBlocked && !tile.rightBlocked && (
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-orange-400 text-xs opacity-70">
                   ←❌
@@ -272,7 +262,6 @@ export default function MahjongTile({
             </>
           )}
 
-          {/* 3D Edge Effect */}
           <div 
             className="absolute inset-0 rounded-lg pointer-events-none"
             style={{
@@ -287,7 +276,6 @@ export default function MahjongTile({
           />
         </div>
 
-        {/* Character Name Tooltip (visible on hover for larger screens) */}
         <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden lg:block">
           <div className="bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
             {tile.character.name}

@@ -26,7 +26,6 @@ export default function MahjongBoard({
   const [startTime] = useState(Date.now());
   const [forceStaticLayout, setForceStaticLayout] = useState(false);
   
-  // Calculate dynamic container size that encompasses actual tile content
   const calculateDynamicDimensions = () => {
     if (forceStaticLayout || hasError || !useAdaptiveLayout) {
       return {
@@ -36,62 +35,53 @@ export default function MahjongBoard({
       };
     }
 
-    // Get available space with enhanced device-aware adjustments
-    // Progressive padding based on device type for better visual spacing
     const deviceType = isReady && size.width > 0 ? 
       (size.width < 768 ? 'mobile' : size.width < 1280 ? 'tablet' : 'desktop') : 'tablet';
     const paddingByDevice = {
-      mobile: 8,    // 4px each side (px-1) for < 768px
-      tablet: 16,   // 8px each side (px-2) for 768px - 1279px  
-      desktop: 16   // 8px each side (px-2) for ≥ 1280px
+      mobile: 8,
+      tablet: 16,
+      desktop: 16
     };
     const availableWidth = isReady && size.width > 0 ? 
       size.width - paddingByDevice[deviceType] : 800;
     
-    // Enhanced responsive UI zone sizing
     const dynamicsDeviceType = availableWidth < 768 ? 'mobile' : availableWidth < 1280 ? 'tablet' : 'desktop';
     const uiZoneHeights = {
-      mobile: { top: 24, bottom: 20, buffer: 48 },    // Optimized for mobile < 768px
-      tablet: { top: 30, bottom: 24, buffer: 60 },    // Balanced UI for MD+ 768px - 1279px
-      desktop: { top: 34, bottom: 28, buffer: 72 }    // Efficient UI for XL+ ≥ 1280px
+      mobile: { top: 24, bottom: 20, buffer: 48 },
+      tablet: { top: 30, bottom: 24, buffer: 60 },
+      desktop: { top: 34, bottom: 28, buffer: 72 }
     };
     
     const uiZones = uiZoneHeights[dynamicsDeviceType];
     const reservedHeight = uiZones.top + uiZones.bottom + uiZones.buffer; // Total UI space
     const availableHeight = isReady && size.height > 0 ? size.height - reservedHeight : 600;
     
-    // First calculate tile bounds to understand actual content requirements
     const tileBounds = calculateTileBounds();
     
-    // Content requirements = actual tile bounds + adequate padding for tall formations
-    const structurePadding = Math.max(40, Math.round(tileSize * 0.4)); // Dynamic padding based on tile size
+    const structurePadding = Math.max(40, Math.round(tileSize * 0.4));
     const contentWidth = Math.max(tileBounds.width + structurePadding, board.width || 600);
     const contentHeight = Math.max(tileBounds.height + structurePadding, board.height || 400);
     
-    // Device-aware scaling factors for optimal UX
     const scalingDeviceType = availableWidth < 768 ? 'mobile' : availableWidth < 1280 ? 'tablet' : 'desktop';
     const deviceScaleFactors = {
-      mobile: { min: 0.6, preferred: 0.8 }, // More aggressive scaling for mobile < 768px
-      tablet: { min: 0.7, preferred: 0.9 }, // Moderate scaling for MD+ 768px - 1279px  
-      desktop: { min: 0.8, preferred: 0.95 } // Conservative scaling for XL+ ≥ 1280px
+      mobile: { min: 0.6, preferred: 0.8 },
+      tablet: { min: 0.7, preferred: 0.9 },
+      desktop: { min: 0.8, preferred: 0.95 }
     };
     
     const factors = deviceScaleFactors[scalingDeviceType];
     
-    // Calculate scaling with priority on fitting tall formations
     const rawScaleX = availableWidth / contentWidth;
     const rawScaleY = availableHeight / contentHeight;
-    const rawScale = Math.min(rawScaleX, rawScaleY, 1); // Never scale up
+    const rawScale = Math.min(rawScaleX, rawScaleY, 1);
     
-    // For very tall formations, prioritize fitting over preferred scale
     const isVeryTall = contentHeight > availableHeight * 0.8;
     const adaptiveScale = isVeryTall 
-      ? Math.max(rawScale, factors.min * 0.9) // Allow more aggressive scaling for tall formations
+      ? Math.max(rawScale, factors.min * 0.9)
       : Math.max(rawScale, factors.min);
     
     const preferredScale = Math.min(factors.preferred, adaptiveScale);
     
-    // Determine final dimensions ensuring tall formations fit
     const scaledWidth = contentWidth * preferredScale;
     const scaledHeight = contentHeight * preferredScale;
     
@@ -220,7 +210,6 @@ export default function MahjongBoard({
         height: 'auto' // Allow height to grow as needed
       }}
     >
-      {/* Game Board Container - Pure game content */}
       <div id='parent_div' className="flex-1 flex justify-center items-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -240,7 +229,6 @@ export default function MahjongBoard({
             transformOrigin: 'center center'
           }}
         >
-        {/* Enhanced Background Board Layer for Authentic Mahjong */}
         <div
           id='background_layer'
           className="absolute rounded-3xl border border-slate-200/30"
@@ -265,7 +253,6 @@ export default function MahjongBoard({
           }}
         />
 
-        {/* Render Tiles with 3D Container */}
         <div
           className="relative w-full h-full"
           style={{
@@ -274,8 +261,8 @@ export default function MahjongBoard({
           }}
         >
           {board.tiles
-            .slice() // Create copy to avoid mutating original array
-            .sort((a, b) => a.layer - b.layer) // Sort by layer: lowest first, highest last
+            .slice()
+            .sort((a, b) => a.layer - b.layer)
             .map((tile) => (
             <MahjongTile
               key={tile.id}
@@ -294,7 +281,6 @@ export default function MahjongBoard({
         </motion.div>
       </div>
 
-      {/* Bottom UI Bar - Emergency Controls */}
       {(hasError || (!isReady && Date.now() - startTime > 3000)) && (
         <div 
           className="flex justify-end items-center px-2"

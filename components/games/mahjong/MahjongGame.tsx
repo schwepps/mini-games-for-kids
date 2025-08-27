@@ -21,7 +21,6 @@ import { MahjongDifficulty } from '@/types/mahjong';
  */
 export default function MahjongGame() {
   const {
-    // State
     gamePhase,
     difficulty,
     board,
@@ -33,15 +32,11 @@ export default function MahjongGame() {
     showingHint,
     loading,
     error,
-    
-    // Actions
     selectDifficulty,
     startNewGame,
     selectTile,
     showHint,
     resetGame,
-    
-    // Computed
     gameTime,
     isInteractionDisabled,
     hasValidMoves
@@ -56,14 +51,14 @@ export default function MahjongGame() {
 
   const dynamicSpacing = calculateDynamicSpacing(containerSize, difficulty);
 
-  // Show celebration when game is won
+
   useEffect(() => {
     if (gamePhase === 'won') {
       setShowCelebration(true);
     }
   }, [gamePhase, setShowCelebration]);
 
-  // Event handlers with container size awareness
+
   const handleNewGame = () => {
     setShowCelebration(false);
     if (isReady && containerSize) {
@@ -104,7 +99,7 @@ export default function MahjongGame() {
     }
   };
 
-  // Setup phase
+
   if (gamePhase === 'setup') {
     return (
       <MahjongGameLayout 
@@ -123,14 +118,13 @@ export default function MahjongGame() {
     );
   }
 
-  // Playing phase
+
   return (
     <MahjongGameLayout 
       dynamicSpacing={dynamicSpacing}
       error={error}
       onRetry={resetGame}
     >
-      {/* Game Logo */}
       <Image
         src="/images/logo/mahjong-logo-large.png"
         alt="Mahjong - Jeu de Mahjong"
@@ -139,8 +133,6 @@ export default function MahjongGame() {
         className="mx-auto drop-shadow-lg"
         priority
       />
-
-      {/* Game Statistics */}
       <MahjongGameStats 
         stats={{
           moves,
@@ -150,8 +142,6 @@ export default function MahjongGame() {
           gameTime
         }}
       />
-
-      {/* Game Board */}
       {board && (
         <AnimatePresence mode="wait">
           <motion.div
@@ -171,8 +161,6 @@ export default function MahjongGame() {
           </motion.div>
         </AnimatePresence>
       )}
-
-      {/* Game Controls */}
       <MahjongGameControls
         hints={hints}
         isInteractionDisabled={isInteractionDisabled}

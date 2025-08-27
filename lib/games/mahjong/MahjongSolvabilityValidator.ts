@@ -23,13 +23,8 @@ export class MahjongSolvabilityValidator {
         return;
       }
 
-      // Update coverage first
       this.updateTileCoverageForTile(tile, board);
-      
-      // Update adjacency blocking
       this.updateTileAdjacency(tile, board);
-      
-      // Determine selectability
       tile.isSelectable = this.isTileSelectable(tile);
     });
   }
@@ -55,24 +50,20 @@ export class MahjongSolvabilityValidator {
       return;
     }
 
-    // Use predefined support relationships from layout first
     const layoutSupportedBy = tile.supportedBy || [];
     
-    // Find tiles that cover this tile from above (direct physical overlap)
     const coveringTiles = board.tiles.filter(otherTile =>
       !otherTile.isMatched &&
       otherTile.layer > tile.layer &&
       this.tilesDirectlyOverlap(tile, otherTile)
     );
 
-    // Find tiles this tile actually rests on (using layout relationships + physical overlap)
     const supportingTiles = board.tiles.filter(otherTile =>
       !otherTile.isMatched &&
       otherTile.layer < tile.layer &&
       (layoutSupportedBy.includes(otherTile.id) || this.tilesDirectlyOverlap(tile, otherTile))
     );
 
-    // Find tiles that rest on this tile 
     const supportedTiles = board.tiles.filter(otherTile =>
       !otherTile.isMatched &&
       otherTile.layer > tile.layer &&
@@ -97,14 +88,12 @@ export class MahjongSolvabilityValidator {
       return;
     }
 
-    // Check for tiles blocking left movement
     const leftBlockingTiles = board.tiles.filter(otherTile =>
       !otherTile.isMatched &&
       otherTile.layer === tile.layer &&
       this.tileBlocksLeftMovement(tile, otherTile)
     );
 
-    // Check for tiles blocking right movement
     const rightBlockingTiles = board.tiles.filter(otherTile =>
       !otherTile.isMatched &&
       otherTile.layer === tile.layer &&
@@ -142,13 +131,11 @@ export class MahjongSolvabilityValidator {
    */
   static tilesDirectlyOverlap(tile1: MahjongTile, tile2: MahjongTile): boolean {
     if (!tile1.footprint || !tile2.footprint) {
-      // Fallback to position-based overlap if footprints not available
-      const overlapX = Math.abs(tile1.x - tile2.x) < 60; // Standard tile width
-      const overlapY = Math.abs(tile1.y - tile2.y) < 60; // Standard tile height
+      const overlapX = Math.abs(tile1.x - tile2.x) < 60;
+      const overlapY = Math.abs(tile1.y - tile2.y) < 60;
       return overlapX && overlapY;
     }
 
-    // Check for any overlap (even partial)
     return !(
       tile1.footprint.maxX <= tile2.footprint.minX ||
       tile1.footprint.minX >= tile2.footprint.maxX ||
@@ -162,10 +149,9 @@ export class MahjongSolvabilityValidator {
    */
   static tileBlocksLeftMovement(tile: MahjongTile, otherTile: MahjongTile): boolean {
     if (!tile.footprint || !otherTile.footprint) {
-      // Fallback: check if other tile is immediately to the left and vertically aligned
       const isToTheLeft = otherTile.x < tile.x;
-      const isTouching = Math.abs(otherTile.x + 60 - tile.x) < 5; // Within 5px of touching
-      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60; // Vertical overlap
+      const isTouching = Math.abs(otherTile.x + 60 - tile.x) < 5;
+      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60;
       return isToTheLeft && isTouching && verticalOverlap;
     }
 
@@ -184,14 +170,12 @@ export class MahjongSolvabilityValidator {
    */
   static tileBlocksRightMovement(tile: MahjongTile, otherTile: MahjongTile): boolean {
     if (!tile.footprint || !otherTile.footprint) {
-      // Fallback: check if other tile is immediately to the right and vertically aligned
       const isToTheRight = otherTile.x > tile.x;
-      const isTouching = Math.abs(tile.x + 60 - otherTile.x) < 5; // Within 5px of touching
-      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60; // Vertical overlap
+      const isTouching = Math.abs(tile.x + 60 - otherTile.x) < 5;
+      const verticalOverlap = Math.abs(otherTile.y - tile.y) < 60;
       return isToTheRight && isTouching && verticalOverlap;
     }
 
-    // Check if otherTile is directly adjacent to the right and prevents sliding
     const isDirectlyRight = Math.abs(tile.footprint.maxX - otherTile.footprint.minX) < 5;
     const verticalOverlap = !(
       otherTile.footprint.maxY <= tile.footprint.minY ||

@@ -28,7 +28,6 @@ export default function MahjongSetup({
         transition={{ duration: 0.5 }}
         className="w-full max-w-4xl mx-auto"
       >
-        {/* Game Logo */}
         <motion.div
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -47,8 +46,6 @@ export default function MahjongSetup({
 
         <Card className="bg-white/90 backdrop-blur-sm shadow-2xl border-4 border-white/50">
           <CardContent className="p-4 sm:p-6 text-center">
-            
-            {/* Title */}
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -61,8 +58,6 @@ export default function MahjongSetup({
                 🎯 Quel niveau veux-tu jouer ?
               </p>
             </motion.div>
-
-            {/* Difficulty Selection */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -139,9 +134,6 @@ export default function MahjongSetup({
                 );
               })}
             </motion.div>
-
-
-            {/* Start Game Button */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

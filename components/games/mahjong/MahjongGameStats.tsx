@@ -38,7 +38,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
     >
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         
-        {/* Progress */}
         <Card className="bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg">
           <CardContent className="p-3 lg:p-4 text-center">
             <motion.div
@@ -51,7 +50,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
               </div>
               <div className="text-xs lg:text-sm opacity-90">Paires</div>
               
-              {/* Progress Bar */}
               <div className="mt-2 bg-white/20 rounded-full h-2">
                 <motion.div
                   initial={{ width: 0 }}
@@ -64,7 +62,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
           </CardContent>
         </Card>
 
-        {/* Moves */}
         <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg">
           <CardContent className="p-3 lg:p-4 text-center">
             <motion.div
@@ -81,7 +78,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
           </CardContent>
         </Card>
 
-        {/* Time */}
         <Card className="bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg">
           <CardContent className="p-3 lg:p-4 text-center">
             <motion.div
@@ -97,7 +93,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
           </CardContent>
         </Card>
 
-        {/* Hints */}
         <Card className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg">
           <CardContent className="p-3 lg:p-4 text-center">
             <motion.div
@@ -119,7 +114,6 @@ export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
         </Card>
       </div>
 
-      {/* Mobile-Only Expanded Stats */}
       <div className="lg:hidden mt-4">
         <Card className="bg-white/10 backdrop-blur-sm border-white/20">
           <CardContent className="p-4">
