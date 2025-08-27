@@ -2,7 +2,7 @@
 
 import { memo, useMemo, JSX } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IQuestion, ICharacter } from '@/types/game';
+import { IQuestion, ICharacter } from '@/types/guess-who';
 import { CharacterFilter } from '@/lib/characterFilter';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import CharacteristicIcon from '../CharacteristicIcon';

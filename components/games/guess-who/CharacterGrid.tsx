@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { ICharacter, IQuestion } from '@/types/game';
+import { ICharacter, IQuestion } from '@/types/guess-who';
 import CharacterCard from './CharacterCard';
 import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
 

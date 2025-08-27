@@ -3,7 +3,7 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { ICharacter } from '@/types/game';
+import { ICharacter } from '@/types/guess-who';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import CharacteristicIcon from './CharacteristicIcon';
 import { Sparkles, Target } from 'lucide-react';

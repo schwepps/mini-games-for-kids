@@ -1,4 +1,4 @@
-import { ICharacter } from '@/types/game';
+import { ICharacter } from '@/types/guess-who';
 import { 
   MahjongBoard, 
   MahjongTile, 

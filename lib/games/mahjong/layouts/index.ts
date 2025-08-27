@@ -11,13 +11,11 @@
 
 import { MahjongLayout, TilePosition } from '@/types/mahjong';
 
-// Import formation layouts
-import { TURTLE_FORMATION } from './formation/TurtleLayout';
-import { TOWER_FORMATION } from './formation/TowerLayout';
-import { PYRAMID_FORMATION } from './formation/PyramidLayout';
-
-// Import square layouts (extracted)
-import { DIAMOND_SQUARE } from './square/DiamondSquareLayout';
+// Import flattened layouts
+import { TURTLE_FORMATION } from './turtle-formation';
+import { TOWER_FORMATION } from './tower-formation';
+import { PYRAMID_FORMATION } from './pyramid-formation';
+import { DIAMOND_SQUARE } from './diamond-square';
 
 // Import services
 import { layoutRegistry, LayoutRegistry, ILayoutRegistry } from './LayoutRegistry';

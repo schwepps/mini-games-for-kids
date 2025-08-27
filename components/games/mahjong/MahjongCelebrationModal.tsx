@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { MahjongDifficulty, DIFFICULTY_OPTIONS } from '@/types/mahjong';
 import SharedCelebrationModal, { CelebrationConfig } from '@/components/shared/games/SharedCelebrationModal';
+import { formatTime } from '@/lib/shared/time-utils';
 
 interface MahjongCelebrationModalProps {
   open: boolean;
@@ -26,11 +27,7 @@ export default function MahjongCelebrationModal({
   onDifficultyChange
 }: MahjongCelebrationModalProps) {
 
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+
 
   const calculateEfficiency = (): number => {
     if (totalPairs === 0) return 0;

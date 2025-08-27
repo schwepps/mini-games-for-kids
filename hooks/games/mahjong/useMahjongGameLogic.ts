@@ -1,10 +1,11 @@
 'use client';
 
 import { useCallback } from 'react';
-import { IProfile } from '@/types/game';
+import { IProfile } from '@/types/guess-who';
 import { MahjongDifficulty, DIFFICULTY_OPTIONS } from '@/types/mahjong';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { createErrorHandler } from '@/lib/utils/errorHandling';
+import { calculateGameTime } from '@/lib/shared/time-utils';
 import { MahjongGenerator } from '@/lib/games/mahjong/generator';
 import { ContainerSize } from '@/hooks/shared/useContainerSize';
 
@@ -103,10 +104,8 @@ export function useMahjongGameLogic(dispatch: (action: any) => void) {
     return Math.min(100, Math.round((perfectMoves / actualMoves) * 100));
   }, []);
 
-  const calculateGameTime = useCallback((startTime: Date | null): number => {
-    return startTime 
-      ? Math.floor((Date.now() - startTime.getTime()) / 1000)
-      : 0;
+  const getCalculatedGameTime = useCallback((startTime: Date | null): number => {
+    return calculateGameTime(startTime);
   }, []);
 
   return {
@@ -120,6 +119,6 @@ export function useMahjongGameLogic(dispatch: (action: any) => void) {
     
     // Utilities
     calculateEfficiency,
-    calculateGameTime
+    calculateGameTime: getCalculatedGameTime
   };
 }

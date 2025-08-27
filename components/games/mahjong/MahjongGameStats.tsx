@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
+import { formatTime } from '@/lib/shared/time-utils';
 
 interface MahjongGameStatsProps {
   stats: {
@@ -15,11 +16,7 @@ interface MahjongGameStatsProps {
 
 export default function MahjongGameStats({ stats }: MahjongGameStatsProps) {
   
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+
 
   const progressPercentage = stats.totalPairs > 0 
     ? (stats.matchedPairs / stats.totalPairs) * 100 

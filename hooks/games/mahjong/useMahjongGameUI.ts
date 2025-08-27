@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { MahjongDifficulty } from '@/types/mahjong';
 import { ContainerSize } from '@/hooks/shared/useContainerSize';
-import { getDeviceType, getDeviceSpacing, DeviceType } from '@/lib/games/mahjong/utils/deviceDetection';
+import { getDeviceType, getDeviceSpacing, DeviceType } from '@/lib/shared/device-utils';
 
 /**
  * UI logic hook for Mahjong game
@@ -25,19 +25,16 @@ export function useMahjongGameUI() {
     difficulty: MahjongDifficulty
   ) => {
     // During SSR or before container size is available, use consistent tablet spacing
-    if (!isHydrated || !containerSize) {
-      const fallbackDeviceType: DeviceType = 'tablet';
-      return getDeviceSpacing(fallbackDeviceType, difficulty);
-    }
-    
-    // After hydration and container size is available, use actual device type
-    const deviceType = getDeviceType(containerSize);
-    return getDeviceSpacing(deviceType, difficulty);
+    const screenWidth = containerSize?.width || 768;
+    const deviceType = getDeviceType(screenWidth);
+    const spacingSize = difficulty === 'hard' ? 'large' : 'medium';
+    return getDeviceSpacing(deviceType, spacingSize);
   }, [isHydrated]);
 
   // Device type detection using consolidated utility
   const getDeviceTypeForContainer = useCallback((containerSize: ContainerSize | null): DeviceType => {
-    return getDeviceType(containerSize);
+    const screenWidth = containerSize?.width || 768;
+    return getDeviceType(screenWidth);
   }, []);
 
   return {

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { formatTime } from '@/lib/games/sudoku/celebrationUtils';
+import { formatTime } from '@/lib/shared/time-utils';
 
 interface SudokuPerformanceStatsProps {
   gridSize: number;

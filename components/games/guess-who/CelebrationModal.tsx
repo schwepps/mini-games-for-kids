@@ -1,7 +1,7 @@
 'use client';
 
 import SharedCelebrationModal, { CelebrationConfig } from '@/components/shared/games/SharedCelebrationModal';
-import { ICharacter } from '@/types/game';
+import { ICharacter } from '@/types/guess-who';
 import { usePerformanceRating } from '@/hooks/shared/usePerformanceRating';
 
 interface CelebrationModalProps {

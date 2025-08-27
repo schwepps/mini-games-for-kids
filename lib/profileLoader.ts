@@ -3,7 +3,7 @@
  * Automatically resolves paths based on NEXT_PUBLIC_GAME_PROFILE env variable
  */
 
-import { IProfile } from '@/types/game';
+import { IProfile } from '@/types/guess-who';
 import { GameValidation } from '@/lib/schemas';
 import { ZodError } from 'zod';
 import { getErrorMessage } from '@/lib/utils/errorHandling';

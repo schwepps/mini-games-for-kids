@@ -1,7 +1,7 @@
 'use client';
 
 import { useReducer, useEffect, useCallback } from 'react';
-import { IProfile, ICharacter } from '@/types/game';
+import { IProfile, ICharacter } from '@/types/guess-who';
 import { 
   SudokuGameState, 
   SudokuGameAction, 

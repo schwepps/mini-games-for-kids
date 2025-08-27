@@ -1,7 +1,7 @@
 'use client';
 
 import { useReducer, useEffect, useCallback } from 'react';
-import { IProfile } from '@/types/game';
+import { IProfile } from '@/types/guess-who';
 import { MemoGameState, MemoGameAction } from '@/types/memo';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { createErrorHandler } from '@/lib/utils/errorHandling';

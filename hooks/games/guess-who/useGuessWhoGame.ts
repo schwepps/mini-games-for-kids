@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { IProfile, ICharacter, IQuestion } from '@/types/game';
+import { IProfile, ICharacter, IQuestion } from '@/types/guess-who';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { CharacterFilter } from '@/lib/characterFilter';
 import { createErrorHandler } from '@/lib/utils/errorHandling';

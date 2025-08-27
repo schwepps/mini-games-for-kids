@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { CharacterPaletteProps } from '@/types/sudoku';
-import { ICharacter } from '@/types/game';
+import { ICharacter } from '@/types/guess-who';
 import { ProfileLoader } from '@/lib/profileLoader';
 
 export default function CharacterPalette({
