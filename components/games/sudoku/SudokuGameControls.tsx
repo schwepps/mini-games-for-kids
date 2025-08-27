@@ -38,12 +38,12 @@ export default function SudokuGameControls({
             {hints ? (
               <>
                 <Lightbulb className="w-5 h-5 mr-2" />
-                Indices ON
+                Aide ON
               </>
             ) : (
               <>
                 <LightbulbOff className="w-5 h-5 mr-2" />
-                Indices OFF
+                Aide OFF
               </>
             )}
           </Button>
@@ -68,7 +68,7 @@ export default function SudokuGameControls({
             className={gameButton('newGame', 'shadow-green-400/30')}
           >
             <RotateCcw className="w-5 h-5 mr-2" />
-            🎮 Nouvelle Partie
+            Nouvelle Partie
           </Button>
         </motion.div>
       </div>

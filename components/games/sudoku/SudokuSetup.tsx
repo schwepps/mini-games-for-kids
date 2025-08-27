@@ -153,7 +153,7 @@ export default function SudokuSetup({
                 >
                   🧩
                 </motion.span>
-                <span className="drop-shadow-sm">Commencer le Sudoku</span>
+                <span className="drop-shadow-sm">Commencer à Jouer</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

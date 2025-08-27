@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { largeButton } from '@/lib/styles/buttonUtils';
 import { GameSetupProps } from '@/types/memo';
 import { PAIR_COUNT_OPTIONS } from '@/types/memo';
 
@@ -105,7 +106,7 @@ export default function GameSetup({
             onClick={onStartGame}
             disabled={loading || selectedPairCount === 0}
             size="lg"
-            className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-lg sm:text-xl lg:text-2xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 rounded-full shadow-2xl border-4 border-white/50 backdrop-blur-sm transform transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`${largeButton('setup')} disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {loading ? (
               <div className="flex items-center gap-3">

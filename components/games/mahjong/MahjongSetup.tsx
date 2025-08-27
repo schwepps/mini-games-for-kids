@@ -159,7 +159,7 @@ export default function MahjongSetup({
                 ) : (
                   <>
                     <span className="mr-3 text-2xl">🚀</span>
-                    <span>C&apos;EST PARTI !</span>
+                    <span>Commencer à Jouer</span>
                   </>
                 )}
               </Button>

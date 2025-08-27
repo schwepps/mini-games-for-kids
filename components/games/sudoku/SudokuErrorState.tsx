@@ -26,7 +26,7 @@ export default function SudokuErrorState({
             size="lg"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
-            Recommencer
+            Réessayer
           </Button>
         </CardContent>
       </Card>
