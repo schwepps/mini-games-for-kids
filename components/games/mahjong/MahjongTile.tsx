@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 import { MahjongTile as MahjongTileType } from '@/types/mahjong';
 import { ProfileLoader } from '@/lib/profileLoader';
 
@@ -16,6 +17,43 @@ interface MahjongTileProps {
   layerOffset?: number;
 }
 
+/**
+ * Calculate proper z-index based on tile properties, hover state, and selection state
+ * Ensures proper visual hierarchy with cross-layer hover priority
+ * 
+ * Hierarchy (lowest to highest):
+ * 1. Non-selectable: layer * 1000 + 100 + position
+ * 2. Selectable: layer * 1000 + 500 + position  
+ * 3. Selected: layer * 1000 + 700 + position
+ * 4. Hovered selectable: 10000+ (absolute highest, cross-layer)
+ * 
+ * The key fix: hovered selectable tiles use 10000+ range to ensure they appear
+ * above ALL other tiles regardless of layer, preventing clipping issues.
+ * 
+ * IMPORTANT: This function coordinates with 3D transform positioning.
+ * Hovered tiles also get subtle translateZ (120) to ensure both CSS stacking 
+ * context AND 3D positioning prioritize them with refined, polished feel.
+ */
+const calculateZIndex = (tile: MahjongTileType, isHovered: boolean = false, isSelected: boolean = false) => {
+  const layerBase = tile.layer * 1000;
+  const positionOffset = tile.row * 10 + tile.col;
+  
+  if (isHovered && tile.isSelectable) {
+    // Hovered selectable tiles: absolute highest z-index (cross-layer priority)
+    // This ensures ANY hovered selectable tile appears above ALL other tiles
+    return 10000 + tile.layer * 10 + (tile.row + tile.col);
+  } else if (isSelected && tile.isSelectable) {
+    // Selected tiles: high priority within layer
+    return layerBase + 700 + positionOffset;
+  } else if (tile.isSelectable) {
+    // Regular selectable tiles: medium priority within layer
+    return layerBase + 500 + positionOffset;
+  } else {
+    // Non-selectable tiles: lowest priority within layer
+    return layerBase + 100 + positionOffset;
+  }
+};
+
 export default function MahjongTile({ 
   tile, 
   tileSize, 
@@ -27,11 +65,16 @@ export default function MahjongTile({
   layerOffset = 10
 }: MahjongTileProps) {
   
+  // Track hover state for proper z-index calculation
+  const [isHovered, setIsHovered] = useState(false);
+  
   const handleClick = () => {
     if (!disabled && tile.isSelectable && !tile.isMatched) {
       onTileClick(tile.id);
     }
   };
+  
+  const currentZIndex = calculateZIndex(tile, isHovered, tile.isSelected);
 
   if (tile.isMatched) {
     return null;
@@ -55,7 +98,7 @@ export default function MahjongTile({
           rotateY: 0,
           x: (tile.x - offsetX) + (tile.layer * layerOffset),
           y: (tile.y - offsetY) - (tile.layer * layerOffset),
-          z: tile.z
+          z: isHovered && tile.isSelectable ? 120 : tile.z
         }}
         exit={{ 
           scale: 0,
@@ -64,11 +107,19 @@ export default function MahjongTile({
           transition: { duration: 0.4, ease: "easeInOut" }
         }}
         whileHover={tile.isSelectable && !disabled ? { 
-          scale: 1.02,
-          z: tile.z + 6,
-          rotateX: -3,
+          scale: 1.01,
+          z: 120,
+          rotateX: -1.5,
           transition: { duration: 0.15 }
         } : {}}
+        onHoverStart={() => {
+          if (tile.isSelectable && !disabled) {
+            setIsHovered(true);
+          }
+        }}
+        onHoverEnd={() => {
+          setIsHovered(false);
+        }}
         whileTap={tile.isSelectable && !disabled ? { 
           scale: 0.97,
           transition: { duration: 0.1 }
@@ -86,7 +137,7 @@ export default function MahjongTile({
           minWidth: '44px',
           minHeight: '44px',
           transformStyle: 'preserve-3d',
-          zIndex: tile.layer * 10,
+          zIndex: currentZIndex,
         }}
         onClick={handleClick}
         role="button"
@@ -136,7 +187,7 @@ export default function MahjongTile({
                 inset 0 1px 0 rgba(255, 255, 255, 0.4),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2)
               `,
-            zIndex: tile.layer * 1000 + tile.row * 100 + tile.col,
+            zIndex: currentZIndex,
             border: tile.isSelectable 
               ? '2px solid rgba(255, 255, 255, 0.9)'
               : '1px solid rgba(255, 255, 255, 0.5)',
