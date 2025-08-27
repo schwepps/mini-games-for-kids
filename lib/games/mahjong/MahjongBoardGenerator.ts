@@ -6,7 +6,6 @@ import {
   MahjongDifficulty 
 } from '@/types/mahjong';
 import { getRandomLayoutByDifficulty } from './layouts';
-// Removed unused import - AdaptiveLayoutGenerator no longer needed
 import { ContainerSize } from '@/hooks/shared/useContainerSize';
 import { MAHJONG_LAYOUT } from '@/lib/constants/gameConstants';
 
@@ -41,44 +40,6 @@ export class MahjongBoardGenerator {
     return board;
   }
 
-  /**
-   * Generate an adaptive MahJong board that fits container constraints
-   */
-  static generateAdaptiveBoard(
-    characters: ICharacter[], 
-    difficulty: MahjongDifficulty,
-    containerSize: ContainerSize,
-    pairCount?: number
-  ): MahjongBoard {
-    // Get a random static layout for this difficulty
-    const baseLayout = getRandomLayoutByDifficulty(difficulty);
-    if (!baseLayout) {
-      throw new Error(`No layouts found for difficulty: ${difficulty}`);
-    }
-
-    // Get optimal tile size based on container and difficulty
-    const tileSize = this.getOptimalTileSize(containerSize, difficulty, pairCount);
-    
-    // Scale the layout to fit the container if needed
-    const scaledLayout = this.scaleLayoutToContainer(baseLayout, containerSize, tileSize);
-    
-    // Create tiles using the scaled layout
-    const tiles = this.createTiles(scaledLayout, characters, tileSize);
-    
-    // Calculate board dimensions
-    const board: MahjongBoard = {
-      tiles,
-      layout: scaledLayout,
-      width: this.calculateAdaptiveBoardWidth(scaledLayout, tileSize),
-      height: this.calculateAdaptiveBoardHeight(scaledLayout, tileSize),
-      layers: scaledLayout.maxLayers
-    };
-
-    // Center tiles within container for better UX
-    this.centerTilesInContainer(board, containerSize);
-
-    return board;
-  }
 
   /**
    * Create tiles from pixel-perfect layout positions
@@ -368,30 +329,6 @@ export class MahjongBoardGenerator {
     return { min: 52, max: 80 };
   }
 
-  /**
-   * Calculate adaptive board dimensions
-   */
-  static calculateAdaptiveBoardWidth(
-    layout: MahjongLayout, 
-    tileSize: number
-  ): number {
-    const calculatedWidth = this.calculateBoardWidth(layout, tileSize);
-    const maxLayer = Math.max(...layout.positions.map(p => p.layer));
-    const layerOffset = maxLayer * 10;
-    
-    return calculatedWidth + layerOffset;
-  }
-
-  static calculateAdaptiveBoardHeight(
-    layout: MahjongLayout, 
-    tileSize: number
-  ): number {
-    const calculatedHeight = this.calculateBoardHeight(layout, tileSize);
-    const maxLayer = Math.max(...layout.positions.map(p => p.layer));
-    const layerOffset = maxLayer * 10;
-    
-    return calculatedHeight + layerOffset;
-  }
 
   /**
    * Scale a static layout to fit within container constraints

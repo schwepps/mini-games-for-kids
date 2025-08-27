@@ -4,7 +4,6 @@ import {
   MahjongTile, 
   MahjongDifficulty 
 } from '@/types/mahjong';
-import { ContainerSize } from '@/hooks/shared/useContainerSize';
 
 /**
  * MahJong Game Generator
@@ -40,29 +39,6 @@ export class MahjongGenerator {
     return board;
   }
 
-  /**
-   * Generate adaptive MahJong board with scaled layouts
-   * @deprecated Use generateBoard() for authentic mahjong gameplay
-   */
-  static generateAdaptiveBoard(
-    characters: ICharacter[], 
-    difficulty: MahjongDifficulty,
-    containerSize: ContainerSize,
-    pairCount?: number
-  ): MahjongBoard {
-    const board = MahjongBoardGenerator.generateAdaptiveBoard(
-      characters, 
-      difficulty, 
-      containerSize, 
-      pairCount
-    );
-    
-    // Initialize coverage and selectability
-    MahjongSolvabilityValidator.updateTileCoverage(board);
-    MahjongSolvabilityValidator.updateTileSelectability(board);
-    
-    return board;
-  }
 
   // Delegate tile selectability and coverage methods
   static updateTileSelectability(board: MahjongBoard): void {
