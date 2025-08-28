@@ -1,7 +1,6 @@
 'use client';
 
 import { useReducer, useEffect, useCallback, useRef } from 'react';
-import { IProfile } from '@/types/shared';
 import { JacquesGameState, JacquesGameAction, JacquesDifficulty } from '@/types/jacques-a-dit';
 import { ProfileLoader } from '@/lib/profileLoader';
 import { createErrorHandler } from '@/lib/utils/errorHandling';
@@ -10,8 +9,7 @@ import {
   initialJacquesGameState, 
   selectRandomCharacters,
   generateSequence,
-  isPlayerInputCorrect,
-  isGameWon
+  isPlayerInputCorrect
 } from '@/lib/games/jacques-a-dit/gameLogic';
 
 export function useJacquesADitGame() {
@@ -213,9 +211,7 @@ export function useJacquesADitGame() {
     gamePhase: state.gamePhase,
     selectedDifficulty: state.selectedDifficulty,
     characters: state.characters,
-    sequence: state.currentSequence, // Use currentSequence for backward compatibility
-    fullSequence: state.fullSequence,
-    currentSequence: state.currentSequence,
+    sequence: state.currentSequence,
     playerInput: state.playerInput,
     currentRound: state.currentRound,
     mistakes: state.mistakes,

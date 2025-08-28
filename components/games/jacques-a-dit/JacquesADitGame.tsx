@@ -194,7 +194,7 @@ export default function JacquesADitGame() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center"
             >
-              <div className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-3xl p-8 inline-block shadow-2xl">
+              <div className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-3xl p-8 inline-block shadow-2xl mb-8">
                 <h2 className="text-4xl font-bold text-white mb-4">
                   Bravo ! 🎉
                 </h2>
@@ -202,6 +202,13 @@ export default function JacquesADitGame() {
                   Tu as terminé tous les tours !
                 </p>
               </div>
+              
+              {/* Game Controls */}
+              <GameControls
+                onNewGame={handleNewGame}
+                onChangeDifficulty={handleChangeDifficulty}
+                disabled={false}
+              />
             </motion.div>
           )}
 

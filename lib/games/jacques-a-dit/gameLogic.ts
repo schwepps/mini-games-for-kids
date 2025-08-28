@@ -244,33 +244,3 @@ export function isPlayerInputCorrect(
   return true;
 }
 
-/**
- * Check if the game is won
- */
-export function isGameWon(
-  currentRound: number, 
-  targetLength: number,
-  playerInput: string[],
-  sequence: string[]
-): boolean {
-  return currentRound >= targetLength && 
-         playerInput.length === currentRound && 
-         isPlayerInputCorrect(playerInput, sequence);
-}
-
-/**
- * Get character by ID
- */
-export function getCharacterById(characters: ICharacter[], id: string): ICharacter | undefined {
-  return characters.find(char => char.id === id);
-}
-
-/**
- * Calculate performance rating based on mistakes
- */
-export function calculatePerformanceRating(mistakes: number): number {
-  // Perfect = 3 stars, 1-2 mistakes = 2 stars, 3+ mistakes = 1 star
-  if (mistakes === 0) return 3;
-  if (mistakes <= 2) return 2;
-  return 1;
-}
