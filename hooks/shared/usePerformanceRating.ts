@@ -13,7 +13,7 @@ export interface PerformanceRating {
 
 export interface UsePerformanceRatingProps {
   /** Game type for efficiency calculation */
-  gameType: 'memo' | 'guessWho';
+  gameType: 'memo' | 'guessWho' | 'jacques-a-dit';
   /** Game-specific metrics */
   metrics: {
     /** For memo: number of moves, for guessWho: questions asked */
@@ -36,6 +36,11 @@ export function usePerformanceRating({ gameType, metrics }: UsePerformanceRating
         );
       case 'guessWho':
         return PERFORMANCE_HELPERS.calculateGuessWhoEfficiency(metrics.attempts);
+      case 'jacques-a-dit':
+        // For Jacques a dit: efficiency based on mistakes vs rounds completed
+        const jacquesTarget = metrics.target || 1;
+        const mistakeRatio = (metrics.attempts - jacquesTarget) / jacquesTarget;
+        return Math.max(0, Math.min(100, 100 - (mistakeRatio * 50)));
       default:
         return 100;
     }

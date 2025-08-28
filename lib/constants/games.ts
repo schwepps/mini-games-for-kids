@@ -57,11 +57,25 @@ export const GAMES: GameConfig[] = [
       keywords: ['jeu', 'mahjong', 'paires', 'dessins animés', 'enfants', 'logique'],
     },
   },
+  {
+    id: 'jacques-a-dit',
+    title: 'Jacques a dit',
+    description: 'Mémorise la séquence !',
+    logo: '/images/logo/jacques-a-dit-logo-large.png',
+    href: '/jacques-a-dit',
+    bgColor: 'from-yellow-400 to-orange-400',
+    available: true,
+    metadata: {
+      title: 'Jacques a dit - Jeu de mémoire',
+      description: 'Jeu de mémoire séquentielle avec tes personnages préférés !',
+      keywords: ['jeu', 'mémoire', 'jacques a dit', 'séquence', 'enfants'],
+    },
+  },
 ];
 
 export const PLATFORM_METADATA = {
   title: 'Jeux pour Enfants',
   description: 'Découvre nos jeux amusants avec tes personnages préférés !',
-  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes', 'sudoku', 'logique'],
+  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes', 'sudoku', 'logique', 'jacques a dit'],
   logo: '/images/logo/logo-large.png',
 };

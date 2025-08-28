@@ -1,14 +1,13 @@
 'use client';
 
 import { useReducer, useEffect, useCallback } from 'react';
-import { IProfile, ICharacter } from '@/types/shared';
+import { ICharacter } from '@/types/shared';
 import { 
   SudokuGameState, 
   SudokuGameAction, 
   SudokuDifficulty,
   SudokuGrid,
   SudokuCell,
-  GridSize,
   DIFFICULTY_OPTIONS 
 } from '@/types/sudoku';
 import { ProfileLoader } from '@/lib/profileLoader';
