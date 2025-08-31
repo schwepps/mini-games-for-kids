@@ -31,6 +31,8 @@ export interface CelebrationConfig {
   calculateEfficiency: () => number;
   /** Function to get game-specific victory message */
   getVictoryMessage?: () => string;
+  /** Optional callback to change difficulty (enables dual-button layout) */
+  onChangeDifficulty?: () => void;
 }
 
 export interface SharedCelebrationModalProps {
@@ -84,13 +86,13 @@ export default function SharedCelebrationModal({
                       x: Math.random() * 600,
                       y: -20,
                       rotate: 0,
-                      scale: 0
+                      opacity: 0
                     }}
                     animate={{ 
                       x: Math.random() * 600,
                       y: 600,
                       rotate: 360,
-                      scale: [0, 1, 0]
+                      opacity: [0, 1, 0]
                     }}
                     transition={{ 
                       duration: 3,
@@ -209,32 +211,84 @@ export default function SharedCelebrationModal({
                     transition={{ delay: 1.4 }}
                     className="space-y-4"
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button
-                        onClick={handleNewGameClick}
-                        size="lg"
-                        className={`bg-gradient-to-r ${GAME_COLORS.GRADIENTS.BUTTON} hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 rounded-full shadow-xl border-4 border-white/50`}
+                    {config.onChangeDifficulty ? (
+                      // Dual button layout when change difficulty callback is provided
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <motion.div
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Button
+                            onClick={handleNewGameClick}
+                            size="lg"
+                            className={`bg-gradient-to-r ${GAME_COLORS.GRADIENTS.BUTTON} hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 rounded-full shadow-xl border-4 border-white/50`}
+                          >
+                            <motion.span
+                              animate={{ rotate: [0, 10, -10, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                              className="mr-3"
+                            >
+                              🔄
+                            </motion.span>
+                            Rejouer
+                            <motion.span
+                              animate={{ scale: [1, 1.2, 1] }}
+                              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                              className="ml-3"
+                            >
+                              ✨
+                            </motion.span>
+                          </Button>
+                        </motion.div>
+                        
+                        <motion.div
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Button
+                            onClick={() => {
+                              onOpenChange(false);
+                              setTimeout(() => {
+                                config.onChangeDifficulty!();
+                              }, ANIMATION_DURATIONS.MODAL_DELAY);
+                            }}
+                            size="lg"
+                            variant="outline"
+                            className="bg-white/90 hover:bg-white text-purple-600 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 rounded-full shadow-xl border-4 border-purple-300 hover:border-purple-400"
+                          >
+                            🎯 Changer difficulté
+                          </Button>
+                        </motion.div>
+                      </div>
+                    ) : (
+                      // Single button layout (backward compatibility)
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <motion.span
-                          animate={{ rotate: [0, 10, -10, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          className="mr-3"
+                        <Button
+                          onClick={handleNewGameClick}
+                          size="lg"
+                          className={`bg-gradient-to-r ${GAME_COLORS.GRADIENTS.BUTTON} hover:from-green-500 hover:via-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 rounded-full shadow-xl border-4 border-white/50`}
                         >
-                          🎮
-                        </motion.span>
-                        {GAME_TEXT.CELEBRATION.NEW_GAME}
-                        <motion.span
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                          className="ml-3"
-                        >
-                          ✨
-                        </motion.span>
-                      </Button>
-                    </motion.div>
+                          <motion.span
+                            animate={{ rotate: [0, 10, -10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            className="mr-3"
+                          >
+                            🎮
+                          </motion.span>
+                          {GAME_TEXT.CELEBRATION.NEW_GAME}
+                          <motion.span
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                            className="ml-3"
+                          >
+                            ✨
+                          </motion.span>
+                        </Button>
+                      </motion.div>
+                    )}
                     
                     <p className="text-sm text-gray-600">
                       {GAME_TEXT.CELEBRATION.CLOSE_HINT}

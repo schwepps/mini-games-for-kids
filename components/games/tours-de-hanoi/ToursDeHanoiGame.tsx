@@ -43,6 +43,12 @@ export default function ToursDeHanoiGame({
   const handleNewGame = () => {
     setShowCelebration(false);
     setGameStats(null);
+    resetGame();
+  };
+
+  const handleChangeDifficulty = () => {
+    setShowCelebration(false);
+    setGameStats(null);
     onRestart();
   };
 
@@ -208,6 +214,7 @@ export default function ToursDeHanoiGame({
         onOpenChange={handleCloseCelebration}
         stats={gameStats}
         onNewGame={handleNewGame}
+        onChangeDifficulty={handleChangeDifficulty}
       />
     </div>
   );

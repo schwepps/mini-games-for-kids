@@ -56,7 +56,7 @@ export const GAME_TEXT = {
     TITLE: 'Félicitations ! 🎉',
     SUBTITLE: 'Tu as réussi !',
     NEW_GAME: 'Rejouer !',
-    CLOSE_HINT: 'Ou ferme cette fenêtre pour changer de difficulté'
+    CLOSE_HINT: 'Ou ferme cette fenêtre'
   },
   ENCOURAGEMENT: {
     PERFECT: 'Performance exceptionnelle ! 🌟',

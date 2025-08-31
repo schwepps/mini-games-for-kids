@@ -8,13 +8,15 @@ interface CelebrationModalProps {
   onOpenChange: (open: boolean) => void;
   stats: GameStats | null;
   onNewGame: () => void;
+  onChangeDifficulty: () => void;
 }
 
 export default function CelebrationModal({
   open,
   onOpenChange,
   stats,
-  onNewGame
+  onNewGame,
+  onChangeDifficulty
 }: CelebrationModalProps) {
   
   if (!stats) return null;
@@ -61,7 +63,8 @@ export default function CelebrationModal({
       }] : [])
     ],
     calculateEfficiency: () => stats.efficiency,
-    getVictoryMessage
+    getVictoryMessage,
+    onChangeDifficulty
   };
 
   return (
