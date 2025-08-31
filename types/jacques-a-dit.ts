@@ -87,6 +87,7 @@ export interface JacquesCelebrationModalProps {
   mistakes: number;
   difficultyName: string;
   onNewGame: () => void;
+  onChangeDifficulty?: () => void;
 }
 
 // Difficulty levels configuration

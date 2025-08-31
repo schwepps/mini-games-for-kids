@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { MahjongDifficulty, DIFFICULTY_OPTIONS } from '@/types/mahjong';
 import SharedCelebrationModal, { CelebrationConfig } from '@/components/shared/games/SharedCelebrationModal';
 import { formatTime } from '@/lib/shared/time-utils';
@@ -26,6 +27,8 @@ export default function MahjongCelebrationModal({
   onDifficultyChange
 }: MahjongCelebrationModalProps) {
 
+
+
   const calculateEfficiency = (): number => {
     if (totalPairs === 0) return 0;
     const perfectMoves = totalPairs;
@@ -45,14 +48,6 @@ export default function MahjongCelebrationModal({
       return `Très bien joué ! Le niveau ${difficultyName} n'a plus de secrets pour toi ! 👏`;
     } else {
       return `Félicitations ! Tu as terminé le défi ${difficultyName} ! Continue à t'améliorer ! 🎉`;
-    }
-  };
-
-  // Simple handler to change difficulty - the parent component should handle the actual logic
-  const handleChangeDifficulty = () => {
-    if (onDifficultyChange) {
-      // Just reset to setup screen - parent component handles difficulty selection
-      onDifficultyChange('easy'); // This will trigger the reset to setup
     }
   };
 
@@ -79,16 +74,57 @@ export default function MahjongCelebrationModal({
         value: formatTime(gameTime),
         gradient: 'from-orange-500 to-red-500'
       }
-    ],
-    onChangeDifficulty: handleChangeDifficulty
+    ]
+  };
+
+  const handleNewGameWithDifficulty = () => {
+    onNewGame();
   };
 
   return (
-    <SharedCelebrationModal
-      open={open}
-      onOpenChange={onOpenChange}
-      onNewGame={onNewGame}
-      config={celebrationConfig}
-    />
+    <>
+      <SharedCelebrationModal
+        open={open}
+        onOpenChange={onOpenChange}
+        onNewGame={handleNewGameWithDifficulty}
+        config={celebrationConfig}
+      />
+
+      {/* Optional: Difficulty Change Button Overlay */}
+      {onDifficultyChange && open && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2 }}
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[60]"
+        >
+          <div className="flex gap-2">
+            {DIFFICULTY_OPTIONS.map((option) => (
+              <motion.button
+                key={option.difficulty}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  onDifficultyChange(option.difficulty);
+                  onOpenChange(false);
+                }}
+                className={`
+                  px-4 py-2 rounded-full text-white font-bold text-sm shadow-lg border-2 border-white/50
+                  ${option.difficulty === difficulty
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                    : 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600'
+                  }
+                `}
+              >
+                {option.difficulty === 'easy' && '🟢'}
+                {option.difficulty === 'medium' && '🟡'}
+                {option.difficulty === 'hard' && '🔴'}
+                <span className="ml-2">{option.displayName}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 }

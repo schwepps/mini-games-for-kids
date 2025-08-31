@@ -10,7 +10,8 @@ export default function CelebrationModal({
   moves,
   totalPairs,
   gameTime = 0,
-  onNewGame
+  onNewGame,
+  onChangeDifficulty
 }: MemoCelebrationModalProps) {
 
   // Calculate game statistics
@@ -58,7 +59,8 @@ export default function CelebrationModal({
       }
     ],
     calculateEfficiency: () => efficiency,
-    getVictoryMessage: () => getDifficultyMessage()
+    getVictoryMessage: () => getDifficultyMessage(),
+    onChangeDifficulty
   };
 
   return (

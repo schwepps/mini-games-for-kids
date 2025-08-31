@@ -10,7 +10,8 @@ export default function CelebrationModal({
   currentRound,
   mistakes,
   difficultyName,
-  onNewGame
+  onNewGame,
+  onChangeDifficulty
 }: JacquesCelebrationModalProps) {
 
   // Use performance rating hook - adapted for sequence game
@@ -65,7 +66,8 @@ export default function CelebrationModal({
       }
     ],
     calculateEfficiency: () => efficiency,
-    getVictoryMessage: () => getDifficultyMessage()
+    getVictoryMessage: () => getDifficultyMessage(),
+    onChangeDifficulty
   };
 
   return (

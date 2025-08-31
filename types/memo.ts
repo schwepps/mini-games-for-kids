@@ -75,6 +75,7 @@ export interface MemoCelebrationModalProps {
   totalPairs: number;
   gameTime?: number; // in seconds
   onNewGame: () => void;
+  onChangeDifficulty?: () => void;
 }
 
 // Grid layout configuration for different card counts

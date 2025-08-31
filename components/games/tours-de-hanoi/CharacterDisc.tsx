@@ -22,7 +22,7 @@ export default function CharacterDisc({
     const isClient = typeof window !== 'undefined';
     if (!isClient) {
       // SSR fallback with character count reduction
-      let baseSize = 45 + (size * 15);
+      const baseSize = 45 + (size * 15);
       let reductionFactor = 1;
       if (characterCount === 4) {
         reductionFactor = 0.6; // 40% reduction

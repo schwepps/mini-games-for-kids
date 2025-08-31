@@ -222,6 +222,7 @@ export default function JacquesADitGame() {
           mistakes={mistakes}
           difficultyName={selectedDifficulty?.name || ''}
           onNewGame={handleNewGame}
+          onChangeDifficulty={handleChangeDifficulty}
         />
       </div>
     </div>

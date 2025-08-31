@@ -49,6 +49,11 @@ export default function MemoGame() {
     startNewGame();
   };
 
+  const handleChangeDifficulty = () => {
+    setShowCelebration(false);
+    resetGame();
+  };
+
   // Loading state
   if (loading && cards.length === 0) {
     return (
@@ -226,6 +231,7 @@ export default function MemoGame() {
           totalPairs={totalPairs}
           gameTime={gameTime}
           onNewGame={handleNewGame}
+          onChangeDifficulty={handleChangeDifficulty}
         />
       </div>
     </div>
