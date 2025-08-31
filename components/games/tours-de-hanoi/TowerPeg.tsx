@@ -12,7 +12,8 @@ export default function TowerPeg({
   onSelectTower,
   onSelectDisc,
   selectedDisc,
-  characterCount
+  characterCount,
+  gameComplete
 }: TowerPegProps) {
   
   const handleClick = () => {
@@ -70,6 +71,7 @@ export default function TowerPeg({
               onClick={() => onSelectDisc(disc)}
               position={index}
               characterCount={characterCount}
+              gameComplete={gameComplete}
             />
           ))}
         </div>

@@ -94,7 +94,7 @@ export default function CharacterDisc({
         damping: 20,
         layout: { duration: 0.3 }
       }}
-      layout
+      layout={!gameComplete}
     >
       {/* Character Image */}
       <div className={`relative w-full h-full rounded-full overflow-hidden border-4 ${
