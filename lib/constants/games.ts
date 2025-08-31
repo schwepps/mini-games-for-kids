@@ -74,7 +74,7 @@ export const GAMES: GameConfig[] = [
   {
     id: 'tours-de-hanoi',
     title: 'Tours de Hanoi',
-    description: 'Empile les personnages !',
+    description: 'Déplace les personnages !',
     logo: '/images/logo/tours-de-hanoi-logo-large.png',
     href: '/tours-de-hanoi',
     bgColor: 'from-pink-400 to-yellow-400',
