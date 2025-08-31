@@ -71,6 +71,20 @@ export const GAMES: GameConfig[] = [
       keywords: ['jeu', 'mémoire', 'jacques a dit', 'séquence', 'enfants'],
     },
   },
+  {
+    id: 'tours-de-hanoi',
+    title: 'Tours de Hanoi',
+    description: 'Empile les personnages !',
+    logo: '/images/logo/tours-de-hanoi-logo-large.png',
+    href: '/tours-de-hanoi',
+    bgColor: 'from-pink-400 to-yellow-400',
+    available: true,
+    metadata: {
+      title: 'Tours de Hanoi - Jeu de logique',
+      description: 'Aide tes personnages préférés à former des tours !',
+      keywords: ['jeu', 'logique', 'tours', 'hanoi', 'dessins animés', 'enfants', 'puzzle'],
+    },
+  },
 ];
 
 export const PLATFORM_METADATA = {
