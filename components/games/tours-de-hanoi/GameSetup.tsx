@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { largeButton } from '@/lib/styles/buttonUtils';
+import { largeButton, cardStyles } from '@/lib/styles/buttonUtils';
 import { GameSetupProps, DIFFICULTY_LEVELS } from '@/types/tours-de-hanoi';
 
 export default function GameSetup({
@@ -72,8 +72,8 @@ export default function GameSetup({
             <Card 
               className={`cursor-pointer transition-all duration-300 hover:shadow-xl focus-within:ring-4 focus-within:ring-blue-400/50 ${
                 selectedDifficulty?.id === difficulty.id
-                  ? 'ring-4 ring-yellow-400 bg-yellow-50 shadow-lg transform scale-105'
-                  : 'bg-white/90 hover:bg-white shadow-md hover:scale-102'
+                  ? cardStyles.selected
+                  : `${cardStyles.base} ${cardStyles.hover}`
               }`}
               onClick={() => onDifficultyChange(difficulty)}
               role="button"

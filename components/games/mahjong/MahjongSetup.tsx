@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { largeButton, cardStyles } from '@/lib/styles/buttonUtils';
 import { MahjongDifficulty, DIFFICULTY_OPTIONS } from '@/types/mahjong';
 import Image from 'next/image';
 
@@ -62,7 +63,7 @@ export default function MahjongSetup({
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 max-w-4xl mx-auto"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto"
             >
               {DIFFICULTY_OPTIONS.map((option, index) => {
                 const isSelected = difficulty === option.difficulty;
@@ -107,10 +108,10 @@ export default function MahjongSetup({
                     whileTap={{ scale: 0.95 }}
                   >
                     <Card 
-                      className={`cursor-pointer transition-all duration-300 border-4 ${
+                      className={`cursor-pointer transition-all duration-300 hover:shadow-xl focus-within:ring-4 focus-within:ring-blue-400/50 ${
                         isSelected
-                          ? `bg-gradient-to-r ${config.bgClass} text-white ${config.borderClass} shadow-2xl scale-105`
-                          : `bg-white/90 hover:bg-white border-gray-300 ${config.hoverClass} hover:shadow-xl`
+                          ? cardStyles.selected
+                          : `${cardStyles.base} ${cardStyles.hover}`
                       }`}
                       onClick={() => onDifficultyChange(option.difficulty)}
                     >
@@ -145,7 +146,7 @@ export default function MahjongSetup({
                 onClick={onStartGame}
                 disabled={loading}
                 size="lg"
-                className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 hover:from-green-300 hover:via-blue-400 hover:to-purple-500 text-white font-bold text-lg lg:text-xl px-8 py-4 lg:py-6 rounded-full shadow-xl border-4 border-white min-w-[240px] transform transition-all"
+                className={`${largeButton('setup')} disabled:opacity-50 disabled:cursor-not-allowed min-w-[240px]`}
               >
                 {loading ? (
                   <>
