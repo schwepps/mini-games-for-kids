@@ -62,6 +62,13 @@ export default function ToursDeHanoiGame({
     resetGame();
   };
 
+  // Get tower color for visual hints (matches tower base colors)
+  const getTowerColor = (towerId: number) => {
+    if (towerId === 0) return 'bg-red-500'; // Source tower
+    if (towerId === 2) return 'bg-green-500'; // Target tower
+    return 'bg-blue-500'; // Middle tower
+  };
+
   // Check which towers can receive the selected disc
   const getCanReceiveDisc = (towerId: number) => {
     if (!gameState.selectedDisc) return false;
@@ -156,11 +163,15 @@ export default function ToursDeHanoiGame({
           >
             <Card className="bg-yellow-100 border-2 border-yellow-400 max-w-sm mx-auto">
               <CardContent className="p-3">
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-3">
                   <span className="text-lg">💡</span>
-                  <p className="text-sm font-medium text-yellow-800">
-                    Astuce : Tour {gameState.hintMove.from + 1} → Tour {gameState.hintMove.to + 1}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    {/* From tower color indicator */}
+                    <div className={`w-6 h-6 rounded-full ${getTowerColor(gameState.hintMove.from)} border-2 border-white shadow-md`}></div>
+                    <span className="text-lg font-bold text-yellow-800">→</span>
+                    {/* To tower color indicator */}
+                    <div className={`w-6 h-6 rounded-full ${getTowerColor(gameState.hintMove.to)} border-2 border-white shadow-md`}></div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
