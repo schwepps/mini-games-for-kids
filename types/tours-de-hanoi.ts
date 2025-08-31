@@ -93,7 +93,6 @@ export interface GameSetupProps {
 export interface ToursDeHanoiGameProps {
   characters: ICharacter[];
   difficulty: DifficultyLevel;
-  onComplete: (stats: GameStats) => void;
   onRestart: () => void;
 }
 
@@ -147,8 +146,3 @@ export interface GameStatusProps {
   difficulty: DifficultyLevel;
 }
 
-// Celebration config
-export interface ToursDeHanoiCelebrationConfig {
-  stats: GameStats;
-  onNewGame: () => void;
-}

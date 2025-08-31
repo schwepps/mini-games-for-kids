@@ -39,13 +39,11 @@ export default function ToursDeHanoiPage() {
     }
   };
 
-  const handleComplete = () => {
-    // Game completion is handled by the celebration modal
-  };
+
 
   const handleRestart = () => {
     setGameState('setup');
-    setSelectedDifficulty(null);
+    setSelectedDifficulty(DIFFICULTY_LEVELS.SUPER_FACILE);
     setCharacters([]);
   };
 
@@ -73,7 +71,6 @@ export default function ToursDeHanoiPage() {
             <ToursDeHanoiGame
               characters={characters}
               difficulty={selectedDifficulty!}
-              onComplete={handleComplete}
               onRestart={handleRestart}
             />
           )}

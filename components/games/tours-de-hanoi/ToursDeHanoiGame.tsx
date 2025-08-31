@@ -15,7 +15,6 @@ import { ToursDeHanoiGameProps, GameStats } from '@/types/tours-de-hanoi';
 export default function ToursDeHanoiGame({
   characters,
   difficulty,
-  onComplete,
   onRestart
 }: ToursDeHanoiGameProps) {
   
@@ -36,7 +35,6 @@ export default function ToursDeHanoiGame({
     onComplete: (stats) => {
       setGameStats(stats);
       setShowCelebration(true);
-      onComplete(stats);
     }
   });
 

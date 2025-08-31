@@ -25,10 +25,6 @@ export default function TowerPeg({
     return 'bg-blue-500';
   };
 
-
-
-
-
   return (
     <div className="flex flex-col items-center">
       {/* Tower Structure */}
