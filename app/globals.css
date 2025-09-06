@@ -46,44 +46,80 @@ body {
 
 :root {
   --radius: 0.625rem;
+  --background: rgb(255, 255, 255); /* Fallback for old browsers */
   --background: oklch(1 0 0);
+  --foreground: rgb(9, 9, 11); /* Fallback for old browsers */
   --foreground: oklch(0.129 0.042 264.695);
+  --card: rgb(255, 255, 255); /* Fallback for old browsers */
   --card: oklch(1 0 0);
+  --card-foreground: rgb(9, 9, 11); /* Fallback for old browsers */
   --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: rgb(255, 255, 255); /* Fallback for old browsers */
   --popover: oklch(1 0 0);
+  --popover-foreground: rgb(9, 9, 11); /* Fallback for old browsers */
   --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: rgb(18, 18, 28); /* Fallback for old browsers */
   --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: rgb(244, 244, 245); /* Fallback for old browsers */
   --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: rgb(18, 18, 28); /* Fallback for old browsers */
   --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: rgb(244, 244, 245); /* Fallback for old browsers */
   --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: rgb(113, 113, 122); /* Fallback for old browsers */
   --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: rgb(244, 244, 245); /* Fallback for old browsers */
   --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: rgb(18, 18, 28); /* Fallback for old browsers */
   --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: rgb(239, 68, 68); /* Fallback for old browsers */
   --destructive: oklch(0.577 0.245 27.325);
+  --border: rgb(228, 228, 231); /* Fallback for old browsers */
   --border: oklch(0.929 0.013 255.508);
+  --input: rgb(228, 228, 231); /* Fallback for old browsers */
   --input: oklch(0.929 0.013 255.508);
+  --ring: rgb(161, 161, 170); /* Fallback for old browsers */
   --ring: oklch(0.704 0.04 256.788);
 }
 
 .dark {
+  --background: rgb(9, 9, 11); /* Fallback for old browsers */
   --background: oklch(0.129 0.042 264.695);
+  --foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --foreground: oklch(0.984 0.003 247.858);
+  --card: rgb(18, 18, 28); /* Fallback for old browsers */
   --card: oklch(0.208 0.042 265.755);
+  --card-foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: rgb(18, 18, 28); /* Fallback for old browsers */
   --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: rgb(228, 228, 231); /* Fallback for old browsers */
   --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: rgb(18, 18, 28); /* Fallback for old browsers */
   --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: rgb(39, 39, 46); /* Fallback for old browsers */
   --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: rgb(39, 39, 46); /* Fallback for old browsers */
   --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: rgb(161, 161, 170); /* Fallback for old browsers */
   --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: rgb(39, 39, 46); /* Fallback for old browsers */
   --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: rgb(250, 250, 250); /* Fallback for old browsers */
   --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: rgb(220, 38, 38); /* Fallback for old browsers */
   --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(255, 255, 255, 0.1); /* Fallback for old browsers */
   --border: oklch(1 0 0 / 10%);
+  --input: rgba(255, 255, 255, 0.15); /* Fallback for old browsers */
   --input: oklch(1 0 0 / 15%);
+  --ring: rgb(113, 113, 128); /* Fallback for old browsers */
   --ring: oklch(0.551 0.027 264.364);
 }
 
