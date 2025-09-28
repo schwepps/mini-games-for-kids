@@ -63,7 +63,7 @@ export default function GuessRow({
                 className={`
                   relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20
                   flex items-center justify-center cursor-pointer
-                  transition-all duration-200
+                  transition-all duration-200 py-1 px-1
                   ${isActive ? 'hover:shadow-lg' : ''}
                   ${isSelected ? 'ring-4 ring-purple-400 shadow-lg scale-105' : ''}
                   ${isEmpty ? 'bg-gray-100 border-2 border-dashed border-gray-300' : 'bg-white'}
@@ -95,7 +95,7 @@ export default function GuessRow({
                             e.stopPropagation();
                             onCharacterRemove(index);
                           }}
-                          className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transition-colors"
+                          className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transition-colors cursor-pointer"
                           aria-label="Retirer le personnage"
                         >
                           ×

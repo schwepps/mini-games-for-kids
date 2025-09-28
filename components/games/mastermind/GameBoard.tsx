@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { RotateCcw, CheckCircle } from 'lucide-react';
+import { gameButton, outlineButton } from '@/lib/styles/buttonUtils';
 import GuessRow from './GuessRow';
 import CharacterSelector from './CharacterSelector';
 import { GameBoardProps } from '@/types/mastermind';
@@ -99,7 +101,7 @@ export default function GameBoard({
           </div>
 
           {/* Guess History */}
-          <div className="mb-6 max-h-[300px] overflow-y-auto">
+          <div className="py-6 max-h-[300px] overflow-y-auto flex flex-col items-center">
             {/* Previous Guesses */}
             {guesses.map((guess, index) => (
               <GuessRow
@@ -148,15 +150,17 @@ export default function GameBoard({
               animate={{ opacity: 1 }}
               className="flex flex-wrap gap-3 justify-center mb-4"
             >
-              <Button
-                onClick={onClearGuess}
-                variant="outline"
-                size="lg"
-                className="font-bold"
-                disabled={currentGuess.every(slot => slot === null)}
-              >
-                🔄 Effacer
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  onClick={onClearGuess}
+                  size="lg"
+                  className="border-2 border-purple-500 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-full px-6 py-3 transition-all duration-200 shadow-purple-400/30"
+                  disabled={currentGuess.every(slot => slot === null)}
+                >
+                  <RotateCcw className="w-5 h-5 mr-2" />
+                  Effacer
+                </Button>
+              </motion.div>
               
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -166,15 +170,13 @@ export default function GameBoard({
                   onClick={onSubmitGuess}
                   size="lg"
                   disabled={!canSubmitGuess}
-                  className={`
-                    font-bold text-white
-                    ${canSubmitGuess 
-                      ? 'bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600' 
-                      : 'bg-gray-400 cursor-not-allowed'
-                    }
-                  `}
+                  className={canSubmitGuess
+                    ? gameButton('newGame', 'shadow-green-400/30')
+                    : 'bg-gray-400 cursor-not-allowed text-white font-bold rounded-full px-6 py-3'
+                  }
                 >
-                  ✅ Valider
+                  <CheckCircle className="w-5 h-5 mr-2" />
+                  Valider
                 </Button>
               </motion.div>
             </motion.div>

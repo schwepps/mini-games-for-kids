@@ -19,7 +19,7 @@ export default function CharacterSelector({
   };
 
   return (
-    <div className="mt-6 p-4 bg-white/95 rounded-xl shadow-lg">
+    <div className="mt-6 p-4 bg-white/95 rounded-xl shadow-lg mx-auto max-w-fit">
       <div className="text-center mb-3">
         <h3 className="text-sm sm:text-base font-bold text-purple-700">
           {selectedSlotIndex !== null ? (
@@ -46,10 +46,10 @@ export default function CharacterSelector({
               <Card
                 className={`
                   relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24
-                  cursor-pointer transition-all duration-200
+                  cursor-pointer transition-all duration-200 py-1 px-1
                   ${disabled || selectedSlotIndex === null ? 'opacity-50 cursor-not-allowed' : ''}
                   ${isUsed ? 'ring-2 ring-green-400 opacity-70' : 'hover:shadow-xl hover:ring-2 hover:ring-purple-400'}
-                  bg-white p-1
+                  bg-white
                 `}
                 onClick={() => {
                   if (!disabled && selectedSlotIndex !== null) {
