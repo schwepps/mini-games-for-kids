@@ -57,12 +57,21 @@ export class ProfileLoader {
 
       const profileData = await response.json();
       const profile = this.validateProfile(profileData);
-      
-      // Cache the loaded profile
-      this._profileCache.set(id, profile);
-      this._currentProfile = profile;
-      
-      return profile;
+
+      // Transform relative image paths to absolute paths
+      const transformedProfile = {
+        ...profile,
+        characters: profile.characters.map(character => ({
+          ...character,
+          image: this.getImageUrl(character.image, id)
+        }))
+      };
+
+      // Cache the transformed profile
+      this._profileCache.set(id, transformedProfile);
+      this._currentProfile = transformedProfile;
+
+      return transformedProfile;
     } catch (error) {
       throw new Error(`Failed to load profile ${id}: ${getErrorMessage(error)}`);
     }
@@ -148,4 +157,13 @@ export class ProfileLoader {
   static async switchProfile(profileId: string): Promise<IProfile> {
     return await this.loadProfile(profileId);
   }
+}
+
+/**
+ * Convenience function to load a random profile
+ */
+export async function loadRandomProfile(): Promise<IProfile> {
+  const availableProfiles = await ProfileLoader.getAvailableProfiles();
+  const randomProfile = availableProfiles[Math.floor(Math.random() * availableProfiles.length)];
+  return await ProfileLoader.loadProfile(randomProfile);
 }

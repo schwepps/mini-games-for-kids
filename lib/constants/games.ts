@@ -85,11 +85,25 @@ export const GAMES: GameConfig[] = [
       keywords: ['jeu', 'logique', 'tours', 'hanoi', 'dessins animés', 'enfants', 'puzzle'],
     },
   },
+  {
+    id: 'mastermind',
+    title: 'Mastermind',
+    description: 'Devine le code secret !',
+    logo: '/images/logo/mastermind-logo-large.png',
+    href: '/mastermind',
+    bgColor: 'from-purple-400 to-pink-400',
+    available: true,
+    metadata: {
+      title: 'Mastermind - Jeu de déduction',
+      description: 'Devine la combinaison secrète de tes personnages préférés !',
+      keywords: ['jeu', 'mastermind', 'déduction', 'logique', 'dessins animés', 'enfants', 'code secret'],
+    },
+  },
 ];
 
 export const PLATFORM_METADATA = {
   title: 'Jeux pour Enfants',
   description: 'Découvre nos jeux amusants avec tes personnages préférés !',
-  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes', 'sudoku', 'logique', 'jacques a dit'],
+  keywords: ['jeux', 'enfants', 'dessins animés', 'qui est-ce', 'mémo', 'memory', 'devinettes', 'sudoku', 'logique', 'jacques a dit', 'mastermind', 'déduction'],
   logo: '/images/logo/logo-large.png',
 };
