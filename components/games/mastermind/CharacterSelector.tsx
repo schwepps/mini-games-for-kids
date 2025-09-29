@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { CharacterSelectorProps } from '@/types/mastermind';
+import { ProfileLoader } from '@/lib/profileLoader';
 
 export default function CharacterSelector({
   availableCharacters,
@@ -68,7 +69,7 @@ export default function CharacterSelector({
               >
                 <div className="relative w-full h-full">
                   <Image
-                    src={character.image}
+                    src={ProfileLoader.getImageUrl(character.image)}
                     alt={character.name}
                     fill
                     className="object-cover rounded"

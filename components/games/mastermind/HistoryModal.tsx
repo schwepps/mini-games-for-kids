@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HistoryModalProps } from '@/types/mastermind';
+import { ProfileLoader } from '@/lib/profileLoader';
 
 export default function HistoryModal({
   open,
@@ -60,7 +61,7 @@ export default function HistoryModal({
                             >
                               {character && (
                                 <Image
-                                  src={character.image}
+                                  src={ProfileLoader.getImageUrl(character.image)}
                                   alt={character.name}
                                   fill
                                   className="object-cover"

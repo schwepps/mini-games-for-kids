@@ -58,20 +58,11 @@ export class ProfileLoader {
       const profileData = await response.json();
       const profile = this.validateProfile(profileData);
 
-      // Transform relative image paths to absolute paths
-      const transformedProfile = {
-        ...profile,
-        characters: profile.characters.map(character => ({
-          ...character,
-          image: this.getImageUrl(character.image, id)
-        }))
-      };
+      // Cache the loaded profile
+      this._profileCache.set(id, profile);
+      this._currentProfile = profile;
 
-      // Cache the transformed profile
-      this._profileCache.set(id, transformedProfile);
-      this._currentProfile = transformedProfile;
-
-      return transformedProfile;
+      return profile;
     } catch (error) {
       throw new Error(`Failed to load profile ${id}: ${getErrorMessage(error)}`);
     }

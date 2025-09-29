@@ -46,8 +46,7 @@ export default function CharacterButton({
   };
 
   const getImagePath = () => {
-    const paths = ProfileLoader.getProfilePaths();
-    return `${paths.imagePath}${character.image}`;
+    return ProfileLoader.getImageUrl(character.image);
   };
 
   return (

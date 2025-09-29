@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { GuessRowProps } from '@/types/mastermind';
 import { Card } from '@/components/ui/card';
+import { ProfileLoader } from '@/lib/profileLoader';
 
 export default function GuessRow({
   guess,
@@ -83,7 +84,7 @@ export default function GuessRow({
                       className="relative w-full h-full"
                     >
                       <Image
-                        src={character.image}
+                        src={ProfileLoader.getImageUrl(character.image)}
                         alt={character.name}
                         fill
                         className="object-cover rounded"

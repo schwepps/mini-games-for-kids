@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { MemoCardProps } from '@/types/memo';
 import { ANIMATION_DURATIONS, SPRING_CONFIGS } from '@/lib/constants/gameConstants';
+import { ProfileLoader } from '@/lib/profileLoader';
 
 const MemoCard = memo(function MemoCard({
   card,
@@ -82,7 +83,7 @@ const MemoCard = memo(function MemoCard({
         >
           <div className="relative w-full h-full bg-white rounded-xl overflow-hidden">
             <Image
-              src={`/images/profiles/cartoon-characters/${card.character.image}`}
+              src={ProfileLoader.getImageUrl(card.character.image)}
               alt={card.character.name}
               fill
               className="object-cover"

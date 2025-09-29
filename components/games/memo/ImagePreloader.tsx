@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { ICharacter } from '@/types/shared';
+import { ProfileLoader } from '@/lib/profileLoader';
 
 interface ImagePreloaderProps {
   characters: ICharacter[];
@@ -22,7 +23,7 @@ export default function ImagePreloader({ characters }: ImagePreloaderProps) {
       {characters.map((character) => (
         <Image
           key={`preload-${character.id}`}
-          src={`/images/profiles/cartoon-characters/${character.image}`}
+          src={ProfileLoader.getImageUrl(character.image)}
           alt=""
           width={300}
           height={300}

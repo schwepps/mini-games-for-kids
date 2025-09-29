@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import HomeButton from '@/components/shared/HomeButton';
 import GameSetup from './GameSetup';
 import GameBoard from './GameBoard';
 import CelebrationModal from './CelebrationModal';
@@ -65,10 +64,7 @@ export default function MastermindGame() {
   };
 
   return (
-    <div className="min-h-screen relative">
-      <HomeButton />
-      
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen p-4 lg:p-8">
         {/* Game Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -194,7 +190,6 @@ export default function MastermindGame() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
     </div>
   );
 }
