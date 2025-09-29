@@ -107,10 +107,10 @@ export default function MahjongSetup({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Card 
+                    <Card
                       className={`cursor-pointer transition-all duration-300 hover:shadow-xl focus-within:ring-4 focus-within:ring-blue-400/50 ${
                         isSelected
-                          ? cardStyles.selected
+                          ? `bg-gradient-to-r ${config.bgClass} ring-4 ring-opacity-70 shadow-2xl transform scale-105 ${config.borderClass}`
                           : `${cardStyles.base} ${cardStyles.hover}`
                       }`}
                       onClick={() => onDifficultyChange(option.difficulty)}
@@ -119,12 +119,12 @@ export default function MahjongSetup({
                         <div className="text-center">
                           <div className="text-4xl sm:text-5xl mb-2">{config.emoji}</div>
                           <h3 className={`text-lg sm:text-xl font-bold mb-1 ${
-                            isSelected ? 'text-white' : 'text-gray-800'
+                            isSelected ? 'text-white drop-shadow-md' : 'text-gray-800'
                           }`}>
                             {config.title}
                           </h3>
                           <p className={`text-sm sm:text-base font-semibold ${
-                            isSelected ? 'text-white/90' : 'text-gray-600'
+                            isSelected ? 'text-white/95 drop-shadow-md' : 'text-gray-600'
                           }`}>
                             {config.subtitle}
                           </p>

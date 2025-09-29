@@ -80,7 +80,11 @@ export default function MahjongTile({
     return null;
   }
 
-  const imageUrl = ProfileLoader.getImageUrl(tile.character.image);
+  // If the image path is already absolute (starts with /), use it directly
+  // Otherwise, build the full path
+  const imageUrl = tile.character.image.startsWith('/')
+    ? tile.character.image
+    : ProfileLoader.getImageUrl(tile.character.image);
   
   return (
     <AnimatePresence mode="wait">
