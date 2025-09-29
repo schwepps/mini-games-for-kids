@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { RotateCcw, CheckCircle } from 'lucide-react';
-import { gameButton, outlineButton } from '@/lib/styles/buttonUtils';
+import { gameButton } from '@/lib/styles/buttonUtils';
 import GuessRow from './GuessRow';
 import CharacterSelector from './CharacterSelector';
 import { GameBoardProps } from '@/types/mastermind';

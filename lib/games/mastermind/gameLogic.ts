@@ -56,6 +56,7 @@ export function mastermindGameReducer(
         currentGuess: new Array(state.difficulty!.codeLength).fill(null),
         guesses: [],
         attemptsRemaining: state.difficulty!.maxAttempts,
+        selectedSlotIndex: 0,
         startTime: new Date(),
         endTime: undefined,
         loading: false,
